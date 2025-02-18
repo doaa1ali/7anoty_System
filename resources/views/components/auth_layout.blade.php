@@ -45,6 +45,17 @@ input {
     border-radius: 5px;
     font-size: 16px;
 }
+select {
+    width: 101%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
+}
+
 
 button {
     background: #28a745;

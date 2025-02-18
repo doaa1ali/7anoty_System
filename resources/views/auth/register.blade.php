@@ -22,6 +22,13 @@
             <label>Profile Image:</label>
             <input type="file" name="image"><br>
 
+             <label for="type">Type:</label>
+             <select name="type" id="type">
+
+                <option value="customer">customer</option>
+                <option value="creator">creator</option>
+
+             </select>
 
             <button type="submit">Register</button>
 

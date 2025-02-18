@@ -1,11 +1,5 @@
 <header>
-    <div class="menu-toggle">
-
-        <label><span class="fas fa-bars"></span></label>
-        <label class="header-title">💀7anoty System</label>
-
-    </div>
-
+    <label class="header-title">☠ Welcome in 7anoty System</label>
     <div class="header-right">
 
     @guest
@@ -19,6 +13,7 @@
 
     @auth
     <div class="header-right">
+    <p style="color: #cfc1c1;">Welcome ya  {{Auth::user()->name }} ({{Auth::user()->type }}) 😊!</p>
     <a href="{{ route('auth.logout') }}" class="logout-btn">
     <span class="fas fa-sign-out-alt"></span> Logout
      </a>

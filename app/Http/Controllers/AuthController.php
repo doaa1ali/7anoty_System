@@ -41,18 +41,19 @@ class AuthController extends Controller
         'phone' => $request->phone,
         'location' => $request->location,
         'image' => $imageName,
+        'type' => $request->type,
       ];
 
     //   dd($data);
 
       $user=User::create($data);
       Auth::login($user);
-    //   return redirect()->route('home');
          if($user->type ==='admin' )
-         return view('Layout.master');
-         else
-    // return redirect()->route('home');
-        return view('auth.login');
+            return view('Layout.master');
+        elseif($user->type ==='creator')
+             return view('creatorLayout.master');
+        else
+             return view('customerLayout.master');
 
     }
 
@@ -74,10 +75,11 @@ class AuthController extends Controller
             // return redirect()->route('home');
             $user=Auth::user();
             if($user->type ==='admin' )
-              return view('Layout.master');
-             else
-            //  dd('fff');
-            return redirect()->route('user.index');
+                return view('Layout.master');
+            elseif($user->type ==='creator')
+                return view('creatorLayout.master');
+            else
+                return view('customerLayout.master');
         }
 
         return back()->withErrors(['email'=> 'invalid email or password']);
@@ -87,7 +89,6 @@ class AuthController extends Controller
     {
         // dd('jjj');
         Auth::logout();
-
         return redirect()->route('home')->with('success', 'Logged out successfully.');
     }
 }
