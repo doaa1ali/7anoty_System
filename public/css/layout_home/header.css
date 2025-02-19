@@ -114,3 +114,18 @@ header {
     background: #fefcf9c6;
     color: #007bff;
 }
+
+.logout-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    background: rgb(144, 43, 43);
+    color: white;
+}
+
+.logout-btn:hover {
+    color: #fefcf9c6;
+    background: red;
+}

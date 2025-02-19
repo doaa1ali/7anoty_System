@@ -7,5 +7,6 @@
     <link rel="stylesheet" href="{{ asset('css/layout_home/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layout_home/services.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layout_home/prayers.css') }}">
+    
    
    

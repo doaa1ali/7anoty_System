@@ -14,12 +14,23 @@
         </nav>
     </div>
    
+    @guest
     <div class="header-account">
-        <a href="#" class="login-btn">
+        <a href="{{ route('auth.login') }}" class="login-btn">
             <span class="fas fa-sign-in-alt"></span> تسجيل الدخول
         </a>
-        <a href="#" class="register-btn">
+        <a href="{{ route('auth.register') }}" class="register-btn" id="open-register">
             <span class="fas fa-user-plus"></span> إنشاء حساب
         </a>
     </div>
+    @endguest
+
+    @auth
+    <div class="header-account">
+        <p style="color:#cfc1c1">Welcome ya  {{Auth::user()->name }}  ({{Auth::user()->type }})😊</p>
+        <a href="{{ route('auth.logout') }}" class="logout-btn">
+            <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
+        </a>
+    </div>
+    @endauth
 </header>

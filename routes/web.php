@@ -1,7 +1,10 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\AuthController;
+use App\Http\Middleware\AuthMiddleware;
+use App\Http\Middleware\TypeMiddleware;
+use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 //HomePage....
@@ -12,17 +15,24 @@ Route::get('prayers', function () {return view('Layout_prayers.master');})->name
 
 
 
-//authors....
-Route::get('author/index', [AuthorController::class, 'index'])->name('author.index');
-Route::get('author/create', [AuthorController::class, 'create'])->name('author.create');
-Route::post('author/store', [AuthorController::class, 'store'])->name("author.store");
-Route::get('author/search', [AuthorController::class, 'search'])->name('author.search');
-Route::get('author/edit/{author}', [AuthorController::class, 'edit'])->name('author.edit');
-Route::put('author/edit/{author}', [AuthorController::class, 'update'])->name('author.update');
-Route::delete('author/delete/{author}', [AuthorController::class, 'destroy'])->name('author.delete');
-Route::get('author/show/{id}', [AuthorController::class, 'show'])->name("author.show");
+//master....
+Route::get('/auth', function () {
+    return view('customerLayout.master');
+})->name('home/Database')->middleware(TypeMiddleware::class);
 
+//User....
+Route::get('auth/index' ,[AuthController::class ,'index'])->name('auth.index');
 
+//register
+Route::get('auth/register' ,[AuthController::class ,'register'])->name('auth.register');
+Route::post('auth/register' ,[AuthController::class ,'handleregister'])->name('auth.handleregister');
+
+//login
+Route::get('auth/login' ,[AuthController::class ,'login'])->name('auth.login');
+Route::post('auth/login' ,[AuthController::class ,'handlelogin'])->name('auth.handlelogin');
+
+//logout
+Route::get('auth/logout' ,[AuthController::class ,'logout'])->name('auth.logout')->middleware(AuthMiddleware::class);
 
 
 

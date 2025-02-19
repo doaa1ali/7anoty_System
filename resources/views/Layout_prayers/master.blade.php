@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    @include('Layout_home.head')
+    @include('Layout_prayers.head')
 </head>
 <body>
     <div class="main-content">
-        @include('Layout_home.header')
-        @include('Layout_home.Hero_Section')
-        @include('Layout_home.services')
-        @include('Layout_home.prayers')     
+        @include('Layout_prayers.header')
+        @include('Layout_prayers.Hero_Section')   
     </div>
-    @include('Layout_home.footer')
-    @include('Layout_home.script')
+
+    <div class="">
+        @include('Layout_prayers.filter') 
+    </div><br>
+
+
+    @include('Layout_prayers.footer')
+    @include('Layout_prayers.script')
 </body>
 </html>

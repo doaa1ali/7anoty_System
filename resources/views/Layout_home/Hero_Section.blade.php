@@ -10,7 +10,7 @@
         <div class='Hero_section_content'>
             <h1>الحانوتي</h1>
             <p>نحن هنا لدعمك في الأوقات الصعبة، خدمات جنائزية متكاملة بكل احترام وعناية.</p>
-            <a href="" class="btn">طلب خدمة الآن</a>
+            <a href="{{route('service')}}" class="btn">طلب خدمة الآن</a>
         </div>
 
     </div>

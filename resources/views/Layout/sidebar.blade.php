@@ -1,7 +1,7 @@
 <div class="sidebar">
         <div class="sidebar-brand">
             <div class="sidebar-flex">
-                <h3>Library System</h3>
+                <h3>الحانوتي</h3>
                 <div class="brand-icons">
                     <i class="fa-solid fa-bell"></i>
                     <i class="fa-solid fa-user-circle"></i>
@@ -13,30 +13,31 @@
             <div class="sidebar-user">
                 <img src="{{ asset('uploads/ImageWebsite/profile.jpg') }}" alt="User Profile">
                 <div>
-                    <h3>Doaa Ali</h3>
-                    <span>DoaaAli@gmail.com</span>
+                    <h3>{{Auth::user()->name }}</h3>
+                    <span>{{Auth::user()->email }}</span>
                 </div>
-             </div>
-             <div class="sidebar-menu">
-                <div class="menu-head">Books</div>
+            </div>
+            <div class="sidebar-menu">
+                <div class="menu-head">المستخدمون</div>
                 <ul>
-                    <li><a href=""><i class="fas fa-book"></i> Books</a></li>
-                    <li><a href=""><i class="fas fa-user-edit"></i> Authors</a></li>
-                    <li><a href=""><i class="fas fa-tags"></i> Categories</a></li>
+                    <li><a href="{{route('auth.index')}}"><i class="fas fa-book"></i> المشرف</a></li>
+                    <li><a href=""><i class="fas fa-user-edit"></i> منشئ المحتوى</a></li>
+                    <li><a href=""><i class="fas fa-tags"></i> العميل</a></li>
                 </ul>
-                
-                <div class="menu-head">Students Management</div>
+
+                <div class="menu-head">إدارة المقابر</div>
                 <ul>
-                    <li><a href=""><i class="fas fa-users"></i> Students</a></li>
-                    <li><a href=""><i class="fas fa-exchange-alt"></i> Borrowings</a></li>
-                    <li><a href=""><i class="fas fa-clock"></i> Late Returns</a></li>
+                    <li><a href=""><i class="fas fa-users"></i> المقابر</a></li>
+                    <li><a href=""><i class="fas fa-exchange-alt"></i> حجوزات المقابر</a></li>
+                    <li><a href=""><i class="fas fa-clock"></i> سجلات الدفن</a></li>
                 </ul>
-                
-                <div class="menu-head">Settings</div>
+
+                <div class="menu-head">الإعدادات</div>
                 <ul>
-                    <li><a href=""><i class="fas fa-cogs"></i> Settings</a></li>
-                    <li><a href=""><i class="fas fa-shopping-bag"></i> Sales</a></li>
+                    <li><a href=""><i class="fas fa-cogs"></i> الإعدادات</a></li>
+                    <li><a href=""><i class="fas fa-shopping-bag"></i> المبيعات</a></li>
                 </ul>
             </div>
+
         </div>
     </div>
