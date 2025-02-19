@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@700&display=swap');
+
+
+* {
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000; 
+}
+.main-content {
+    min-height: calc(100vh - 70px);
+    margin-top: 50px; 
+    width: 100%;
+    height: 100%;
+
+    
+}
+
+
+.logout-btn {
+    background: #ae7906c6;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+    color: white;
+}
+
+.logout-btn span {
+    margin-right: 5px;
+}

@@ -4,10 +4,11 @@ use App\Http\Controllers\AuthController;
 
 use Illuminate\Support\Facades\Route;
 
-//master....
-Route::get('/', function () {
-    return view('Layout.master');
-})->name('home');
+//HomePage....
+Route::get('/', function () {return view('Layout_home.master');})->name('home');
+Route::get('service', function () {return view('Layout_service.master');})->name('service');
+Route::get('prayers', function () {return view('Layout_prayers.master');})->name('prayers');
+
 
 
 

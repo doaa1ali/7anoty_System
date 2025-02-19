@@ -1,0 +1,89 @@
+body {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
+    background-size: cover;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red;
+    border: none;
+    font-size: 18px;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.close-btn:hover {
+    color: darkred;
+}
+
+
+.register-box {
+    position: relative; 
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 350px;
+    text-align: center;
+}
+
+
+.register-box h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+.input-group {
+    text-align: left;
+    margin-bottom: 15px;
+
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding-right: 5px;
+    height: 25px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn {
+    width: 100%;
+    background-color: #ae7906c6;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #ae7906c6;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
