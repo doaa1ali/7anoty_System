@@ -184,16 +184,6 @@ select {
 .cancel:hover {
     background-color: #c0392b;
 }
-.show-btn {
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #503ce7;
-    color: white;
-    text-decoration: none;
-}
 
-.show-btn:hover {
-    background-color: #503ce7;
-}
 
 
