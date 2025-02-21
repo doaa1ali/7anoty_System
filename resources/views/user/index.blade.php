@@ -58,8 +58,8 @@
                         </td>
                         <td>{{ $user->type }}</td>
                         <td class="actions">
-                            <a href="" class="show-btn">عرض</a>
                             <a href="" class="edit-btn">تعديل</a>
+                            <a href="" class="show-btn">عرض</a>
                             <form action="" method="POST" class="delete-form">
                                 @csrf
                                 @method('DELETE')
