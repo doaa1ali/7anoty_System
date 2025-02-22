@@ -15,9 +15,6 @@ class AuthController extends Controller
         return view('user.index', compact('users'));
     }
 
-
-
-
     public function register()
     {
         return view ('auth.register');
@@ -40,8 +37,8 @@ class AuthController extends Controller
         
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = 'hanoty' . time() . '.' . $image->extension();
-            $image->move(public_path('uploads/hanotyimages'), $imageName);
+            $imageName = 'user' . time() . '.' . $image->extension();
+            $image->move(public_path('uploads/userimages'), $imageName);
         }
         
         $data = [
@@ -57,11 +54,16 @@ class AuthController extends Controller
         $user = User::create($data);
         Auth::login($user);
         
-        if ($user->type === 'admin') {
+        if ($user->type === 'admin') 
+        {
             return view('Layout.master');
-        } elseif ($user->type === 'creator') {
+        } 
+        elseif ($user->type === 'creator') 
+        {
             return view('Layout_home.master');
-        } else {
+        } 
+        else 
+        {
             return view('Layout_home.master');
         }   
 
@@ -99,4 +101,60 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('home')->with('success', 'Logged out successfully.');
     }
+
+
+    public function create()
+    {
+        return view('user.create');
+    }
+
+
+    public function store(Request $request )
+    {
+        
+        
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6',
+            'phone' => 'required|string|max:15',
+            'location' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
+        ]);
+
+        $imageName = null; 
+        
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = 'user' . time() . '.' . $image->extension();
+            $image->move(public_path('uploads/userimages'), $imageName);
+        }
+        
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'phone' => $request->phone,
+            'location' => $request->location,
+            'image' => $imageName,
+            'type' => $request->type ?? 'customer',
+        ];
+        
+        User::create($data);
+
+        $users = User::all();
+        return view('user.index',  compact('users'));
+
+    }
+
+
+    public function search(Request $request)
+    {
+
+      $query = $request->input('query');
+      $users = User::where('name', 'like', "%{$query}%")->get();
+      return view('user.index', compact('users'));
+
+    }
+
 }

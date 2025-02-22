@@ -6,7 +6,7 @@
 
         <a href="/"><button class="close-btn" >x</button></a>
         <h2>إنشاء حساب</h2>
-        <form action="{{ route('auth.handleregister') }}" method="POST">
+        <form action="{{ route('auth.handleregister') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <div class="input-group">

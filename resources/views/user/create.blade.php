@@ -2,48 +2,62 @@
 @extends('Layout.master')
 
 @section('Show-Books')
-    <main>
-        <div>
-        <div class="container">
+ <main>
+  
+        <div class="register-box">
 
-            <h1>Add New Author</h1>
-
-            <form action="{{ route('author.store') }}" method="post" enctype="multipart/form-data">
+            <a href="{{route('auth.index')}}"><button class="close-btn" >x</button></a>
+            <h2>إضافة مستخدم جديد </h2>
+            <form action="{{ route('auth.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <label for="name">Name of Author:</label>
-                <input type="text" id="name" name="name" value="{{ old('name') }}" >
-                @error('name')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+                <div class="input-group">
+                    <label for="name">الاسم:</label>
+                    <input type="text" id="name" name="name" value="{{ old('name') }}" required>
+                    @error('name') <p class="error">{{ $message }}</p> @enderror
+                </div>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="{{ old('email') }}" >
-                @error('email')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+                <div class="input-group">
+                    <label for="email">البريد الإلكتروني:</label>
+                    <input type="email" id="email" name="email" value="{{ old('email') }}" required>
+                    @error('email') <p class="error">{{ $message }}</p> @enderror
+                </div>
 
-                <label for="profile_image">Image for you:</label>
-                <input type="file" id="profile_image" name="profile_image" value="{{ old('profile_image') }}" >
-                @error('profile_image')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+                <div class="input-group">
+                    <label for="password">كلمة المرور:</label>
+                    <input type="password" id="password" name="password" required>
+                    @error('password') <p class="error">{{ $message }}</p> @enderror
+                </div>
 
-                <label for="bio">Bio:</label>
-                <textarea id="bio" name="bio">{{ old('bio') }}</textarea>
-                @error('bio')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+                
 
-                <label for="job_description">Job_Description:</label>
-                <textarea id="job_description" name="job_description" >{{ old('job_description') }}</textarea>
-                @error('job_description')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+                <div class="input-group">
+                    <label for="phone">رقم الهاتف:</label>
+                    <input type="text" id="phone" name="phone" value="{{ old('phone') }}" required>
+                    @error('phone') <p class="error">{{ $message }}</p> @enderror
+                </div>
 
-                <button type="submit" class="save">Save</button> 
-                <button type="button" onclick="window.location.href='{{ route('author.index') }}';" class="cancel">Cancel</button>
+                <div class="input-group">
+                    <label for="location">الموقع:</label>
+                    <input type="text" id="location" name="location" value="{{ old('location') }}">
+                </div>
+
+                <div class="input-group">
+                    <label>صورة الملف الشخصي:</label>
+                    <input type="file" name="image">
+                </div>
+
+                <div class="input-group">
+                    <label for="type">نوع الحساب:</label>
+                    <select name="type" id="type">
+                        <option value="customer" {{ old('type') == 'customer' ? 'selected' : '' }}>مستخدم عادي</option>
+                        <option value="creator" {{ old('type') == 'creator' ? 'selected' : '' }}>مُنشئ محتوى</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn">حفظ</button><br><br>
+               {{--<a>هل تريد التعديل؟ <a href="{{ route('auth.login') }}">حفظ</a> --}} 
             </form>
         </div>
-    </main>
+</main>
 @endsection
