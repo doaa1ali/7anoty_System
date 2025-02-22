@@ -15,13 +15,19 @@ Route::get('prayers', function () {return view('Layout_prayers.master');})->name
 
 
 
-//master....
-Route::get('/auth', function () {
-    return view('customerLayout.master');
-})->name('home/Database')->middleware(TypeMiddleware::class);
+//master Database....
+Route::middleware(TypeMiddleware::class)->group(function () {
+    //homeDatabase...
+    Route::get('home/Database', function () { return view('Layout.master'); })->name('home.Database');
+    //Users......
+    Route::get('auth/index' ,[AuthController::class ,'index'])->name('auth.index');
+    Route::get('auth/search', [AuthController::class, 'search'])->name('auth.search');
+    Route::get('auth/create', [AuthController::class, 'create'])->name('auth.create');
+    Route::post('auth/store', [AuthController::class, 'store'])->name('auth.store');
+   
+});
 
-//User....
-Route::get('auth/index' ,[AuthController::class ,'index'])->name('auth.index');
+
 
 //register
 Route::get('auth/register' ,[AuthController::class ,'register'])->name('auth.register');

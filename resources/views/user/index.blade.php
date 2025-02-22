@@ -6,11 +6,11 @@
         <h1>جدول المستخدمين</h1>
         <div class="header-actions">
             <button class="create-btn">
-                <a href="">
+                <a href="{{route('auth.create')}}">
                     <span class="fas fa-plus"></span> إضافة مستخدم جديد
                 </a>
             </button>
-            <form action="" method="GET" class="search-container">
+            <form action="{{route('auth.search')}}" method="GET" class="search-container">
                 <input type="text" name="query" id="searchInput" placeholder="أدخل اسم المستخدم...">
                 <button type="submit">
                     <i class="fa fa-search"></i>
@@ -50,10 +50,10 @@
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->location }}</td>
                         <td>
-                            @if($user->profile_image)
-                                <img src="{{ asset('uploads/hanotyimages' . $user->image) }}" width="80" height="80" style="border-radius: 50%;">
+                            @if($user->image)
+                                <img src="{{ asset('uploads/userimages/' . $user->image) }}" width="80" height="80" style="border-radius: 50%;">
                             @else                   
-                                <p><img src="{{ asset('uploads/hanotyimages/1.png') }}" width="80" height="80" style="border-radius: 50%;"></p>
+                                <p><img src="{{ asset('uploads/userimages/1.png') }}" width="80" height="80" style="border-radius: 50%;"></p>
                             @endif
                         </td>
                         <td>{{ $user->type }}</td>
@@ -71,5 +71,4 @@
             </tbody>
         </table>
     </div>
-
 @endsection

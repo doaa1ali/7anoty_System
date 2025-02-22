@@ -1,13 +1,5 @@
 <div class="sidebar">
-        <div class="sidebar-brand">
-            <div class="sidebar-flex">
-                <h3>الحانوتي</h3>
-                <div class="brand-icons">
-                    <i class="fa-solid fa-bell"></i>
-                    <i class="fa-solid fa-user-circle"></i>
-                </div>
-            </div>
-        </div>
+     
 
         <div class="sidebar-main">
             <div class="sidebar-user">
