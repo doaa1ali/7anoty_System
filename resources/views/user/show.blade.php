@@ -1,45 +1,37 @@
 @extends('Layout.master')
 
 @section('Show-Books')
-    <main>
-    
-        <div class="container">
-            <div class="show">
-                <img src="{{ asset('uploads/author/images/' . $author->profile_image) }}" >
-            </div>
-
-            <div>
-                <h3>{{ $author->name }}</h3>
-                <span>{{ $author->email }}</span>
-            </div><br>
-
-            <div class="author-details">
-                <h3>Bio:</h3>
-                <p class="bio">{{ $author->bio }}</p>
-
-                <h3>Job Description:</h3>
-                <p class="job-description">{{ $author->job_description }}</p>
-                
-                <h3>Books:</h3>
-                @if($author->books->isEmpty())
-                    <p>No books available for this author.</p>
-                @else
-                    <ul class="book-list">
-                        @foreach($author->books as $book)
-                            <li class="book-item">
-                                <span class="book-title">{{ $book->name }}</span> 
-                                <span class="book-price">${{ $book->price }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endif
-            </div>
-
-            <div class="buttons-container">
-                <a href="{{ route('author.edit', $author->id) }}" class="save">Edit</a> 
-                <a href="{{ route('author.index')}}" class="cancel">Back</a>
-            </div>
-
+<main class="container">
+    <div class="card">
+        <div class="user-info">
+            @if($user->image)
+                <img src="{{ asset('uploads/userimages/' . $user->image) }}" class="profile-img">
+            @else                   
+                <img src="{{ asset('uploads/userimages/1.png') }}" class="profile-img">
+            @endif
+            <h3>{{ $user->name }}</h3>
+            <span class="email">{{ $user->email }}</span>
         </div>
-    </main>
+
+        <div class="auth-details">
+            <h4>كلمة المرور</h4>
+            <p class="pass">{{$user->password}}</p>
+
+            <h4>رقم الهاتف</h4>
+            <p>{{ $user->phone }}</p>
+            
+            <h4>الموقع</h4>
+            <p>{{ $user->location }}</p>
+
+            <h4>النوع</h4>
+            <p>{{ $user->type == 'customer' ? 'مستخدم عادي' : 'منشئ محتوى' }}</p>
+        </div>
+
+        <div class="buttons-container">
+            <a href="{{route('auth.edit', $user->id)}}" class="edit">تعديل</a> 
+            <a href="{{ route('auth.index')}}" class="cancel">رجوع</a>
+        </div>
+    </div>
+</main>
+
 @endsection

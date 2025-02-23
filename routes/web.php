@@ -24,6 +24,10 @@ Route::middleware(TypeMiddleware::class)->group(function () {
     Route::get('auth/search', [AuthController::class, 'search'])->name('auth.search');
     Route::get('auth/create', [AuthController::class, 'create'])->name('auth.create');
     Route::post('auth/store', [AuthController::class, 'store'])->name('auth.store');
+    Route::get('auth/show/{id}', [AuthController::class, 'show'])->name('auth.show');
+    Route::delete('auth/delete/{user}', [AuthController::class, 'destroy'])->name('auth.Delete');
+    Route::get('auth/edit/{id}', [AuthController::class, 'edit'])->name('auth.edit');
+    Route::put('auth/update/{id}', [AuthController::class, 'update'])->name('auth.update');
    
 });
 

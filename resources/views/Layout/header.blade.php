@@ -1,8 +1,10 @@
 <header>
     <div class="menu-toggle">
-
         <label><span class="fas fa-bars"></span></label>
-        <label class="header-title">الحانوتي</label>
+        <label class="header-title">
+            <a href="{{route('home')}}">الحانوتي</a>
+        </label>
+        
 
     </div>
 

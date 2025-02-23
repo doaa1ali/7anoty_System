@@ -1,49 +1,56 @@
 @extends('Layout.master')
 
 @section('Show-Books')
-    <main>
-        <div class="container">
-            <h1>Edit Author</h1><br><br>
+<main>
+    <div class="register-box">
+        <a href="{{ route('auth.index') }}"><button class="close-btn">x</button></a>
+        <h2>تعديل بيانات المستخدم</h2>
 
-            <form action="{{ route('author.update', $author->id) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT') 
+        <form action="{{ route('auth.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
+            <div class="input-group">
+                <label for="name">الاسم:</label>
+                <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required>
+                @error('name') <p class="error">{{ $message }}</p> @enderror
+            </div>
 
-                <label for="name">Name of Author:</label>
-                <input type="text" id="name" name="name" value="{{ $author->name }}" >
-                @error('name')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+            <div class="input-group">
+                <label for="email">البريد الإلكتروني:</label>
+                <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required>
+                @error('email') <p class="error">{{ $message }}</p> @enderror
+            </div>
 
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" value="{{ $author->email }}" >
-                @error('email')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+            <div class="input-group">
+                <label for="phone">رقم الهاتف:</label>
+                <input type="text" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" required>
+                @error('phone') <p class="error">{{ $message }}</p> @enderror
+            </div>
 
-                <label for="profile_image">Image for you:</label>
-                <input type="file" id="profile_image" name="profile_image" value="{{ $author->profile_image }}" >
-                @error('profile_image')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+            <div class="input-group">
+                <label for="location">الموقع:</label>
+                <input type="text" id="location" name="location" value="{{ old('location', $user->location) }}">
+                @error('location') <p class="error">{{ $message }}</p> @enderror
+            </div>
 
-                <label for="bio">Bio:</label>
-                <textarea id="bio" name="bio">{{ $author->bio }}</textarea>
-                @error('bio')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+            <div class="input-group">
+                <label>صورة الملف الشخصي:</label>
+                <input type="file" name="image">
+                @error('image') <p class="error">{{ $message }}</p> @enderror
+            </div>
 
-                <label for="job_description">Job_Description:</label>
-                <textarea id="job_description" name="job_description" >{{  $author->job_description }}</textarea>
-                @error('job_description')
-                    <p style="color: red; font-size: 14px; text-align: left;">{{ $message }}</p>
-                @enderror
+            <div class="input-group">
+                <label for="type">نوع الحساب:</label>
+                <select name="type" id="type">
+                    <option value="customer" {{ old('type', $user->type) == 'customer' ? 'selected' : '' }}>مستخدم عادي</option>
+                    <option value="creator" {{ old('type', $user->type) == 'creator' ? 'selected' : '' }}>مُنشئ محتوى</option>
+                </select>
+                @error('type') <p class="error">{{ $message }}</p> @enderror
+            </div>
 
-                <br><br>
-                <button type="submit" class="save">Edit</button> 
-                <button type="button" onclick="window.location.href='{{ route('author.index') }}';" class="cancel">Cancel</button>
-            </form>
-        </div>
-    </main>
+            <button type="submit" class="btn">حفظ التعديلات</button>
+        </form>
+    </div>
+</main>
 @endsection

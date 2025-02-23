@@ -157,4 +157,85 @@ class AuthController extends Controller
 
     }
 
+
+
+    public function show($id)
+    {
+        
+        $user = User::findOrFail($id);
+        if (!$user) {
+            return redirect()->route('auth.index')->with('error', 'User not found!');
+        }
+
+        return view('user.show', compact('user'));
+    }
+
+    public function destroy(User $user)
+    {
+      
+        if ($user->image && file_exists(public_path("uploads/userimages/{$user->image}"))) {
+            unlink(public_path("uploads/userimages/{$user->image}"));
+        }
+    
+        $user->delete();
+    
+        return redirect()->route('auth.index')->with('success', 'تم حذف المستخدم بنجاح!');
+    }
+    
+
+    
+    public function edit($id)
+    {
+        $user = User::findOrFail($id);
+        return view('user.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => "required|email|unique:users,email,$id", 
+            'password' => 'nullable|min:6', 
+            'phone' => 'required|string|max:15',
+            'location' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
+        ]);
+    
+        $user = User::findOrFail($id);
+    
+   
+        $data_update = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'location' => $request->location,
+            'type' => $request->type ?? 'customer',
+        ];
+    
+   
+        if ($request->filled('password')) {
+            $data_update['password'] = Hash::make($request->password);
+        }
+  
+        if ($request->hasFile('image')) {
+
+            if ($user->image && file_exists(public_path("uploads/userimages/{$user->image}"))) {
+                unlink(public_path("uploads/userimages/{$user->image}"));
+            }
+    
+           
+            $image = $request->file('image');
+            $filename = "User_" . time() . '.' . $image->extension();
+            $image->move(public_path("uploads/userimages"), $filename);
+    
+            $data_update['image'] = $filename;
+        }
+    
+        $user->update($data_update);
+    
+        session()->flash('success', 'تم تحديث بيانات المستخدم بنجاح!');
+        return redirect()->route('auth.index');
+    }
+    
+
 }

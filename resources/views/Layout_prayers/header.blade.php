@@ -27,7 +27,7 @@
 
     @auth
     <div class="header-account">
-        <p style="color:#cfc1c1">Welcome ya  {{Auth::user()->name }}  ({{Auth::user()->type }})😊</p>
+        <p style="color:#cfc1c1">مرحبا {{Auth::user()->name }}  ({{Auth::user()->type }})😊</p>
         <a href="{{ route('auth.logout') }}" class="logout-btn">
             <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
         </a>

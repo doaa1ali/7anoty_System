@@ -46,7 +46,7 @@
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>heddin</td>
+                        <td>********</td>
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->location }}</td>
                         <td>
@@ -58,9 +58,9 @@
                         </td>
                         <td>{{ $user->type }}</td>
                         <td class="actions">
-                            <a href="" class="edit-btn">تعديل</a>
-                            <a href="" class="show-btn">عرض</a>
-                            <form action="" method="POST" class="delete-form">
+                            <a href="{{route('auth.edit', $user->id)}}" class="edit-btn">تعديل</a>
+                            <a href="{{route('auth.show', $user->id)}}" class="show-btn">عرض</a>
+                            <form action="{{route('auth.Delete', $user->id)}}" method="POST" class="delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="delete-btn" onclick="return confirm('هل أنت متأكد أنك تريد حذف هذا المستخدم؟')">حذف</button>
