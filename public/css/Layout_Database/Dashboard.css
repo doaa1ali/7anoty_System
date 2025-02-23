@@ -10,7 +10,7 @@
 body {
     display: flex;
 }
-    
+
 
 .sidebar {
     width: 250px;
@@ -24,31 +24,38 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: width 0.3s;  
-    
+    transition: width 0.3s;
+
+}
+.sidebar-main {
+    flex: 1;
+    overflow-y: auto;
+    max-height: calc(100vh - 150px); /* لضبط الارتفاع */
+    padding-bottom: 20px; /* منع التداخل مع المحتوى */
 }
 
 .sidebar-main:hover {
-    flex: 1; 
+    flex: 1;
     overflow-y: auto;
 }
 
 .sidebar-main::-webkit-scrollbar {
-    width: 3px; 
+    width: 3px;
 }
 
 .sidebar-main::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2); 
-    border-radius: 4px;
+    background: rgba(126, 46, 46, 0);
+    border-radius: 10px;
 }
 
 .sidebar-main::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1); 
+    background: rgba(255, 255, 255, 0.301);
+    width: 50px;
 }
 
 
 .main-content.shift-left {
-    margin-right: 0px; 
+    margin-right: 0px;
     transition: margin-left 0.3s ease;
     width: 100%;
 }
@@ -103,7 +110,7 @@ body {
 
 .sidebar-user h3 {
     font-size: 14px;
-    
+
 }
 
 .sidebar-user span {
@@ -120,7 +127,7 @@ body {
     font-weight: bold;
     background-color: #100f0f;
     color: white;
-    
+
 }
 
 .sidebar-menu ul {
@@ -158,20 +165,20 @@ body {
 .main-content {
     background: #333;
     min-height: calc(100vh - 70px);
-    margin-top: 60px; 
+    margin-top: 60px;
     margin-right: 250px;
     width: calc(100% - 250px);
     min-height: 100vh;
     transition: margin-left 0.3s ease;
     padding: 10px;
-    
+
 }
 
 header {
     height: 60px;
     display: flex;
-    align-items: center; 
-    justify-content: space-between; 
+    align-items: center;
+    justify-content: space-between;
     text-align: center;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
     background: black;
@@ -200,7 +207,7 @@ header {
     display: flex;
     align-items: center;
     gap: 15px;
-    
+
 }
 
 .header-title {
@@ -211,8 +218,7 @@ header {
 }
 
 .header-left {
-    margin-right: auto; 
-   
+    margin-right: auto;
 }
 
 .logout-btn {
@@ -242,13 +248,13 @@ header {
 main {
     padding: 0;
     min-height: calc(100vh - 70px);
-    margin-top: 60px; 
+    margin-top: 70px;
 }
 
 .page-header {
     display: flex;
     justify-content: space-between;
-    
+
 }
 
 .page-header h1{
@@ -257,9 +263,9 @@ main {
 .header-actions {
     display: flex;
     align-items: center;
-    justify-content: space-between; 
-    gap: 10px; 
-    
+    justify-content: space-between;
+    gap: 10px;
+
 }
 
 .header-actions .create-btn {
@@ -271,8 +277,8 @@ main {
     margin-left: 1rem;
     border-radius: 5px;
     font-weight: 400;
-    width: 190px;  
-    margin-top: 0;  
+    width: 190px;
+    margin-top: 0;
 }
 
 .header-actions .create-btn:hover {
@@ -290,7 +296,7 @@ main {
 .header-actions .create-btn span {
     font-size: 0.9rem;
     margin-right: .6rem;
-    
+
 }
 
 .table-container {

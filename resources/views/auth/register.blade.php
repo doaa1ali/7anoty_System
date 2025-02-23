@@ -27,7 +27,7 @@
                 @error('password') <p class="error">{{ $message }}</p> @enderror
             </div>
 
-            
+
 
             <div class="input-group">
                 <label for="phone">رقم الهاتف:</label>

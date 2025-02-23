@@ -1,0 +1,91 @@
+
+<x-auth_layout word="اضافه دار مناسبات">
+
+<div class="container">
+    <div class="register-box">
+
+        <a href="/"><button class="close-btn" >x</button></a>
+        <h2> اضافه دار مناسبات</h2>
+        <form action="{{ route('addhall') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            <div class="input-group">
+                <label for="name">الاسم:</label>
+                <input type="text" id="name" name="name" value="{{ old('name') }}" required>
+                @error('name') <p class="error">{{ $message }}</p> @enderror
+            </div>
+
+            <div class="input-group">
+                <label for="description">الوصف:</label>
+                <textarea id="description" name="description">{{ old('description') }}</textarea>
+            </div>
+
+            <div class="input-group">
+                <label for="location">الموقع:</label>
+                <input type="text" id="location" name="location" value="{{ old('location') }}">
+            </div>
+
+           <!--  -->
+           <div class="input-group">
+            <label for="mapSearch">ابحث عن موقع:</label>
+            <input type="text" id="mapSearch" placeholder="ابحث عن الموقع">
+            <button type="button" onclick="searchInMap()">بحث</button>
+
+                <div id="map-container">
+                    <iframe
+                        id="mapFrame"
+                        width="100%"
+                        height="300"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        src="https://www.google.com/maps?q=30.0444,31.2357&z=15&output=embed">
+                    </iframe>
+                </div>
+
+                <input type="hidden" id="lat" name="lat">
+                <input type="hidden" id="long" name="long">
+            </div>
+            <!--  -->
+            <div class="input-group">
+                <label for="price">السعر:</label>
+                <input type="text" id="price" name="price" value="{{ old('price') }}">
+            </div>
+
+            <div class="input-group">
+                <label for="seats">عدد الكراسي:</label>
+                <input type="number" id="seats" name="seats" value="{{ old('seats') }}">
+            </div>
+
+            <div class="input-group">
+                <label for="has_buffet">هل هناك خدمه بوفيه؟</label>
+                <select id="has_buffet" name="has_buffet">
+                    <option value="0">لا</option>
+                    <option value="1">نعم</option>
+                </select>
+            </div>
+
+
+
+               <div class="input-group">
+                    <label for="start_time">وقت البداية:</label>
+                    <input type="time" id="start_time" name="start_time" value="{{ old('start_time') }}" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="end_time">وقت النهاية:</label>
+                    <input type="time" id="end_time" name="end_time" value="{{ old('end_time') }}" required>
+                </div>
+
+                <div class="input-group">
+                <label for="image">اضافه صورة :</label>
+                <input type="file" id="image" name="image">
+                </div>
+
+            <button type="submit" class="btn">اضافه</button><br><br>
+        </form>
+    </div>
+</div>
+
+
+</x-auth_layout>

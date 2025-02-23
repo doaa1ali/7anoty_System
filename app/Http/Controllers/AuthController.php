@@ -22,8 +22,8 @@ class AuthController extends Controller
 
     public function handleregister(Request $request )
     {
-        
-        
+
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -33,14 +33,14 @@ class AuthController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
 
-        $imageName = null; 
-        
+        $imageName = null;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = 'user' . time() . '.' . $image->extension();
             $image->move(public_path('uploads/userimages'), $imageName);
         }
-        
+
         $data = [
             'name' => $request->name,
             'email' => $request->email,
@@ -50,22 +50,17 @@ class AuthController extends Controller
             'image' => $imageName,
             'type' => $request->type ?? 'customer',
         ];
-        
+// dd('ssss');
         $user = User::create($data);
         Auth::login($user);
-        
-        if ($user->type === 'admin') 
-        {
+
+        if ($user->type === 'admin') {
             return view('Layout.master');
-        } 
-        elseif ($user->type === 'creator') 
-        {
+        } elseif ($user->type === 'creator') {
             return view('Layout_home.master');
-        } 
-        else 
-        {
+        } else {
             return view('Layout_home.master');
-        }   
+        }
 
     }
 
@@ -88,17 +83,23 @@ class AuthController extends Controller
             if($user->type ==='admin' )
                 return view('Layout.master');
             elseif($user->type ==='creator')
-                return view('Layout_home.master');
+                return view('creatorLayout.master');
             else
-                return view('customerLayout.master');
+                return view('Layout_home.master');
+
         }
 
         return back()->withErrors(['email'=> 'invalid email or password']);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->flush();
+        $request->session()->regenerateToken();
+        $request->session()->regenerate();
+        // dd(session()->all());
         return redirect()->route('home')->with('success', 'Logged out successfully.');
     }
 
@@ -111,8 +112,8 @@ class AuthController extends Controller
 
     public function store(Request $request )
     {
-        
-        
+
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -122,14 +123,14 @@ class AuthController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
 
-        $imageName = null; 
-        
+        $imageName = null;
+
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = 'user' . time() . '.' . $image->extension();
             $image->move(public_path('uploads/userimages'), $imageName);
         }
-        
+
         $data = [
             'name' => $request->name,
             'email' => $request->email,
@@ -139,7 +140,7 @@ class AuthController extends Controller
             'image' => $imageName,
             'type' => $request->type ?? 'customer',
         ];
-        
+
         User::create($data);
 
         $users = User::all();
