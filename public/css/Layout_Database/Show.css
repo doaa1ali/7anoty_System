@@ -1,0 +1,91 @@
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+
+.card {
+    background: #000;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 750px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+}
+
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+    margin-bottom: 10px;
+}
+
+
+h3 {
+    color: white;
+}
+
+.email {
+    color: rgb(253, 252, 252);
+    font-size: 14px;
+}
+
+
+.auth-details {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.auth-details h4 {
+    margin-bottom: 5px;
+    color: white;
+}
+
+.auth-details p {
+    background: #202020;
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: white;
+}
+
+.buttons-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.edit, .cancel {
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.3s;
+    width: 49%;
+    gap: 3px;
+}
+
+.edit {
+    background: #28a745;
+    color: white;
+}
+
+.cancel {
+    background: red;
+    color: white;
+}
+
+.edit:hover {
+    background: #218838;
+}
+
+.cancel:hover {
+    background: #bb1021;
+}

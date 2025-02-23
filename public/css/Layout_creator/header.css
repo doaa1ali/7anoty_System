@@ -1,0 +1,145 @@
+
+header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    width: 600px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    background: black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    gap: 25px;
+    width: 100%;
+    padding: 10px 20px;
+    z-index: 1000;
+}
+
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.6);
+}
+
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.header-nav {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-account {
+    display: flex;
+    gap: 20px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.menu-toggle img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 3px solid #ddc01a;
+    margin-right: 10px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: white(49, 49, 49);
+}
+
+
+.header-nav a {
+    text-decoration: none;
+    font-size: 18px;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #034e9f;
+}
+
+.header-nav a.active {
+    color: #007bff;
+    font-weight: bold;
+
+}
+
+.header-account {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+ .register-btn {
+    background: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.login-btn {
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.register-btn:hover {
+    background: #0056b3;
+}
+
+.login-btn:hover {
+    background: #fefcf9c6;
+    color: #007bff;
+}
+
+.logout-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    background: rgb(144, 43, 43);
+    color: white;
+}
+
+.logout-btn:hover {
+    color: #fefcf9c6;
+    background: red;
+}
+
+.create-btn {
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.3s;
+    background: #FFD700;
+    color: white;
+}
+.create-btn a {
+    text-decoration: none;
+    color: black;
+}
