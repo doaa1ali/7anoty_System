@@ -11,14 +11,19 @@ class User extends Authenticatable
 
     use HasFactory, Notifiable;
 
-    protected $fillable = ['id','name','email','password','phone','location','image','type' ];
+    protected $fillable = ['name','email','password','phone','location','image','type' ];
+
+    public function cemeteries()
+    {
+       return $this->hasMany(Cemetery::class);
+    }
 
 
     protected $hidden = [
         'password',
     ];
 
- 
+
     protected function casts(): array
     {
         return [

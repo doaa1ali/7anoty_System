@@ -11,7 +11,8 @@ class TypeMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (!Auth::check()) 
+
+        if(!auth::check())
         {
             return redirect()->route('auth.login');
         }
@@ -22,17 +23,17 @@ class TypeMiddleware
             {
                 return $next($request);
             }
-
+                    
             elseif(auth::check() && auth::user()->type==='creator')
             {
                 return response()->view('creatorLayout.master');
             }
+                
             else
             {
-                return response()->view('customerLayout.master');
+                return response()->view('Layout_home.master');
             }
+               
         }
-        
-            
     }
 }

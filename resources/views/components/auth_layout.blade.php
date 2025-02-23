@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <link rel="stylesheet" href="{{ asset('css/layout_home/register.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Layout_creator/register.css') }}">
+
     <style>
         body {
             background:  url("{{ asset('uploads/ImageWebsite/28.jpg') }}");;

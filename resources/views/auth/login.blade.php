@@ -24,7 +24,7 @@
                 <button type="submit" class="btn">تسجيل الدخول</button><br>
 
                 <p>ليس لديك حساب؟ <a href="{{ route('auth.register') }}">إنشاء حساب</a></p>
-                
+
             </form>
         </div>
     </div>

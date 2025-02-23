@@ -1,0 +1,56 @@
+.main{
+    width: 100%;
+}
+
+
+.Hero_section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 600px; 
+    position: relative;
+    color: white;
+    text-align: center;
+}
+
+.Hero_section_content {
+    position: absolute;
+    top: 40%; 
+    left: 30%; 
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 2; 
+    max-width: 80%; 
+}
+
+.Hero_section h1 {
+    font-size: 50px;
+    font-weight: bold;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); 
+}
+
+.Hero_section p {
+    font-size: 20px;
+    margin: 15px 0;
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.4);
+}
+
+.btn {
+    background-color: #FFD700;
+    color: black;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 18px;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.btn:hover {
+    background-color: #ae7906c6;
+}
+

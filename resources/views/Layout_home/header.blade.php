@@ -13,7 +13,7 @@
             <a href="#" class="{{ request()->routeIs('contact') ? 'active' : '' }}">تواصل معنا</a>
         </nav>
     </div>
-   
+
     @guest
     <div class="header-account">
         <a href="{{ route('auth.login') }}" class="login-btn">
@@ -33,4 +33,5 @@
         </a>
     </div>
     @endauth
+
 </header>

@@ -2,6 +2,10 @@
 
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CemeteryController;
+use App\Http\Controllers\ServiceController;
+
+
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\TypeMiddleware;
 use GuzzleHttp\Middleware;
@@ -11,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {return view('Layout_home.master');})->name('home');
 Route::get('service', function () {return view('Layout_service.master');})->name('service');
 Route::get('prayers', function () {return view('Layout_prayers.master');})->name('prayers');
-
-
 
 
 //master Database....
@@ -43,6 +45,13 @@ Route::post('auth/login' ,[AuthController::class ,'handlelogin'])->name('auth.ha
 
 //logout
 Route::get('auth/logout' ,[AuthController::class ,'logout'])->name('auth.logout')->middleware(AuthMiddleware::class);
+
+//service type
+Route::get('/service/type', [ServiceController::class, 'servicetype'])->name('service.type');
+Route::post('/service/type', [ServiceController::class, 'servicehandle'])->name('service.handle');
+Route::post('type/cemetry', [ServiceController::class, 'addcemetry'])->name('addcemetery');
+Route::post('type/hall', [ServiceController::class, 'addhall'])->name('addhall');
+Route::post('type/other', [ServiceController::class, 'addotherservice'])->name('addotherservice');
 
 
 
