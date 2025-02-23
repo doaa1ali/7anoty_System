@@ -1,5 +1,5 @@
 <div class="sidebar">
-     
+
 
         <div class="sidebar-main">
             <div class="sidebar-user">
@@ -19,8 +19,8 @@
 
                 <div class="menu-head">إدارة المقابر</div>
                 <ul>
-                    <li><a href=""><i class="fas fa-users"></i> المقابر</a></li>
-                    <li><a href=""><i class="fas fa-exchange-alt"></i> حجوزات المقابر</a></li>
+                    <li><a href="{{route('cemetry.index')}}"><i class="fas fa-users"></i> المقابر</a></li>
+                    <li><a href="{{route('cemetry.index')}}"><i class="fas fa-exchange-alt"></i> حجوزات المقابر</a></li>
                     <li><a href=""><i class="fas fa-clock"></i> سجلات الدفن</a></li>
                 </ul>
 

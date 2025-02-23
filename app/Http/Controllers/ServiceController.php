@@ -115,7 +115,7 @@ class ServiceController extends Controller
             'user_id' => auth()->id(),
 
         ];
-         dd($data);
+        //  dd($data);
        $hall= Hall::create($data);
     //    dd($hall);
        return redirect()->back()->with('success', 'تمت إضافة القاعه بنجاح!');

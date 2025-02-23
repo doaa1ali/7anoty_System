@@ -30,7 +30,18 @@ Route::middleware(TypeMiddleware::class)->group(function () {
     Route::delete('auth/delete/{user}', [AuthController::class, 'destroy'])->name('auth.Delete');
     Route::get('auth/edit/{id}', [AuthController::class, 'edit'])->name('auth.edit');
     Route::put('auth/update/{id}', [AuthController::class, 'update'])->name('auth.update');
-   
+
+
+    //cemetry......
+    Route::get('cemetry/index' ,[CemeteryController::class ,'index'])->name('cemetry.index');
+    Route::get('cemetry/search', [CemeteryController::class, 'search'])->name('cemetry.search');
+    Route::get('cemetry/create', [CemeteryController::class, 'create'])->name('cemetry.create');
+    Route::post('cemetry/store', [CemeteryController::class, 'store'])->name('cemetry.store');
+    Route::get('cemetry/show/{id}', [CemeteryController::class, 'show'])->name('cemetry.show');
+    Route::delete('cemetry/delete/{cemetry}', [CemeteryController::class, 'destroy'])->name('cemetry.Delete');
+    Route::get('cemetry/edit/{id}', [CemeteryController::class, 'edit'])->name('cemetry.edit');
+    Route::put('cemetry/update/{id}', [CemeteryController::class, 'update'])->name('cemetry.update');
+
 });
 
 
