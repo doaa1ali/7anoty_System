@@ -21,7 +21,7 @@
         <option value="إعداد وإرسال النعي">إعداد وإرسال النعي</option>
     </select>
     @error('name') <p class="error">{{ $message }}</p> @enderror
-</div>
+    </div>
 
             <div class="input-group">
                 <label for="description">الوصف:</label>

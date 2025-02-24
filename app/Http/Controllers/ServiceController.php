@@ -69,7 +69,7 @@ class ServiceController extends Controller
             'user_id' => auth()->id(),
 
         ];
-         dd($data);
+        //  dd($data);
        $cemetery= Cemetery::create($data);
        return redirect()->back()->with('success', 'تمت إضافة المقبرة بنجاح!');
     }

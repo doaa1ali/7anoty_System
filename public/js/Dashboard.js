@@ -33,12 +33,29 @@ function toggleServiceForm() {
 
 
 
-//
+//map
 function searchInMap() {
     let searchQuery = document.getElementById('mapSearch').value;
     if (searchQuery) {
         let googleSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
-        window.open(googleSearchUrl, '_blank'); // فتح البحث في نافذة جديدة
+        window.open(googleSearchUrl, '_blank');
+        alert("بعد تحديد الموقع، انسخ الرابط من شريط العنوان والصقه هنا.");
+    }
+}
+
+function extractLatLong() {
+    let url = document.getElementById('mapUrl').value;
+    let regex = /@([-.\d]+),([-.\d]+)/;
+    let match = url.match(regex);
+
+    if (match) {
+        let lat = match[1];
+        let long = match[2];
+
+        document.getElementById('lat').value = lat;
+        document.getElementById('long').value = long;
+
+        updateMap(lat, long);
     }
 }
 
@@ -46,13 +63,4 @@ function updateMap(lat, long) {
     let mapFrame = document.getElementById('mapFrame');
     let newSrc = `https://www.google.com/maps?q=${lat},${long}&z=15&output=embed`;
     mapFrame.src = newSrc;
-
-    document.getElementById('lat').value = lat;
-    document.getElementById('long').value = long;
 }
-
-document.getElementById('mapFrame').addEventListener('click', function () {
-    let lat = 30.0444 + (Math.random() * 0.01); // محاكاة اختيار موقع
-    let long = 31.2357 + (Math.random() * 0.01);
-    updateMap(lat, long);
-});
