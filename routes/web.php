@@ -7,6 +7,7 @@ use App\Http\Controllers\HallController;
 use App\Http\Controllers\ServiceController;
 
 
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\TypeMiddleware;
 use GuzzleHttp\Middleware;
@@ -19,7 +20,7 @@ Route::get('prayers', function () {return view('Layout_prayers.master');})->name
 
 
 //master Database....
-Route::middleware(TypeMiddleware::class)->group(function () {
+Route::middleware(AdminMiddleware::class)->group(function () {
     //homeDatabase...
     Route::get('home/Database', function () { return view('Layout.master'); })->name('home.Database');
     //Users......

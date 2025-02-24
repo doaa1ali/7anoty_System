@@ -35,7 +35,9 @@ function toggleServiceForm() {
 
 //
 function searchInMap() {
+
     let searchQuery = document.getElementById('mapSearch').value;
+    console.log(searchQuery);
     if (searchQuery) {
         let googleSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
         window.open(googleSearchUrl, '_blank'); // فتح البحث في نافذة جديدة
@@ -52,6 +54,7 @@ function updateMap(lat, long) {
 }
 
 document.getElementById('mapFrame').addEventListener('click', function () {
+    console.log('tess');
     let lat = 30.0444 + (Math.random() * 0.01); // محاكاة اختيار موقع
     let long = 31.2357 + (Math.random() * 0.01);
     updateMap(lat, long);

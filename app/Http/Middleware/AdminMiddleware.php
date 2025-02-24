@@ -11,9 +11,9 @@ class AdminMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth::check() && auth::user()->type==='admin')
+        if(auth::check() && auth::user())
               return $next($request);
         else
-            return redirect()->route('home');
+            return redirect()->route('home.Database');
     }
 }

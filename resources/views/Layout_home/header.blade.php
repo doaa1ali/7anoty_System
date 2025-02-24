@@ -30,7 +30,7 @@
             <div class="header-account">
                 <p style="color:#cfc1c1">مرحبا {{ Auth::user()->name }} 😊</p>
                 <button class="create-btn">
-                    <a href="{{ route('service.type') }}">
+                    <a href="{{ route('home.Database') }}">
                         <span class="fas fa-plus"></span> إضافة خدمة
                     </a>
                 </button>

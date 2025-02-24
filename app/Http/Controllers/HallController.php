@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hall;
+
+use App\Models\Duration;
 use Illuminate\Http\Request;
 
 class HallController extends Controller
@@ -12,9 +14,14 @@ class HallController extends Controller
      */
     public function index()
     {
+        if (auth()->user()->type=== 'creator') {
+            $halls = Hall::where('user_id',auth()->user()->id)->get();
+
+        }
+        else{
         $halls = Hall::all();
         $halls = Hall::with('user')->get();
-
+        }
         return view("hall.index", compact("halls"));
     }
 
@@ -70,6 +77,11 @@ class HallController extends Controller
         ];
          //dd($data);
        $hall= Hall::create($data);
+       $duration =Duration::create([
+        'hall_id'=> $hall->id,
+        'start_time'=>$hall->start_time,
+        'end_time'=> $hall->end_time 
+    ]);
     //    dd($hall);
     return redirect()->route('hall.index')->with('success', 'تمت إضافة القاعه بنجاح!');
     }
