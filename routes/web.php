@@ -3,9 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CemeteryController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\HallController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\TypeMiddleware;
 use Illuminate\Support\Facades\Route;
+
 
 // HomePage Routes
 Route::get('/', function () {
@@ -40,6 +42,16 @@ Route::middleware(TypeMiddleware::class)->group(function () {
     Route::put('service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
     Route::get('service/search', [ServiceController::class, 'search'])->name('service.search');
    
+    //hall
+    Route::get('hall/index' ,[HallController::class ,'index'])->name('hall.index');
+    Route::get('hall/create', [HallController::class, 'create'])->name('hall.create');
+    Route::post('hall/store', [HallController::class, 'store'])->name('hall.store');
+    Route::get('hall/search', [HallController::class, 'search'])->name('hall.search');
+    Route::get('hall/edit/{id}', [HallController::class, 'edit'])->name('hall.edit');
+    Route::put('hall/update/{id}', [HallController::class, 'update'])->name('hall.update');
+    Route::delete('hall/delete/{hall}', [HallController::class, 'destroy'])->name('hall.Delete');
+    Route::get('hall/show/{id}', [HallController::class, 'show'])->name('hall.show');
+
 });
 
 

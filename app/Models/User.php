@@ -23,7 +23,6 @@ class User extends Authenticatable
     }
 
 
-
     protected $hidden = [
         'password',
     ];
@@ -44,5 +43,10 @@ class User extends Authenticatable
     public function services()
     {
         return $this->hasMany(Service::class);
+
+    }
+    public function halls()
+    {
+        return $this->hasMany(Hall::class, 'user_id'); // A User has many Halls
     }
 }

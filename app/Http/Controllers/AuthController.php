@@ -57,7 +57,7 @@ class AuthController extends Controller
         if ($user->type === 'admin') {
             return view('Layout.master');
         } elseif ($user->type === 'creator') {
-            return view('Layout_home.master');
+            return view('creatorLayout.master');
         } else {
             return view('Layout_home.master');
         }

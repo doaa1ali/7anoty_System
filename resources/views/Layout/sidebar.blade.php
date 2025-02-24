@@ -18,7 +18,7 @@
                 <div class="menu-head">إدارة الخدمات</div>
                 <ul>
                     <li><a href="{{route('service.index')}}"><i class="fas fa-user-edit"></i> الخدمات</a></li>
-                    <li><a href=""><i class="fas fa-tags"></i> العميل</a></li>
+                    <li><a href="/hall/index"><i class="fas fa-clock"></i>دار مناسبات</a></li>
                 </ul>
 
                 <div class="menu-head">إدارة المقابر</div>
@@ -26,6 +26,8 @@
                     <li><a href=""><i class="fas fa-users"></i> المقابر</a></li>
                     <li><a href=""><i class="fas fa-exchange-alt"></i> حجوزات المقابر</a></li>
                     <li><a href=""><i class="fas fa-clock"></i> سجلات الدفن</a></li>
+                    
+
                 </ul>
 
                 <div class="menu-head">الإعدادات</div>

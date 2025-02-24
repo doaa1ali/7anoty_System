@@ -25,7 +25,11 @@ h1{
     font-size: 20px;
     font-weight: bold;
     cursor: pointer;
+<<<<<<< HEAD
     border-radius: 5px;
+=======
+    border-radius: 5px; /* يعطي حواف ناعمة */
+>>>>>>> origin/hall_crud
     transition: background 0.3s ease-in-out;
 }
 
@@ -73,7 +77,11 @@ h1{
     font-weight: bold;
     margin-bottom: 5px;
 }
-
+.input-group select,
+.input-group textarea {
+    height: 80px;
+    width: 100%;
+}
 
 .input-group input {
     width: 100%;
@@ -83,16 +91,26 @@ h1{
     border-radius: 5px;
     font-size: 16px;
 }
+<<<<<<< HEAD
 
 
 .input-group textarea {
     width: 100%;
     padding: 5px;
+=======
+.input-group select {
+    width: 100%;
+    padding-right: 5px;
+    height: 25px;
+>>>>>>> origin/hall_crud
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
     height: 35px;
+<<<<<<< HEAD
     box-sizing: border-box; /* يضمن أن الحواف لا تؤثر على الحجم */
+=======
+>>>>>>> origin/hall_crud
 }
 
 .btn {

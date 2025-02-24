@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Cemetery;
 use App\Models\Hall;
 use App\Models\Service;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/hall_crud
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
@@ -67,7 +72,11 @@ class ServiceController extends Controller
             'user_id' => auth()->id(),
 
         ];
+<<<<<<< HEAD
          dd($data);
+=======
+         //dd($data);
+>>>>>>> origin/hall_crud
        $cemetery= Cemetery::create($data);
        return redirect()->back()->with('success', 'تمت إضافة المقبرة بنجاح!');
     }
@@ -113,7 +122,11 @@ class ServiceController extends Controller
             'user_id' => auth()->id(),
 
         ];
+<<<<<<< HEAD
          dd($data);
+=======
+         //dd($data);
+>>>>>>> origin/hall_crud
        $hall= Hall::create($data);
     //    dd($hall);
        return redirect()->back()->with('success', 'تمت إضافة القاعه بنجاح!');
@@ -161,6 +174,7 @@ class ServiceController extends Controller
         Service::create($data);
        return redirect()->back()->with('success', 'تمت إضافة الخدمه بنجاح!');
     }
+<<<<<<< HEAD
     /*
     public function __construct()
     {
@@ -331,4 +345,6 @@ class ServiceController extends Controller
 
         return redirect()->route('service.index')->with('success', 'تم حذف الخدمة بنجاح');
     }
+=======
+>>>>>>> origin/hall_crud
 }
