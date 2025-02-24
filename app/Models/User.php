@@ -8,10 +8,14 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-
     use HasFactory, Notifiable;
 
-    protected $fillable = ['name','email','password','phone','location','image','type' ];
+    // Define role constants
+    const ROLE_CREATOR = 'creator';
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
+
+    protected $fillable = ['id','name','email','password','phone','location','image','type', 'role' ];
 
     public function cemeteries()
     {
@@ -19,10 +23,10 @@ class User extends Authenticatable
     }
 
 
+
     protected $hidden = [
         'password',
     ];
-
 
     protected function casts(): array
     {
@@ -30,5 +34,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
+    }
+
+    public function services()
+    {
+        return $this->hasMany(Service::class);
     }
 }

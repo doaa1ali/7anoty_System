@@ -10,10 +10,14 @@
                 </div>
             </div>
             <div class="sidebar-menu">
-                <div class="menu-head">المستخدمون</div>
+                <div class="menu-head"> إدارة المستخدمون</div>
                 <ul>
-                    <li><a href="{{route('auth.index')}}"><i class="fas fa-book"></i> المشرف</a></li>
-                    <li><a href=""><i class="fas fa-user-edit"></i> منشئ المحتوى</a></li>
+                    <li><a href="{{route('auth.index')}}"><i class="fas fa-book"></i> المستخدمون</a></li>
+                </ul>
+
+                <div class="menu-head">إدارة الخدمات</div>
+                <ul>
+                    <li><a href="{{route('service.index')}}"><i class="fas fa-user-edit"></i> الخدمات</a></li>
                     <li><a href=""><i class="fas fa-tags"></i> العميل</a></li>
                 </ul>
 

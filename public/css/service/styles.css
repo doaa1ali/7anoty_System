@@ -1,0 +1,118 @@
+/* General Styles */
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    color: #333;
+}
+
+h2 {
+    color: #FFD700;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: black;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    color: white;
+}
+
+/* Form Styles */
+.form-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #FFD700;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+}
+
+.form-control:focus {
+    border-color: #FFD700;
+    outline: none;
+}
+
+.form-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+}
+
+.form-select:focus {
+    border-color: #FFD700;
+    outline: none;
+}
+
+.form-check-input {
+    margin-left: 10px;
+}
+
+.form-check-label {
+    color: #FFD700;
+}
+
+/* Button Styles */
+.btn-primary {
+    width: 100%;
+    background-color: #FFD700;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #ae7906c6;
+}
+
+/* Alert Styles */
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.alert-danger {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #c62828;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #2e7d32;
+}
+
+/* Discount Field */
+#discount_field {
+    margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+}
