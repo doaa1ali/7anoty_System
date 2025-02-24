@@ -1,7 +1,7 @@
 
 <x-auth_layout word="التسجيل">
 
-<div class="container">
+<div class="register-container">
     <div class="register-box">
 
         <a href="/"><button class="close-btn" >x</button></a>

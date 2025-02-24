@@ -79,6 +79,23 @@ h1{
     height: 35px;
 }
 
+.input-group textarea {
+    width: 100%;
+    padding-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 35px;
+}
+
+.input-group_checked {
+    display: flex;
+    align-items: center; 
+    justify-content: space-between;
+    flex-direction: row-reverse; 
+    margin-bottom: 10px;
+}
+
 .btn {
     width: 100%;
     background-color: #FFD700;

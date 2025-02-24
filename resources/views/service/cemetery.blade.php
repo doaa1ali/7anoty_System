@@ -1,7 +1,7 @@
 
 <x-auth_layout word="اضافه مقبره">
 
-<div class="container">
+<div class="register-container">
     <div class="register-box">
 
         <a href="/"><button class="close-btn" >x</button></a>
@@ -52,7 +52,7 @@
 
             <div class="input-group">
                 <label for="size">المساحة (م²):</label>
-                <input type="text" id="size" name="size" value="{{ old('size') }}">
+                <input type="text" id="size" name="size" placeholder="ادخل الحجم بالمتر مربع" value="{{ old('size') }}">
             </div>
 
             <div class="input-group">
