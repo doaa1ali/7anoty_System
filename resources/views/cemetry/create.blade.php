@@ -80,25 +80,36 @@
                     <input type="number" id="discount" name="discount" value="{{ old('discount') }}" min="0" max="100">
                     @error('discount') <p class="error">{{ $message }}</p> @enderror
                 </div>
+                
+                @if (auth()->check() && auth()->user()->type != 'creator')
+                    <div class="input-group">
+                        <label for="creator_id">منشئ المحتوي:</label>
+                        
+                        <select name="user_id" id="user_id" required>
+                            <option value="">اختر منشئ المحتوي</option>
+                            @foreach($creators as $creator)
+                                <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
+                                    {{ $creator->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        
+                        <!-- <input type="text" id="creator_id" name="creator" value="{{ old('$creator->name') }}"> -->
+                        
+                    </div>
+                @endif
+               
+                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
 
-                <div class="input-group">
-                    <label for="creator_id">منشئ المحتوي:</label>
-                    <select name="user_id" id="user_id" required>
-                        <option value="">اختر منشئ المحتوي</option>
-                        @foreach($creators as $creator)
-                            <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
-                                {{ $creator->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('creator_id') <p class="error">{{ $message }}</p> @enderror
-                </div>
 
                 <button type="submit" class="btn">حفظ</button><br><br>
-                <p>
-                    لم تجد منشئ المحتوي؟
-                    <a href="{{ route('auth.register') }}">سجّل منشئ محتوي جديد</a>
-                </p>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+
+                    <p>
+                        لم تجد منشئ المحتوي؟
+                        <a href="{{ route('auth.register') }}">سجّل منشئ محتوي جديد</a>
+                    </p>
+                @endif
             </form>
         </div>
 </main>

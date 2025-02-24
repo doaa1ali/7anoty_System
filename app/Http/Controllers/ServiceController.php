@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cemetery;
+use App\Models\Duration;
 use App\Models\Hall;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -246,8 +247,12 @@ class ServiceController extends Controller
             $validated['discount'] = null;
         }
 
-        Service::create($validated);
-
+        $service =Service::create(attributes: $validated);
+        $duration =Duration::create([
+            'service_id'=> $service->id,
+            'start_time'=>$service->start_time,
+            'end_time'=> $service->end_time 
+        ]);
         return redirect()->route('service.index')->with('success', 'تم إضافة الخدمة بنجاح.');
     }
 
