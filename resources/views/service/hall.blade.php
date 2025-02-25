@@ -1,7 +1,8 @@
 
 <x-auth_layout word="اضافه دار مناسبات">
 
-<div class="container">
+<div class="register-container">
+
     <div class="register-box">
 
         <a href="/"><button class="close-btn" >x</button></a>

@@ -30,8 +30,8 @@ body {
 .sidebar-main {
     flex: 1;
     overflow-y: auto;
-    max-height: calc(100vh - 150px); /* لضبط الارتفاع */
-    padding-bottom: 20px; /* منع التداخل مع المحتوى */
+    max-height: calc(100vh - 60px); 
+    padding-bottom: 20px; 
 }
 
 .sidebar-main:hover {

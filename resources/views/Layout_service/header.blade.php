@@ -26,11 +26,37 @@
     @endguest
 
     @auth
-    <div class="header-account">
-        <p style="color:#cfc1c1">مرحبا {{Auth::user()->name }}  ({{Auth::user()->type }})😊</p>
-        <a href="{{ route('auth.logout') }}" class="logout-btn">
-            <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
-        </a>
-    </div>
+        @if(Auth::user()->type === 'creator')
+            <div class="header-account">
+                <p style="color:#cfc1c1">مرحبا {{ Auth::user()->name }} 😊</p>
+                <button class="create-btn">
+                    <a href="{{ route('service.type') }}">
+                        <span class="fas fa-plus"></span> إضافة خدمة
+                    </a>
+                </button>
+                <a href="{{ route('auth.logout') }}" class="logout-btn">
+                    <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
+                </a>
+            </div>
+        @elseif(Auth::user()->type === 'admin')
+            <div class="header-account">
+                <p style="color:#cfc1c1">مرحبا {{ Auth::user()->name }} 😊</p>
+                <button class="create-btn">
+                    <a href="{{ route('home.Database') }}">
+                    <span class="fas fa-database"> </span>قاعدة البيانات  
+                    </a>
+                </button>
+                <a href="{{ route('auth.logout') }}" class="logout-btn">
+                    <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
+                </a>
+            </div>
+        @else
+            <div class="header-account">
+                <p style="color:#cfc1c1">مرحبا {{ Auth::user()->name }} 😊</p>
+                <a href="{{ route('auth.logout') }}" class="logout-btn">
+                    <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
+                </a>
+            </div>
+        @endif
     @endauth
 </header>
