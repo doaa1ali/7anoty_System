@@ -15,7 +15,15 @@ class CemeteryController extends Controller
      */
     public function index()
     {
-        $cemeteries = Cemetery::all();
+        if (auth()->user()->type=== 'creator') {
+            $cemeteries = Cemetery::where('user_id',auth()->user()->id)->get();
+
+        }
+        else{
+
+            $cemeteries = Cemetery::all();
+        }
+       
        return  view('cemetry/index', compact('cemeteries'));
     }
 
@@ -45,7 +53,7 @@ class CemeteryController extends Controller
             'price' => 'numeric',
             'is_discount' => 'required|boolean',
             'discount' => 'nullable|numeric|min:0|max:100',
-            'user_id' => 'required|exists:users,id',
+            'user_id' => 'exists:users,id',
         ]);
         //  dd($data);
           $imageName = null;
@@ -67,8 +75,20 @@ class CemeteryController extends Controller
             'price'=>$request->price,
             'is_discount'=>$request->is_discount,
             'discount'=>$request->discount,
-            'user_id' => $request->user_id,
+            
+            // 'user_id' => auth()->id(),
+
+            // 'user_id' => $request->user_id,
+
         ];
+
+        if (auth()->check() && auth()->user()->type != 'creator') {
+            $data['user_id'] = $request->user_id;
+        }
+        else {
+            $data['user_id'] = auth()->id();
+        }
+
         if ($request->is_discount == 0) {
             $data['discount'] = null;
         }

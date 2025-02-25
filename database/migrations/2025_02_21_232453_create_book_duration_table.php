@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('book_duration', function (Blueprint $table) {
             $table->id();
             $table->date('booking_date');
-            $table->unsignedBigInteger('service_id')->nullable();
+            $table->decimal('final_price', 10, 2)->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('service_id')->nullable();
             $table->unsignedBigInteger('hall_id')->nullable();
             $table->unsignedBigInteger('duration_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

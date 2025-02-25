@@ -23,8 +23,9 @@ return new class extends Migration
             $table->boolean('has_buffet')->default(false);
             $table->time('start_time');
             $table->time('end_time');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('image')->nullable();
+            // $table->unsignedBigInteger('user_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

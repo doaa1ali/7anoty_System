@@ -10,10 +10,14 @@
                 </div>
             </div>
             <div class="sidebar-menu">
+            @if (auth()->check() && auth()->user()->type != 'creator')
+
                 <div class="menu-head"> إدارة المستخدمون</div>
                 <ul>
                     <li><a href="{{route('auth.index')}}"><i class="fas fa-book"></i> المستخدمون</a></li>
                 </ul>
+                @endif
+
 
                 <div class="menu-head">إدارة الخدمات</div>
                 <ul>
@@ -24,17 +28,15 @@
                 <div class="menu-head">إدارة المقابر</div>
                 <ul>
                     <li><a href="{{route('cemetry.index')}}"><i class="fas fa-users"></i> المقابر</a></li>
+                    @if (auth()->check() && auth()->user()->type != 'creator')
                     <li><a href="{{route('cemetry.index')}}"><i class="fas fa-exchange-alt"></i> حجوزات المقابر</a></li>
                     <li><a href=""><i class="fas fa-clock"></i> سجلات الدفن</a></li>
-                    
-
                 </ul>
-
-                <div class="menu-head">الإعدادات</div>
                 <ul>
                     <li><a href=""><i class="fas fa-cogs"></i> الإعدادات</a></li>
                     <li><a href=""><i class="fas fa-shopping-bag"></i> المبيعات</a></li>
                 </ul>
+                @endif
             </div>
 
         </div>

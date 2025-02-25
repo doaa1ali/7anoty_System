@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CemeteryController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\CreatorMiddleware;
 
@@ -19,7 +20,7 @@ Route::get('prayers', function () {return view('Layout_prayers.master');})->name
 
 
 //master Database....
-Route::middleware(TypeMiddleware::class)->group(function () {
+Route::middleware(AdminMiddleware::class)->group(function () {
     //homeDatabase...
     Route::get('home/Database', function () { return view('Layout.master'); })->name('home.Database');
     //Users......
@@ -79,7 +80,6 @@ Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout'
 
 //service type
 Route::middleware(CreatorMiddleware::class)->group(function () {
-
 Route::get('/service/type', [ServiceController::class, 'servicetype'])->name('service.type');
 Route::post('/service/type', [ServiceController::class, 'servicehandle'])->name('service.handle');
 Route::post('type/cemetry', [ServiceController::class, 'addcemetry'])->name('addcemetery');

@@ -16,8 +16,10 @@ return new class extends Migration
             $table->decimal('final_price', 10, 2)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('book_duration_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('book_duration_id')->references('id')->on('book_duration')->onDelete('cascade');
             $table->timestamps();
         });
     }

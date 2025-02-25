@@ -28,27 +28,24 @@
                     <input type="text" id="location" name="location" value="{{ old('location') }}" required>
                     @error('location') <p class="error">{{ $message }}</p> @enderror
                 </div>
+                <!--  -->
 
-                <div class="input-group">
-            <label for="mapSearch">ابحث عن موقع:</label>
-            <input type="text" id="mapSearch" placeholder="ابحث عن الموقع">
-            <button type="button" onclick="searchInMap()">بحث</button>
-
-                <div id="map-container">
-                    <iframe
-                        id="mapFrame"
-                        width="100%"
-                        height="300"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        src="https://www.google.com/maps?q=30.0444,31.2357&z=15&output=embed">
-                    </iframe>
-                </div>
-
-                <input type="hidden" id="lat" name="lat">
-                <input type="hidden" id="long" name="long">
+            <!--  -->
+            <div class="input-group">
+                            <div class="col-md-12">
+                                <label class="fs-6 fw-bold">{{ __('Pickup your location') }}</label>
+                                <div class="text-center">
+                                    <div id="googleMap"
+                                        style="width: 100%;min-height:300px;border:1px solid #009EF7; border-radius: 10px;">
+                                    </div>
+                                    <input type="hidden" id="lat_inp" name="lat">
+                                    <input type="hidden" id="lng_inp" name="long">
+                                    <p class="invalid-feedback" id="lat"></p>
+                                </div>
+                            </div>
             </div>
+
+            <!--  -->
 
                 <div class="input-group">
                     <label for="size">المساحة (م²):</label>
@@ -81,24 +78,35 @@
                     @error('discount') <p class="error">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="input-group">
-                    <label for="creator_id">منشئ المحتوي:</label>
-                    <select name="user_id" id="user_id" required>
-                        <option value="">اختر منشئ المحتوي</option>
-                        @foreach($creators as $creator)
-                            <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
-                                {{ $creator->name }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('creator_id') <p class="error">{{ $message }}</p> @enderror
-                </div>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+                    <div class="input-group">
+                        <label for="creator_id">منشئ المحتوي:</label>
+
+                        <select name="user_id" id="user_id" required>
+                            <option value="">اختر منشئ المحتوي</option>
+                            @foreach($creators as $creator)
+                                <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
+                                    {{ $creator->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <!-- <input type="text" id="creator_id" name="creator" value="{{ old('$creator->name') }}"> -->
+
+                    </div>
+                @endif
+
+                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
+
 
                 <button type="submit" class="btn">حفظ</button><br><br>
-                <p>
-                    لم تجد منشئ المحتوي؟
-                    <a href="{{ route('auth.register') }}">سجّل منشئ محتوي جديد</a>
-                </p>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+
+                    <p>
+                        لم تجد منشئ المحتوي؟
+                        <a href="{{ route('auth.register') }}">سجّل منشئ محتوي جديد</a>
+                    </p>
+                @endif
             </form>
         </div>
 </main>
