@@ -1,10 +1,10 @@
-<section class="reciters-section">
-    <div class="section-header">
+<section class="reciter-section">
+    <div class="sections-header">
         <h2>نتيجة البحث</h2>
     </div>
-    <div class="reciters-container">
+    <div class="reciter-container">
 
-        <div class="reciter-card">
+        <div class="reciters-card">
             <img src="{{ asset('uploads/ImageWebsite/14.jpg') }}" alt="الشيخ محمد حسن">
             <div class="reciter-info">
                 <h3>الشيخ محمد حسن</h3>
@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="reciter-card">
+        <div class="reciters-card">
             <img src="{{ asset('uploads/ImageWebsite/15.jpg') }}" alt="الشيخ أحمد عبد الله">
             <div class="reciter-info">
                 <h3>الشيخ أحمد عبد الله</h3>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div class="reciter-card">
+        <div class="reciters-card">
             <img src="{{ asset('uploads/ImageWebsite/16.jpg') }}" alt="الشيخ ياسر محمود">
             <div class="reciter-info">
                 <h3>الشيخ ياسر محمود</h3>
@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="reciter-card">
+        <div class="reciters-card">
             <img src="{{ asset('uploads/ImageWebsite/14.jpg') }}" alt="الشيخ محمد حسن">
             <div class="reciter-info">
                 <h3>الشيخ محمد حسن</h3>
@@ -48,7 +48,7 @@
             </div>
         </div>
 
-        <div class="reciter-card">
+        <div class="reciters-card">
             <img src="{{ asset('uploads/ImageWebsite/15.jpg') }}" alt="الشيخ أحمد عبد الله">
             <div class="reciter-info">
                 <h3>الشيخ أحمد عبد الله</h3>
@@ -59,7 +59,7 @@
             </div>
         </div>
 
-        <div class="reciter-card">
+        <div class="reciters-card">
             <img src="{{ asset('uploads/ImageWebsite/16.jpg') }}" alt="الشيخ ياسر محمود">
             <div class="reciter-info">
                 <h3>الشيخ ياسر محمود</h3>

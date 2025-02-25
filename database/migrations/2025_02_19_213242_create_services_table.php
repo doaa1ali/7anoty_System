@@ -23,6 +23,7 @@ return new class extends Migration
             $table->decimal('discount', 10, 2)->nullable();
             $table->time('start_time');
             $table->time('end_time');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

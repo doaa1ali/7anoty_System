@@ -46,8 +46,8 @@ class CemeteryController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'location' => 'required|string',
-            'lat' => 'nullable|numeric',
-            'long' => 'nullable|numeric',
+            'lat' => 'numeric',
+            'long' => 'numeric',
             'size' => 'numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'numeric',
@@ -55,7 +55,7 @@ class CemeteryController extends Controller
             'discount' => 'nullable|numeric|min:0|max:100',
             'user_id' => 'exists:users,id',
         ]);
-        //  dd($data);
+        // dd($data);
           $imageName = null;
 
         if ($request->hasFile('image')) {
@@ -92,7 +92,8 @@ class CemeteryController extends Controller
         if ($request->is_discount == 0) {
             $data['discount'] = null;
         }
-        //  dd($data);
+       
+
        $cemetery= Cemetery::create($data);
        session()->flash('success', 'تم اضافة المقبره بنجاح!');
        return redirect()->route('cemetry.index');

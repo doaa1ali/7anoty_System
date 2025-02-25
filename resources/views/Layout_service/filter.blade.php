@@ -34,7 +34,7 @@
         <button class="filter-btn">تصفية <i class="fa fa-filter"></i></button>
     </div>
 
-    <div class="services-container">
+    <div class="service-container">
         @include('Layout_service.services')
     </div>
 

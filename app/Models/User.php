@@ -15,18 +15,12 @@ class User extends Authenticatable
     const ROLE_ADMIN = 'admin';
     const ROLE_USER = 'user';
 
-    protected $fillable = ['id','name','email','password','phone','location','image','type', 'role' ];
-
-    public function cemeteries()
-    {
-       return $this->hasMany(Cemetery::class);
-    }
-
+    protected $fillable = ['name','email','password','phone','location','lat','long','image','type' ];
 
     protected $hidden = [
         'password',
     ];
-    
+
 
     protected function casts(): array
     {
@@ -36,18 +30,18 @@ class User extends Authenticatable
         ];
     }
 
-    public function hasRole(string $role): bool
+    public function cemeteries()
     {
-        return $this->role === $role;
+       return $this->hasMany(Cemetery::class);
     }
 
-    public function services()
+    public function bookDurations()
     {
-        return $this->hasMany(Service::class);
-
+        return $this->hasMany(BookDuration::class, 'user_id');
     }
-    public function halls()
+
+    public function hall()
     {
-        return $this->hasMany(Hall::class, 'user_id'); 
+       return $this->hasMany(Hall::class);
     }
 }
