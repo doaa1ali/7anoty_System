@@ -48,6 +48,6 @@ class User extends Authenticatable
     }
     public function halls()
     {
-        return $this->hasMany(Hall::class, 'user_id'); // A User has many Halls
+        return $this->hasMany(Hall::class, 'user_id'); 
     }
 }
