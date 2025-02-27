@@ -29,7 +29,9 @@ class BookDuration extends Model
     {
         return $this->belongsTo(Duration::class);
     }
-
-    
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 
 }

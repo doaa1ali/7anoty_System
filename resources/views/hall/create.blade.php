@@ -28,24 +28,20 @@
 
            <!--  -->
            <div class="input-group">
-            <label for="mapSearch">ابحث عن موقع:</label>
-            <input type="text" id="mapSearch" placeholder="ابحث عن الموقع">
-            <button type="button" onclick="searchInMap()">بحث</button>
-
-                <div id="map-container">
-                    <iframe
-                        id="mapFrame"
-                        width="100%"
-                        height="300"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        src="https://www.google.com/maps?q=30.0444,31.2357&z=15&output=embed">
-                    </iframe>
+                <div class="map-container">
+                    <div >
+                        <label>الموقع:</label>
+                        <div class="text-center">
+                        <input id="location_inp" type="text" name="location" placeholder="ابحث عن الموقع..." /><br><br>
+                            <div id="googleMap"
+                                style="width: 100%;min-height:300px;border:1px solid #009EF7; border-radius: 10px; ">
+                            </div>
+                            <input type="hidden" id="lat_inp" name="lat">
+                            <input type="hidden" id="lng_inp" name="long">
+                            <p class="invalid-feedback" id="lat"></p>
+                        </div>
+                    </div>
                 </div>
-
-                <input type="hidden" id="lat" name="lat">
-                <input type="hidden" id="long" name="long">
             </div>
             <!--  -->
             <div class="input-group">

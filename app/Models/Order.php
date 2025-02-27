@@ -8,7 +8,7 @@ class Order extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'final_price'
+        'final_price','user_id','cemetery_id','book_duration_id'
     ];
 
     public function user()
@@ -16,11 +16,15 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function service()
+    public function book_duration()
     {
-        return $this->belongsTo(Service::class);
+        return $this->hasMany(BookDuration::class);
     }
 
+    public function cemetery()
+    {
+        return $this->belongsTo(cemetery::class);
+    }
 
 
 }

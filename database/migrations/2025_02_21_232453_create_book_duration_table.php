@@ -19,7 +19,9 @@ return new class extends Migration
             $table->unsignedBigInteger('service_id')->nullable();
             $table->unsignedBigInteger('hall_id')->nullable();
             $table->unsignedBigInteger('duration_id');
+            $table->unsignedBigInteger('order_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->foreign('hall_id')->references('id')->on('halls')->onDelete('cascade');
             $table->foreign('duration_id')->references('id')->on('duration')->onDelete('cascade');
