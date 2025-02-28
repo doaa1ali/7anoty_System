@@ -81,6 +81,25 @@
                 <div class="input-group">
                 <label for="image">اضافه صورة :</label>
                 <input type="file" id="image" name="image">
+                 
+                @if (auth()->check() && auth()->user()->type != 'creator')
+                    <div class="input-group">
+                        <label for="creator_id">منشئ المحتوي:</label>
+                        
+                        <select name="user_id" id="user_id" required>
+                            <option value="">اختر منشئ المحتوي</option>
+                            @foreach($creators as $creator)
+                                <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
+                                    {{ $creator->name }}
+                                </option>
+                            @endforeach
+                            </select>
+
+                                       
+                    </div>
+                @endif
+
+
                 </div>
 
             <button type="submit" class="btn">اضافه</button><br><br>

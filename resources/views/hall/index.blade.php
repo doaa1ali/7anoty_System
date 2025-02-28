@@ -35,8 +35,8 @@
                     <th>الموقع</th>
                     <th>السعر</th>
                     <th>الصوره</th>
-                    <!-- <th>الكراسي</th>
-                    <th>خدمه البوفيه</th> -->
+                    <th>الكراسي</th>
+                    <th>خدمه البوفيه</th>
                     <th>معاد الحجز</th>
                     <th>معاد النهايه</th>
                     <th>اسم المستخدم</th>
@@ -59,8 +59,8 @@
                                 <p><img src="{{ asset('uploads/hallimages/hall2.png') }}" width="80" height="80" style="border-radius: 50%;"></p>
                             @endif
                         </td>
-                        <!-- <td>{{ $hall->seats }}</td>
-                        <td>{{ $hall->has_buffet ? 'نعم' : 'لا' }}</td> -->
+                        <td>{{ $hall->seats }}</td>
+                        <td>{{ $hall->has_buffet ? 'نعم' : 'لا' }}</td> 
                         <td>{{ $hall->start_time }}</td>
                         <td>{{ $hall->end_time }}</td>
                         <td>

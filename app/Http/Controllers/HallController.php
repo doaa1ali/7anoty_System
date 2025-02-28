@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hall;
+use App\Models\User;
 
 use App\Models\Duration;
 use Illuminate\Http\Request;
@@ -30,7 +31,11 @@ class HallController extends Controller
      */
     public function create()
     {
-        return view("hall.create");
+        
+        $creators=User::where('type','creator')->get();
+        // dd($creators);
+        return view('hall.create',compact('creators'));
+       
     }
 
     /**
@@ -50,6 +55,7 @@ class HallController extends Controller
             'start_time' => 'required',
             'end_time' => 'required',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'user_id' => 'exists:users,id',
         ]);
         //  dd($data);
           $imageName = null;
@@ -72,9 +78,15 @@ class HallController extends Controller
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
             'image'=>$imageName,
-            'user_id' => auth()->id(),
+           // 'user_id' => auth()->id(),
 
         ];
+        if (auth()->check() && auth()->user()->type != 'creator') {
+            $data['user_id'] = $request->user_id;
+        }
+        else {
+            $data['user_id'] = auth()->id();
+        }
          //dd($data);
        $hall= Hall::create($data);
        $duration =Duration::create([

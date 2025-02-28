@@ -11,19 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('book_duration', function (Blueprint $table) {
+        Schema::create('book_durations', function (Blueprint $table) {
             $table->id();
             $table->date('booking_date');
-            $table->unsignedBigInteger('service_id')->nullable();
+            $table->decimal('final_price', 10, 2)->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('service_id')->nullable();
             $table->unsignedBigInteger('hall_id')->nullable();
             $table->unsignedBigInteger('duration_id');
+            $table->unsignedBigInteger('order_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->foreign('hall_id')->references('id')->on('halls')->onDelete('cascade');
-            $table->foreign('duration_id')->references('id')->on('duration')->onDelete('cascade');
-            $table->unique(['booking_date', 'duration_id', 'user_id','hall_id']);
-            $table->unique(['booking_date', 'duration_id', 'user_id','service_id']);
+            $table->foreign('duration_id')->references('id')->on('durations')->onDelete('cascade');
+            $table->unique(['booking_date', 'duration_id', 'user_id','hall_id'], 'book_durations_uniquehall');
+            $table->unique(['booking_date', 'duration_id', 'user_id','service_id'], 'book_durations_uniqueservice');
             $table->timestamps();
         });
     }
