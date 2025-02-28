@@ -16,17 +16,11 @@ class ServiceController extends Controller
     {
         if (auth()->user()-> type=== 'creator') {
             // $services = Service::where('user_id',auth()->user()->id)->get();
-            if(ser->user_id===null){
-                $creators=User::where('type','creator')->get();
-          return redirect()->route('service.create',compact('$creators'));
-        }
-        else
-        {
-            $services = Service::whereHas('order', function ($query) {
-                $query->where('user_id', auth()->id());
-            })->get();
-        }
-           dd($services);
+        //     if(ser->user_id===null){
+        //     $creators=User::where('type','creator')->get();
+        //   return redirect()->route('service.create',compact('$creators'));
+
+            $services = Service::where('user_id',auth()->user()->id)->get();
         }
         else 
         {

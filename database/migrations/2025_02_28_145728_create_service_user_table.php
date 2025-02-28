@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('service_user', function (Blueprint $table) {
             $table->id();
-            $table->decimal('final_price', 10, 2)->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('cemetery_id')->nullable();
-            //$table->unsignedBigInteger('book_duration_id')->nullable();
+            $table->unsignedBigInteger('service_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('cemetery_id')->references('id')->on('cemeteries')->onDelete('cascade');
-            //$table->foreign('book_duration_id')->references('id')->on('book_duration')->onDelete('cascade');
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order');
+        Schema::dropIfExists('service_user');
     }
 };

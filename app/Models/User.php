@@ -44,4 +44,9 @@ class User extends Authenticatable
     {
        return $this->hasMany(Hall::class);
     }
+
+    public function user()
+    {
+       return $this->belongsToMany(Service::class,'service_user');
+    }
 }

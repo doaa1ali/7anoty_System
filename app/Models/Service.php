@@ -12,5 +12,9 @@ class Service extends Model
         'name', 'description', 'price', 'location', 'lat', 'long', 'is_discount', 'discount', 'start_time', 'end_time', 'image',
     ];
 
+    public function servic()
+    {
+       return $this->belongsToMany(User::class,'service_user');
+    }
 
 }
