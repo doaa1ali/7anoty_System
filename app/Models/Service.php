@@ -13,13 +13,15 @@ class Service extends Model
     ];
 
 
-    public function durations()
+    public function order()
     {
-        return $this->hasMany(Duration::class);
+        return $this->hasMany(Order::class);
     }
 
-    public function bookDurations()
-    {
-        return $this->hasMany(BookDuration::class, 'service_id');
-    }
+    //-------
+    public function user()
+{
+    return $this->belongsToMany(User::class, 'order','service_id','user_id');
+
+}
 }

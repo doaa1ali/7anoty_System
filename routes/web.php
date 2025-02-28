@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CemeteryController;
 use App\Http\Controllers\HallController;
@@ -8,7 +7,6 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\CreatorMiddleware;
-
 use App\Http\Middleware\TypeMiddleware;
 use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
@@ -54,14 +52,14 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('hall/show/{id}', [HallController::class, 'show'])->name('hall.show');
 
       //cemetry......
-      Route::get('cemetry/index' ,[CemeteryController::class ,'index'])->name('cemetry.index');
-      Route::get('cemetry/search', [CemeteryController::class, 'search'])->name('cemetry.search');
-      Route::get('cemetry/create', [CemeteryController::class, 'create'])->name('cemetry.create');
-      Route::post('cemetry/store', [CemeteryController::class, 'store'])->name('cemetry.store');
-      Route::get('cemetry/show/{id}', [CemeteryController::class, 'show'])->name('cemetry.show');
-      Route::delete('cemetry/delete/{cemetry}', [CemeteryController::class, 'destroy'])->name('cemetry.Delete');
-      Route::get('cemetry/edit/{id}', [CemeteryController::class, 'edit'])->name('cemetry.edit');
-      Route::put('cemetry/update/{id}', [CemeteryController::class, 'update'])->name('cemetry.update');
+      Route::get('cemetery/index' ,[CemeteryController::class ,'index'])->name('cemetery.index');
+      Route::get('cemetery/search', [CemeteryController::class, 'search'])->name('cemetery.search');
+      Route::get('cemetery/create', [CemeteryController::class, 'create'])->name('cemetery.create');
+      Route::post('cemetery/store', [CemeteryController::class, 'store'])->name('cemetery.store');
+      Route::get('cemetery/show/{id}', [CemeteryController::class, 'show'])->name('cemetery.show');
+      Route::delete('cemetery/delete/{cemetery}', [CemeteryController::class, 'destroy'])->name('cemetery.Delete');
+      Route::get('cemetery/edit/{id}', [CemeteryController::class, 'edit'])->name('cemetery.edit');
+      Route::put('cemetery/update/{id}', [CemeteryController::class, 'update'])->name('cemetery.update');
 
 });
 
@@ -79,10 +77,10 @@ Route::post('auth/login', [AuthController::class, 'handlelogin'])->name('auth.ha
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware(AuthMiddleware::class);
 
 //service type
-Route::middleware(CreatorMiddleware::class)->group(function () {
-Route::get('/service/type', [ServiceController::class, 'servicetype'])->name('service.type');
-Route::post('/service/type', [ServiceController::class, 'servicehandle'])->name('service.handle');
-Route::post('type/cemetry', [ServiceController::class, 'addcemetry'])->name('addcemetery');
-Route::post('type/hall', [ServiceController::class, 'addhall'])->name('addhall');
-Route::post('type/other', [ServiceController::class, 'addotherservice'])->name('addotherservice');
-});
+// Route::middleware(CreatorMiddleware::class)->group(function () {
+// Route::get('/service/type', [ServiceController::class, 'servicetype'])->name('service.type');
+// Route::post('/service/type', [ServiceController::class, 'servicehandle'])->name('service.handle');
+// Route::post('type/cemetry', [ServiceController::class, 'addcemetry'])->name('addcemetery');
+// Route::post('type/hall', [ServiceController::class, 'addhall'])->name('addhall');
+// Route::post('type/other', [ServiceController::class, 'addotherservice'])->name('addotherservice');
+// });

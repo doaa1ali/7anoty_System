@@ -36,8 +36,8 @@
                 <select id="location" name="location" required>
                     <option value="">اختر المحافظة</option>
                         @foreach ([
-                            'القاهرة', 'الجيزة', 'الإسكندرية', 'أسوان', 'الأقصر', 'أسيوط', 'بورسعيد', 'دمياط', 'الدقهلية', 
-                            'الفيوم', 'كفر الشيخ', 'الغربية', 'المنوفية', 'الشرقية', 'قنا', 'سوهاج', 'السويس', 'بني سويف', 
+                            'القاهرة', 'الجيزة', 'الإسكندرية', 'أسوان', 'الأقصر', 'أسيوط', 'بورسعيد', 'دمياط', 'الدقهلية',
+                            'الفيوم', 'كفر الشيخ', 'الغربية', 'المنوفية', 'الشرقية', 'قنا', 'سوهاج', 'السويس', 'بني سويف',
                             'مطروح', 'المنيا', 'الوادي الجديد', 'البحيرة', 'الإسماعيلية', 'شمال سيناء', 'جنوب سيناء', 'البحر الأحمر'
                         ] as $loc)
                             <option value="{{ $loc }}" {{ old('location') == $loc ? 'selected' : '' }}>{{ $loc }}</option>
@@ -70,7 +70,37 @@
                 @error('end_time') <p class="error">{{ $message }}</p> @enderror
             </div>
 
-            <button type="submit" class="btn">حفظ الخدمة</button>
+            @if (auth()->check() && auth()->user()->type != 'creator')
+                    <div class="input-group">
+                        <label for="creator_id">منشئ المحتوي:</label>
+
+                        <select name="user_id" id="user_id" required>
+                            <option value="">اختر منشئ المحتوي</option>
+                            @foreach($creators as $creator)
+                                <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
+                                    {{ $creator->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <!-- <input type="text" id="creator_id" name="creator" value="{{ old('$creator->name') }}"> -->
+
+                    </div>
+                @endif
+
+                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
+
+
+                <button type="submit" class="btn">حفظ</button><br><br>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+
+                    <p>
+                        لم تجد منشئ المحتوي؟
+                        <a href="{{ route('auth.create') }}">سجّل منشئ محتوي جديد</a>
+                    </p>
+                @endif
+
+            <!-- <button type="submit" class="btn">حفظ الخدمة</button> -->
         </form>
     </div>
 </main>

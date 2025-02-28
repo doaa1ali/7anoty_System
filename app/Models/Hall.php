@@ -16,8 +16,8 @@ class Hall extends Model
         return $this->hasMany(Duration::class);
     }
 
-    public function bookDurations()
+    public function user()
     {
-        return $this->hasMany(BookDuration::class, 'hall_id');
+       return $this->belongsTo(User::class);
     }
 }

@@ -23,8 +23,4 @@ class Duration extends Model
         return $this->belongsTo(Hall::class);
     }
 
-    public function bookDurations()
-    {
-        return $this->hasMany(BookDuration::class, 'duration_id');
-    }
 }

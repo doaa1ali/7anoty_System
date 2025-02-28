@@ -39,4 +39,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(BookDuration::class, 'user_id');
     }
+
+    public function hall()
+    {
+       return $this->hasMany(Hall::class);
+    }
+
+    //---------
+    public function services()
+{
+    return $this->belongsToMany(Service::class, 'order','user_id','service_id');
+}
 }

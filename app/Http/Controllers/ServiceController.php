@@ -3,187 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cemetery;
+use App\Models\User;
 use App\Models\Duration;
 use App\Models\Hall;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ServiceController extends Controller
 {
-    public function servicetype()
-    {
-        return view ('service.type');
-    }
 
-    public function servicehandle(Request $request)
-    {
-        if($request->type ==='cemetery')
-        {
-          return view('service.cemetery');
-        }
-        elseif($request->type ==='hall')
-        {
-            return view('service.hall');
-        }
-        elseif($request->type ==='other')
-        {
-            return view('service.other');
-        }
-    }
-
-    public function addcemetry(Request $request)
-    {
-        $data=$request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'location' => 'required|string',
-            'lat' => 'nullable|numeric',
-            'long' => 'nullable|numeric',
-            'size' => 'numeric',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'price' => 'numeric',
-            'is_discount' => 'required|boolean',
-            'discount' => 'nullable|numeric|min:0|max:100',
-        ]);
-        // dd($data);
-          $imageName = null;
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'cemetery' . time() . '.' . $image->extension();
-            $image->move(public_path('uploads/cemeteryimages'), $imageName);
-        }
-
-        $data=[
-            'name'=>'cemetery',
-            'description'=>$request->description,
-            'location'=>$request->location,
-            'lat'=>$request->lat,
-            'long'=>$request->long,
-            'size'=>$request->size,
-            'image'=>$imageName,
-            'price'=>$request->price,
-            'is_discount'=>$request->is_discount,
-            'discount'=>$request->discount,
-            'user_id' => auth()->id(),
-
-        ];
-         //dd($data);
-       $cemetery= Cemetery::create($data);
-       return redirect()->back()->with('success', 'تمت إضافة المقبرة بنجاح!');
-    }
-
-    public function addhall(Request $request)
-    {
-
-        // dd($request->all());
-        $data=$request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'location' => 'required|string',
-            'lat' => 'nullable|numeric',
-            'long' => 'nullable|numeric',
-            'price' => 'numeric',
-            'seats' => 'required|integer',
-            'has_buffet' => 'required|boolean',
-            'start_time' => 'required',
-            'end_time' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-        //  dd($data);
-          $imageName = null;
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'hall' . time() . '.' . $image->extension();
-            $image->move(public_path('uploads/hallimages'), $imageName);
-        }
-
-        $data=[
-            'name'=>$request->name,
-            'description'=>$request->description,
-            'location'=>$request->location,
-            'lat'=>$request->lat,
-            'long'=>$request->long,
-            'price'=>$request->price,
-            'seats'=>$request->seats,
-            'has_buffet' => $request->has_buffet,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
-            'image'=>$imageName,
-            'user_id' => auth()->id(),
-
-        ];
-
-         //dd($data);
-
-       $hall= Hall::create($data);
-    //    dd($hall);
-       return redirect()->back()->with('success', 'تمت إضافة القاعه بنجاح!');
-    }
-
-
-    public function addotherservice(Request $request)
-    {
-        $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'price' => 'nullable|numeric',
-        'location' => 'nullable|string',
-        'lat' => 'nullable|numeric',
-        'long' => 'nullable|numeric',
-        'is_discount' => 'required|boolean',
-        'discount' => 'nullable|numeric|min:0|max:100',
-        'start_time' => 'required',
-        'end_time' => 'required',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-        //  dd('hhhhhhhhhhhhhh');
-          $imageName = null;
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = 'other' . time() . '.' . $image->extension();
-            $image->move(public_path('uploads/otherimages'), $imageName);
-        }
-
-        $data=[
-            'name'=>'cemetery',
-            'description'=>$request->description,
-            'price'=>$request->price,
-            'location'=>$request->location,
-            'lat'=>$request->lat,
-            'long'=>$request->long,
-            'is_discount'=>$request->is_discount,
-            'discount'=>$request->discount,
-            'start_time' => $request->start_time,
-            'end_time' => $request->end_time,
-            'image'=>$imageName
-
-        ];
-        Service::create($data);
-       return redirect()->back()->with('success', 'تمت إضافة الخدمه بنجاح!');
-    }
-    /*
-    public function __construct()
-    {
-        $this->middleware('auth');
-
-        $this->middleware('creator')->only(['create', 'store', 'edit', 'update', 'destroy']);
-    }
-    */
     public function index()
     {
+        if (auth()->user()->type=== 'creator') {
+             $services = Service::where('user_id',auth()->user()->id)->get();
+            // $services = Service::whereHas('order', function ($query) {
+            //     $query->where('user_id', auth()->id());
+            // })->get();
+            // dd($services);
+        }
+        else{
 
-        $services = Service::all();
-        return view('service.index', compact('services'));
+            $services = Service::all();
+        }
+        return view('service.index',compact('services'));
     }
 
 
     public function create()
     {
+        $creators=User::where('type','creator')->get();
 
-        return view('service.create');
+        return view('service.create',compact('creators'));
     }
 
 
@@ -207,6 +58,7 @@ class ServiceController extends Controller
             'discount.required_if' => 'قيمة الخصم مطلوبة عند تفعيل خيار الخصم.',
             'discount.numeric' => 'يجب أن تكون قيمة الخصم رقماً.',
             'discount.lt' => 'قيمة الخصم يجب أن تكون أقل من السعر.',
+            'user_id' => 'exists:users,id',
         ];
 
         $validated = $request->validate([
@@ -219,8 +71,8 @@ class ServiceController extends Controller
             'end_time' => 'required|date_format:H:i|after:start_time',
             'is_discount' => 'nullable|boolean',
             'discount' => 'required_if:is_discount,1|nullable|numeric|min:0|lt:price',
-        ], $messages);
 
+        ], $messages);
 
         $imageName = null;
 
@@ -235,26 +87,32 @@ class ServiceController extends Controller
             $validated['image'] = $imageName;
         }
 
-        $validated['user_id'] = auth()->id();
+        if (auth()->check() && auth()->user()->type != 'creator') {
+            $validated['user_id'] = $request->user_id;
+        }
+        else {
+            $validated['user_id'] = auth()->id();
+        }
 
         $validated['is_discount'] = $request->has('is_discount');
 
         if (!$validated['is_discount']) {
             $validated['discount'] = null;
         }
-
-        $service =Service::create(attributes: $validated);
+        // dd($validated);
+        $service =Service::create($validated);
         $duration =Duration::create([
             'service_id'=> $service->id,
             'start_time'=>$service->start_time,
-            'end_time'=> $service->end_time 
+            'end_time'=> $service->end_time
         ]);
         return redirect()->route('service.index')->with('success', 'تم إضافة الخدمة بنجاح.');
     }
 
     public function show($id)
     {
-        $service = Service::findOrFail($id);
+        // $service = Service::findOrFail($id);
+        $service = Service::with('user')->findOrFail($id);
 
         return view('service.show', compact('service'));
     }
@@ -271,8 +129,9 @@ class ServiceController extends Controller
     public function edit($id)
     {
         $service = Service::findOrFail($id);
+        $creators=User::where('type','creator')->get();
 
-        return view('service.update', compact('service'));
+        return view('service.update', compact('service','creators'));
     }
 
 
@@ -294,6 +153,8 @@ class ServiceController extends Controller
             'end_time' => 'required',
             'is_discount' => 'sometimes|boolean',
             'discount' => 'sometimes|nullable|numeric|min:0|lt:price',
+            'user_id' => 'exists:users,id',
+
         ], $messages);
 
         $service = Service::findOrFail($id);
@@ -311,10 +172,28 @@ class ServiceController extends Controller
 
             $validated['image'] = $imageName;
         }
-
+        if (auth()->check() && auth()->user()->type != 'creator') {
+            $validated['user_id'] = $request->user_id;
+        }
+        else {
+            $validated['user_id'] = auth()->id();
+        }
 
         $service->update($validated);
+        $duration = Duration::where('service_id', $service->id)->first();
 
+          if ($duration) {
+        $duration->update([
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+        ]);
+         } else {
+        Duration::create([
+            'service_id' => $service->id,
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+        ]);
+    }
         return redirect()->route('service.index')->with('success', 'تم تحديث الخدمة بنجاح.');
     }
 

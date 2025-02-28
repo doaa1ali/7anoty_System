@@ -13,7 +13,7 @@
 
         <button class="filter-btn">تصفية <i class="fa fa-filter"></i></button>
     </div>
-    <div class="prayers-container">
+    <div class="prayer-container">
         @include('Layout_prayers.prayers')
     </div>
 

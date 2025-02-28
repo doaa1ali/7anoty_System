@@ -5,9 +5,9 @@ document.querySelector('.menu-toggle label').addEventListener('click', function(
 
 
 
-setTimeout(function() {
-    document.querySelector('.alert').style.display = 'none';
-}, 3000);
+// setTimeout(function() {
+//     document.querySelector('.alert').style.display = 'none';
+// }, 3000);
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,10 +26,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-function toggleServiceForm() {
-    var formContainer = document.getElementById("serviceFormContainer");
-    formContainer.style.display = (formContainer.style.display === "none" || formContainer.style.display === "") ? "block" : "none";
-}
+
+
+// function toggleServiceForm() {
+//     var formContainer = document.getElementById("serviceFormContainer");
+//     formContainer.style.display = (formContainer.style.display === "none" || formContainer.style.display === "") ? "block" : "none";
+// }
 
 //omar map code
 let lat = 30.0444; // Cairo, Egypt
@@ -95,6 +97,8 @@ function myMap() {
             { location: clickLocation },
             function (results, status) {
                 if (status === "OK" && results[0]) {
+                    // document.getElementById("location_inp").value =
+                    //     results[0].formatted_address;
                     document.getElementById("lat_inp").value =
                         clickLocation.lat();
                     document.getElementById("lng_inp").value =
@@ -111,8 +115,8 @@ function myMap() {
         var position = marker.getPosition();
         geocoder.geocode({ location: position }, function (results, status) {
             if (status === "OK" && results[0]) {
-                document.getElementById("location_inp").value =
-                    results[0].formatted_address;
+                // document.getElementById("location_inp").value =
+                //     results[0].formatted_address;
                 document.getElementById("lat_inp").value = position.lat();
                 document.getElementById("lng_inp").value = position.lng();
             }
@@ -131,8 +135,11 @@ function getCurrentPos() {
             marker.setPosition(pos);
             googleMap.setCenter(pos);
             googleMap.setZoom(14);
+
             geocoder.geocode({ location: pos }, function (results, status) {
                 if (status === "OK" && results[0]) {
+                    document.getElementById("location_inp").value =
+                        results[0].formatted_address;
                     document.getElementById("lat_inp").value = pos.lat;
                     document.getElementById("lng_inp").value = pos.lng;
                 }

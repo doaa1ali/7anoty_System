@@ -67,11 +67,40 @@
 
             <div class="input-group">
                 <label for="end_time">وقت الانتهاء:</label>
-                <input type="time" name="end_time" id="end_time" value="{{ old('end_time', $service->end_time) }}" 
+                <input type="time" name="end_time" id="end_time" value="{{ old('end_time', $service->end_time) }}"
                 @error('end_time') <p class="error">{{ $message }}</p> @enderror
             </div><br><br>
 
-            <button type="submit" class="btn">حفظ التعديلات</button>
+            <!-- <button type="submit" class="btn">حفظ التعديلات</button> -->
+            @if (auth()->check() && auth()->user()->type != 'creator')
+                    <div class="input-group">
+                        <label for="creator_id">منشئ المحتوي:</label>
+
+                        <select name="user_id" id="user_id" required>
+                            <option value="">اختر منشئ المحتوي</option>
+                            @foreach($creators as $creator)
+                                <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
+                                    {{ $creator->name }}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <!-- <input type="text" id="creator_id" name="creator" value="{{ old('$creator->name') }}"> -->
+
+                    </div>
+                @endif
+
+                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
+
+
+                <button type="submit" class="btn">حفظ</button><br><br>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+
+                    <p>
+                        لم تجد منشئ المحتوي؟
+                        <a href="{{ route('auth.create') }}">سجّل منشئ محتوي جديد</a>
+                    </p>
+                @endif
         </form>
     </div>
 </main>

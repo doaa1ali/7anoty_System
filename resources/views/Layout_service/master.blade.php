@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    @include('Layout_service.head')
+    @include('Layout_home.head')
 </head>
 <body>
     <div class="main-content">
-        @include('Layout_service.header')
+        @include('Layout_home.header')
         @include('Layout_service.Hero_Section')
            
     </div>
@@ -15,7 +15,7 @@
     </div><br>
 
 
-    @include('Layout_service.footer')
-    @include('Layout_service.script')
+    @include('Layout_home.footer')
+    @include('Layout_home.script')
 </body>
 </html>
