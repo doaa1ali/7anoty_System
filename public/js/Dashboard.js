@@ -5,9 +5,9 @@ document.querySelector('.menu-toggle label').addEventListener('click', function(
 
 
 
-// setTimeout(function() {
-//     document.querySelector('.alert').style.display = 'none';
-// }, 3000);
+setTimeout(function() {
+    document.querySelector('.alert').style.display = 'none';
+}, 3000);
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -97,12 +97,10 @@ function myMap() {
             { location: clickLocation },
             function (results, status) {
                 if (status === "OK" && results[0]) {
-                    // document.getElementById("location_inp").value =
-                    //     results[0].formatted_address;
-                    document.getElementById("lat_inp").value =
-                        clickLocation.lat();
-                    document.getElementById("lng_inp").value =
-                        clickLocation.lng();
+                    document.getElementById("location_inp").value = results[0].formatted_address;
+                    document.getElementById("lat_inp").value = clickLocation.lat();
+                    document.getElementById("lng_inp").value = clickLocation.lng();
+
                 } else {
                     console.log("Geocode error: " + status);
                 }

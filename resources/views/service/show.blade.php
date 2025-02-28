@@ -33,6 +33,11 @@
                 <h4>قيمة الخصم</h4>
                 <p>{{ $service->discount }} جنيه</p>
             @endif
+
+            <h4> منشئ الخدمه</h4>
+            @foreach($service->users as $user)
+            <p>{{ $user->name }}</p>
+            @endforeach
         </div>
 
         <div class="buttons-container">

@@ -13,7 +13,7 @@
 
                 <div class="input-group">
                     <label for="name">اسم المقبرة:</label>
-                    <input type="text" id="name" name="name" value="{{ old('name') }}" required>
+                    <input type="text" id="name" name="name" value="{{ old('name') }}" >
                     @error('name') <p class="error">{{ $message }}</p> @enderror
                 </div>
 
@@ -23,20 +23,15 @@
                     @error('description') <p class="error">{{ $message }}</p> @enderror
                 </div>
 
-                <div class="input-group">
-                    <label for="location">الموقع:</label>
-                    <input type="text" id="location" name="location" value="{{ old('location') }}" required>
-                    @error('location') <p class="error">{{ $message }}</p> @enderror
-                </div>
-                <!--  -->
 
                 <div class="input-group">
                     <div class="map-container">
-                        <div class="col-md-12">
-                                <label>{{ __('Pickup your location') }}</label>
+                        <div >
+                            <label>الموقع:</label>
                             <div class="text-center">
+                            <input id="location_inp" type="text" name="location" placeholder="ابحث عن الموقع..." /><br><br>
                                 <div id="googleMap"
-                                    style="width: 100%;min-height:300px;border:1px solid #009EF7; border-radius: 10px;">
+                                    style="width: 100%;min-height:300px;border:1px solid #009EF7; border-radius: 10px; ">
                                 </div>
                                 <input type="hidden" id="lat_inp" name="lat">
                                 <input type="hidden" id="lng_inp" name="long">
@@ -44,7 +39,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
 
                 <div class="input-group">

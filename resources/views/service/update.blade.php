@@ -38,14 +38,20 @@
             </div>
 
             <div class="input-group">
-                <label for="location">الموقع:</label>
-                <select name="location" id="location" required>
-                    <option value="">اختر المحافظة</option>
-                    @foreach (['القاهرة', 'الجيزة', 'الإسكندرية', 'أسوان', 'الأقصر', 'أسيوط', 'بورسعيد', 'دمياط', 'الدقهلية', 'الفيوم', 'كفر الشيخ', 'الغربية', 'المنوفية', 'الشرقية', 'قنا', 'سوهاج', 'السويس', 'بني سويف', 'مطروح', 'المنيا'] as $loc)
-                        <option value="{{ $loc }}" {{ old('location', $service->location) == $loc ? 'selected' : '' }}>{{ $loc }}</option>
-                    @endforeach
-                </select>
-                @error('location') <p class="error">{{ $message }}</p> @enderror
+                <div class="map-container">
+                    <div >
+                        <label>الموقع:</label>
+                        <div class="text-center">
+                        <input id="location_inp" type="text" name="location" value="{{ old('location', $service->location) }}" /><br><br>
+                            <div id="googleMap"
+                                style="width: 100%;min-height:300px;border:1px solid #009EF7; border-radius: 10px; ">
+                            </div>
+                            <input type="hidden" id="lat_inp" name="lat">
+                            <input type="hidden" id="lng_inp" name="long">
+                            <p class="invalid-feedback" id="lat"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="input-group_checked">

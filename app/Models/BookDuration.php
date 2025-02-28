@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class BookDuration extends Model
 {
     use HasFactory;
-    protected $table="book_duration";
 
     protected $fillable = ['user_id', 'service_id', 'hall_id', 'duration_id'];
 
@@ -31,7 +30,9 @@ class BookDuration extends Model
     {
         return $this->belongsTo(Duration::class);
     }
-
-
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 
 }

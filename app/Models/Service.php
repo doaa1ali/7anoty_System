@@ -12,16 +12,9 @@ class Service extends Model
         'name', 'description', 'price', 'location', 'lat', 'long', 'is_discount', 'discount', 'start_time', 'end_time', 'image',
     ];
 
-
-    public function order()
+    public function users()
     {
-        return $this->hasMany(Order::class);
+       return $this->belongsToMany(User::class, 'service_user');
     }
 
-    //-------
-    public function user()
-{
-    return $this->belongsToMany(User::class, 'order','service_id','user_id');
-
-}
 }

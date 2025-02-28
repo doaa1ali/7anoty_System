@@ -29,9 +29,20 @@
             </div>
 
             <div class="input-group">
-                <label for="location">الموقع:</label>
-                <input type="text" id="location" name="location" value="{{ old('location', $user->location) }}">
-                @error('location') <p class="error">{{ $message }}</p> @enderror
+                <div class="map-container">
+                    <div >
+                        <label>الموقع:</label>
+                        <div class="text-center">
+                        <input id="location_inp" type="text" name="location" value="{{ old('location', $user->location) }}" /><br><br>
+                            <div id="googleMap"
+                                style="width: 100%;min-height:300px;border:1px solid #009EF7; border-radius: 10px; ">
+                            </div>
+                            <input type="hidden" id="lat_inp" name="lat">
+                            <input type="hidden" id="lng_inp" name="long">
+                            <p class="invalid-feedback" id="lat"></p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="input-group">

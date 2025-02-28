@@ -11,20 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('book_duration', function (Blueprint $table) {
+        Schema::create('durations', function (Blueprint $table) {
             $table->id();
-            $table->date('booking_date');
-            $table->decimal('final_price', 10, 2)->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->unsignedBigInteger('service_id')->nullable();
             $table->unsignedBigInteger('hall_id')->nullable();
-            $table->unsignedBigInteger('duration_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->foreign('hall_id')->references('id')->on('halls')->onDelete('cascade');
-            $table->foreign('duration_id')->references('id')->on('duration')->onDelete('cascade');
-            $table->unique(['booking_date', 'duration_id', 'user_id','hall_id']);
-            $table->unique(['booking_date', 'duration_id', 'user_id','service_id']);
             $table->timestamps();
         });
     }
@@ -34,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('book_duration');
+        Schema::dropIfExists('duration');
     }
 };

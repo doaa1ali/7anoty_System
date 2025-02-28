@@ -23,7 +23,6 @@ class AuthController extends Controller
     public function handleregister(Request $request )
     {
 
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -109,6 +108,8 @@ class AuthController extends Controller
             'password' => 'required|min:6',
             'phone' => 'required|string|max:15',
             'location' => 'nullable|string|max:255',
+            'lat' => 'nullable|numeric',
+            'long' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
 
@@ -126,6 +127,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'location' => $request->location,
+            'lat' => $request->lat,
+            'long' => $request->long,
             'image' => $imageName,
             'type' => $request->type ?? 'customer',
         ];
@@ -188,6 +191,8 @@ class AuthController extends Controller
             'password' => 'nullable|min:6',
             'phone' => 'required|string|max:15',
             'location' => 'nullable|string|max:255',
+            'lat' => 'nullable|numeric',
+            'long' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
 
@@ -199,6 +204,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'location' => $request->location,
+            'lat' => $request->lat,
+            'long' => $request->long,
             'type' => $request->type ?? 'customer',
         ];
 
@@ -229,5 +236,3 @@ class AuthController extends Controller
 
 
 }
-
-

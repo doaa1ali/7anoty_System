@@ -19,6 +19,7 @@ Route::get('prayers', function () {return view('Layout_prayers.master');})->name
 
 //master Database....
 Route::middleware(AdminMiddleware::class)->group(function () {
+
     //homeDatabase...
     Route::get('home/Database', function () { return view('Layout.master'); })->name('home.Database');
     //Users......
@@ -76,11 +77,5 @@ Route::post('auth/login', [AuthController::class, 'handlelogin'])->name('auth.ha
 // Logout Route
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware(AuthMiddleware::class);
 
-//service type
-// Route::middleware(CreatorMiddleware::class)->group(function () {
-// Route::get('/service/type', [ServiceController::class, 'servicetype'])->name('service.type');
-// Route::post('/service/type', [ServiceController::class, 'servicehandle'])->name('service.handle');
-// Route::post('type/cemetry', [ServiceController::class, 'addcemetry'])->name('addcemetery');
-// Route::post('type/hall', [ServiceController::class, 'addhall'])->name('addhall');
-// Route::post('type/other', [ServiceController::class, 'addotherservice'])->name('addotherservice');
-// });
+
+
