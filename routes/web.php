@@ -1,10 +1,9 @@
 <?php
 
-
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CemeteryController;
-use App\Http\Controllers\HallController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\CemeteryController;
+use App\Http\Controllers\Dashboard\HallController;
+use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Middleware\TypeMiddleware;
@@ -41,7 +40,7 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::get('service/edit/{id}', [ServiceController::class, 'edit'])->name('service.edit');
     Route::put('service/update/{id}', [ServiceController::class, 'update'])->name('service.update');
     Route::get('service/search', [ServiceController::class, 'search'])->name('service.search');
-   
+
     //hall...
     Route::get('hall/index' ,[HallController::class ,'index'])->name('hall.index');
     Route::get('hall/create', [HallController::class, 'create'])->name('hall.create');
@@ -52,15 +51,15 @@ Route::middleware(AdminMiddleware::class)->group(function () {
     Route::delete('hall/delete/{hall}', [HallController::class, 'destroy'])->name('hall.Delete');
     Route::get('hall/show/{id}', [HallController::class, 'show'])->name('hall.show');
 
-    //cemetry......
-    Route::get('cemetry/index' ,[CemeteryController::class ,'index'])->name('cemetry.index');
-    Route::get('cemetry/search', [CemeteryController::class, 'search'])->name('cemetry.search');
-    Route::get('cemetry/create', [CemeteryController::class, 'create'])->name('cemetry.create');
-    Route::post('cemetry/store', [CemeteryController::class, 'store'])->name('cemetry.store');
-    Route::get('cemetry/show/{id}', [CemeteryController::class, 'show'])->name('cemetry.show');
-    Route::delete('cemetry/delete/{cemetry}', [CemeteryController::class, 'destroy'])->name('cemetry.Delete');
-    Route::get('cemetry/edit/{id}', [CemeteryController::class, 'edit'])->name('cemetry.edit');
-    Route::put('cemetry/update/{id}', [CemeteryController::class, 'update'])->name('cemetry.update');
+      //cemetry......
+      Route::get('cemetery/index' ,[CemeteryController::class ,'index'])->name('cemetery.index');
+      Route::get('cemetery/search', [CemeteryController::class, 'search'])->name('cemetery.search');
+      Route::get('cemetery/create', [CemeteryController::class, 'create'])->name('cemetery.create');
+      Route::post('cemetery/store', [CemeteryController::class, 'store'])->name('cemetery.store');
+      Route::get('cemetery/show/{id}', [CemeteryController::class, 'show'])->name('cemetery.show');
+      Route::delete('cemetery/delete/{cemetery}', [CemeteryController::class, 'destroy'])->name('cemetery.Delete');
+      Route::get('cemetery/edit/{id}', [CemeteryController::class, 'edit'])->name('cemetery.edit');
+      Route::put('cemetery/update/{id}', [CemeteryController::class, 'update'])->name('cemetery.update');
 
 });
 

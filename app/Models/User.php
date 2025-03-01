@@ -9,13 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
-    // Define role constants
-    const ROLE_CREATOR = 'creator';
-    const ROLE_ADMIN = 'admin';
-    const ROLE_USER = 'user';
-
-    protected $fillable = ['name','email','password','phone','location','lat','long','image','type' ];
+    protected $fillable = ['name','email','password','phone','location','lat','long','image','type','access_token' ];
 
     protected $hidden = [
         'password',
@@ -47,6 +41,6 @@ class User extends Authenticatable
 
     public function services()
     {
-       return $this->belongsToMany(Service::class,'service_user');
+       return $this->belongsToMany(Service::class, 'service_user');
     }
 }

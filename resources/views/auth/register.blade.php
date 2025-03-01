@@ -73,7 +73,4 @@
 
 
 
-
-
-
 </x-auth_layout>

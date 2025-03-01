@@ -79,7 +79,35 @@
                 <input type="file" id="image" name="image">
                 </div>
 
-            <button type="submit" class="btn">اضافه</button><br><br>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+                    <div class="input-group">
+                        <label for="creator_id">منشئ المحتوي:</label>
+
+                        <select name="user_id" id="user_id" required>
+                            <option value="">اختر منشئ المحتوي</option>
+                            @foreach($creators as $creator)
+                                <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
+                                    {{ $creator->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+
+                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
+
+
+                <button type="submit" class="btn">حفظ</button><br><br>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+
+                    <p>
+                        لم تجد منشئ المحتوي؟
+                        <a href="{{ route('auth.create') }}">سجّل منشئ محتوي جديد</a>
+                    </p>
+                @endif
+
+
+            <!-- <button type="submit" class="btn">اضافه</button><br><br> -->
         </form>
     </div>
 </div>

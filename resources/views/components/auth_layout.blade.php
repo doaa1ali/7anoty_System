@@ -16,13 +16,10 @@
 
 <body>
     <h1 >أهلا بك في صفحة {{$word}}</h1>
-
     {{$slot}}
-
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4T0sSqqn87uvqXHcUbbWpxt4NVyBW6w                                                                                                                                                                                                                                                                                                                                                                                           &loading=async&libraries=places,drawing&callback=myMap&language=ar&region=EG">
-    </script>
     <script src="{{ asset('js/Dashboard.js')}}"></script>
-    
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDu4T0sSqqn87uvqXHcUbbWpxt4NVyBW6w                                                                                                                                                                                                                                                                                                                                                                                              &loading=async&libraries=places,drawing&callback=myMap&language=ar&region=EG">
+    </script>
 </body>
 </html>

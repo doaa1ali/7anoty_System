@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Duration extends Model
 {
     use HasFactory;
-    protected $table="duration";
     protected $fillable = [
-        'service_id','hall_id', 'start_time', 'end_time'
+        'start_time', 'end_time' ,'service_id','hall_id'
     ];
 
     public function service()

@@ -6,7 +6,7 @@
         <div class="user-info">
             @if ($service->image)
                 <img src="{{ asset('uploads/servicesimage/' . $service->image) }}" class="profile-img">
-            @else                   
+            @else
                 <img src="{{ asset('uploads/servicesimage/services.jpg') }}" class="profile-img">
             @endif
             <h3>{{ $service->name }}</h3>
@@ -19,7 +19,7 @@
 
             <h4>السعر</h4>
             <p>{{ $service->price }} جنيه</p>
-            
+
             <h4>وقت البدء</h4>
             <p>{{ $service->start_time }}</p>
 
@@ -33,10 +33,15 @@
                 <h4>قيمة الخصم</h4>
                 <p>{{ $service->discount }} جنيه</p>
             @endif
+
+            <h4> منشئ الخدمه</h4>
+            @foreach($service->users as $user)
+            <p>{{ $user->name }}</p>
+            @endforeach
         </div>
 
         <div class="buttons-container">
-            <a href="{{ route('service.edit', $service->id) }}" class="edit">تعديل</a> 
+            <a href="{{ route('service.edit', $service->id) }}" class="edit">تعديل</a>
             <a href="{{ route('service.index') }}" class="cancel">رجوع</a>
         </div>
     </div>
