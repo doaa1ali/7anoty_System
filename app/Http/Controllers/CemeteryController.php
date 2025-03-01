@@ -69,11 +69,6 @@ class CemeteryController extends Controller
             'price'=>$request->price,
             'is_discount'=>$request->is_discount,
             'discount'=>$request->discount,
-
-            // 'user_id' => auth()->id(),
-
-            // 'user_id' => $request->user_id,
-
         ];
 
         if (auth()->check() && auth()->user()->type != 'creator') {

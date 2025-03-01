@@ -65,7 +65,6 @@ Route::middleware(AdminMiddleware::class)->group(function () {
 });
 
 
-
 // Register Routes
 Route::get('auth/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('auth/register', [AuthController::class, 'handleregister'])->name('auth.handleregister');
