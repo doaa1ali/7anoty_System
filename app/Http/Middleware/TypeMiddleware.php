@@ -26,7 +26,7 @@ class TypeMiddleware
                     
             elseif(auth::check() && auth::user()->type==='creator')
             {
-                return response()->view('creatorLayout.master');
+                return response()->view('Layout_home.master');
             }
                 
             else

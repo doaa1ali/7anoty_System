@@ -23,7 +23,6 @@ class AuthController extends Controller
     public function handleregister(Request $request )
     {
 
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
@@ -53,14 +52,9 @@ class AuthController extends Controller
 // dd('ssss');
         $user = User::create($data);
         Auth::login($user);
+        return view('Layout_home.master');
 
-        if ($user->type === 'admin') {
-            return view('Layout.master');
-        } elseif ($user->type === 'creator') {
-            return view('creatorLayout.master');
-        } else {
-            return view('Layout_home.master');
-        }
+        
 
     }
 
@@ -80,12 +74,7 @@ class AuthController extends Controller
         if(Auth::attempt($data))
         {
             $user=Auth::user();
-            if($user->type ==='admin' )
-                return view('Layout.master');
-            elseif($user->type ==='creator')
-            return view('Layout.master');
-            else
-                return view('Layout_home.master');
+            return view('Layout_home.master');
 
         }
 

@@ -16,8 +16,10 @@ return new class extends Migration
             $table->decimal('final_price', 10, 2)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('cemetery_id')->nullable();
+            //$table->unsignedBigInteger('book_duration_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('cemetery_id')->references('id')->on('cemeteries')->onDelete('cascade');
+            //$table->foreign('book_duration_id')->references('id')->on('book_duration')->onDelete('cascade');
             $table->timestamps();
         });
     }

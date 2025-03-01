@@ -1,9 +1,11 @@
-.reciters-section {
+
+ .reciter-section {
     text-align: center;
     background-color: #333;
 }
 
-.reciters-section h2 {
+.reciter-section h2 {
+    margin-top: 0;
     font-size: 25px;
     margin-bottom: 20px;
     color: white;
@@ -15,7 +17,7 @@
 }
 
 
-.reciters-container {
+.reciter-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
@@ -24,7 +26,7 @@
 
 
 
-.reciter-card {
+.reciters-card {
     background: black;
     border-radius: 10px;
     padding: 20px;
@@ -33,7 +35,7 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.reciter-card img {
+.reciters-card img {
     width: 100%;
     height: 200px; 
     object-fit: cover; 
@@ -41,19 +43,19 @@
 }
 
 
-.reciter-info h3 {
+.reciters-info h3 {
     font-size: 22px;
     margin: 10px 0;
     color: #deebf9;
 }
 
-.reciter-info p {
+.reciters-info p {
     font-size: 16px;
     color: #f9f6f6;
     margin-bottom: 10px;
 }
 
-.reciter-card .btn {
+.reciters-card .btn {
     display: inline-block;
     background: #FFD700;
     color: black;
@@ -64,11 +66,11 @@
     transition: background 0.3s;
 }
 
-.reciter-card:hover {
+.reciters-card:hover {
     transform: translateY(-10px);
 }
 
-.reciter-card .btn:hover {
+.reciters-card .btn:hover {
     background: #ae7906c6;
 }
 

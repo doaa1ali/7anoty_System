@@ -7,14 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Duration extends Model
 {
-protected $table="duration";
+    use HasFactory;
+   // protected $table="durations";
     protected $fillable = [
         'service_id','hall_id', 'start_time', 'end_time'
     ];
 
-
-    public function user()
+    public function service()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Service::class);
     }
+
+    public function hall()
+    {
+        return $this->belongsTo(Hall::class);
+    }
+
 }

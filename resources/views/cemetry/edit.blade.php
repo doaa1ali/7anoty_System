@@ -23,31 +23,23 @@
             </div>
 
             <div class="input-group">
-                <label for="location">الموقع:</label>
-                <input type="text" id="location" name="location" value="{{ old('location', $cemetery->location) }}" required>
-                @error('location') <p class="error">{{ $message }}</p> @enderror
-            </div>
-
-            <div class="input-group">
-                <label for="mapSearch">ابحث عن موقع:</label>
-                <input type="text" id="mapSearch" placeholder="ابحث عن الموقع">
-                <button type="button" onclick="searchInMap()">بحث</button>
-
-                <div id="map-container">
-                    <iframe
-                        id="mapFrame"
-                        width="100%"
-                        height="300"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        src="https://www.google.com/maps?q={{ $cemetery->lat }},{{ $cemetery->long }}&z=15&output=embed">
-                    </iframe>
+                <div class="map-container">
+                    <div >
+                        <label>الموقع:</label>
+                        <div class="text-center">
+                        <input id="location_inp" type="text" name="location" value="{{ old('location', $cemetery->location) }}" /><br><br>
+                            <div id="googleMap"
+                                style="width: 100%;min-height:300px;border:1px solid #009EF7; border-radius: 10px; ">
+                            </div>
+                            <input type="hidden" id="lat_inp" name="lat">
+                            <input type="hidden" id="lng_inp" name="long">
+                            <p class="invalid-feedback" id="lat"></p>
+                        </div>
+                    </div>
                 </div>
-
-                <input type="hidden" id="lat" name="lat" value="{{ old('lat', $cemetery->lat) }}">
-                <input type="hidden" id="long" name="long" value="{{ old('long', $cemetery->long) }}">
             </div>
+
+
 
             <div class="input-group">
                 <label for="size">المساحة (م²):</label>
@@ -58,7 +50,7 @@
             <div class="input-group">
                 <label>صورة المقبرة الحالية:</label><br>
                 @if($cemetery->image)
-                    <img src="{{ asset('uploads/cemeteryimages/' . $cemetery->image) }}" width="100" height="100" style="border-radius: 10px;">
+                    <img src="{{ asset('uploads/cemeteryimages/' . $cemetery->image) }}" width="100" height="100" style="border-radius: 50%;">
                 @else
                     <p>لا توجد صورة</p>
                 @endif

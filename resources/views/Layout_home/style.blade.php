@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ asset('css/layout_home/footer.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layout_home/services.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layout_home/prayers.css') }}">
-    
-   
-   
+    <link rel="stylesheet" href="{{ asset('css/Layout_prayers/filter.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Layout_prayers/prayers.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Layout_services/filter.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Layout_services/services.css') }}">

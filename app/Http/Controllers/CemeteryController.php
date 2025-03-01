@@ -4,18 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Cemetery;
 use App\Models\User;
-
 use Illuminate\Http\Request;
 
 class CemeteryController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        if (auth()->user()->type=== 'creator') {
+        if (auth()->user()->type === 'creator') {
             $cemeteries = Cemetery::where('user_id',auth()->user()->id)->get();
 
         }
@@ -27,9 +24,7 @@ class CemeteryController extends Controller
        return  view('cemetry/index', compact('cemeteries'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $creators=User::where('type','creator')->get();
@@ -37,17 +32,15 @@ class CemeteryController extends Controller
         return view('cemetry.create',compact('creators'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         $data=$request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'location' => 'required|string',
-            'lat' => 'nullable|numeric',
-            'long' => 'nullable|numeric',
+            'lat' => 'numeric',
+            'long' => 'numeric',
             'size' => 'numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'price' => 'numeric',
@@ -55,7 +48,7 @@ class CemeteryController extends Controller
             'discount' => 'nullable|numeric|min:0|max:100',
             'user_id' => 'exists:users,id',
         ]);
-        //  dd($data);
+        // dd($data);
           $imageName = null;
 
         if ($request->hasFile('image')) {
@@ -92,7 +85,8 @@ class CemeteryController extends Controller
         if ($request->is_discount == 0) {
             $data['discount'] = null;
         }
-        //  dd($data);
+       
+
        $cemetery= Cemetery::create($data);
        session()->flash('success', 'تم اضافة المقبره بنجاح!');
        return redirect()->route('cemetry.index');
@@ -128,47 +122,55 @@ class CemeteryController extends Controller
      */
     public function update(Request $request, $id)
     {
-    //    dd($request,$id);
-    $data=$request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'location' => 'required|string',
-        'lat' => 'nullable|numeric',
-        'long' => 'nullable|numeric',
-        'size' => 'numeric',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'price' => 'numeric',
-        'is_discount' => 'required|boolean',
-        'discount' => 'nullable|numeric|min:0|max:100',
-    ]);
-    //  dd($data);
-      $imageName = null;
+    
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'location' => 'required|string',
+            'lat' => 'nullable|numeric',
+            'long' => 'nullable|numeric', 
+            'size' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'price' => 'nullable|numeric',
+            'is_discount' => 'required|boolean',
+            'discount' => 'nullable|numeric|min:0|max:100',
+        ]);
 
-    if ($request->hasFile('image')) {
-        $image = $request->file('image');
-        $imageName = 'cemetery' . time() . '.' . $image->extension();
-        $image->move(public_path('uploads/cemeteryimages'), $imageName);
+
+        $cemetery = Cemetery::findOrFail($id);
+        $imageName = $cemetery->image; 
+
+
+        if ($request->hasFile('image')) {
+        
+            if ($cemetery->image && file_exists(public_path("uploads/cemeteryimages/{$cemetery->image}"))) {
+                unlink(public_path("uploads/cemeteryimages/{$cemetery->image}"));
+            }
+
+            $image = $request->file('image');
+            $imageName = "cemetery_" . time() . '.' . $image->extension();
+            $image->move(public_path("uploads/cemeteryimages"), $imageName);
+        }
+
+    
+        $cemetery->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'location' => $request->location,
+            'lat' => $request->lat,
+            'long' => $request->long, 
+            'size' => $request->size,
+            'image' => $imageName, 
+            'price' => $request->price,
+            'is_discount' => $request->is_discount,
+            'discount' => $request->discount,
+            'user_id' => $request->user_id,
+        ]);
+
+        session()->flash('success', 'تم تحديث المقبرة بنجاح!');
+        return redirect()->route('cemetry.index');
     }
-    $data=[
-        'name'=>$request->name,
-        'description'=>$request->description,
-        'location'=>$request->location,
-        'lat'=>$request->lat,
-        'long'=>$request->long,
-        'size'=>$request->size,
-        'image'=>$imageName,
-        'price'=>$request->price,
-        'is_discount'=>$request->is_discount,
-        'discount'=>$request->discount,
-        'user_id' =>$request->user_id,
-    ];
 
-    $cemetery=Cemetery::findOrFail($id);
-    $cemetery->update($data);
-    session()->flash('success', 'تم تحديث المقبره بنجاح!');
-    return redirect()->route('cemetry.index');
-
-    }
 
     /**
      * Remove the specified resource from storage.
