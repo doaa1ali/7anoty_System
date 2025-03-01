@@ -45,7 +45,7 @@ class User extends Authenticatable
        return $this->hasMany(Hall::class);
     }
 
-    public function user()
+    public function services()
     {
        return $this->belongsToMany(Service::class,'service_user');
     }
