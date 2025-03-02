@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('book_durations', function (Blueprint $table) {
             $table->id();
             $table->date('booking_date');
-            $table->decimal('final_price', 10, 2)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('service_id')->nullable();
             $table->unsignedBigInteger('hall_id')->nullable();
@@ -25,8 +24,8 @@ return new class extends Migration
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->foreign('hall_id')->references('id')->on('halls')->onDelete('cascade');
             $table->foreign('duration_id')->references('id')->on('durations')->onDelete('cascade');
-            $table->unique(['booking_date', 'duration_id', 'user_id','hall_id'], 'book_durations_uniquehall');
-            $table->unique(['booking_date', 'duration_id', 'user_id','service_id'], 'book_durations_uniqueservice');
+            $table->unique(['booking_date', 'duration_id', 'order_id','hall_id'], 'book_durations_uniquehall');
+            $table->unique(['booking_date', 'duration_id', 'order_id','service_id'], 'book_durations_uniqueservice');
             $table->timestamps();
         });
     }

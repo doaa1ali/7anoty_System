@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiAuthController;
+use App\Http\Controllers\Api\ApiOrderController;
 
 
 Route::get('/user', function (Request $request) {
@@ -19,5 +20,9 @@ Route::post('auth/store', [ApiAuthController::class, 'store']);
 Route::post('auth/show/{id}', [ApiAuthController::class, 'show']);
 Route::delete('auth/delete/{id}', [ApiAuthController::class, 'destroy']);
 Route::post('auth/update/{id}', [ApiAuthController::class, 'update']);
+
+
+
+Route::get('order/index', [ApiOrderController::class, 'index']);
 
 

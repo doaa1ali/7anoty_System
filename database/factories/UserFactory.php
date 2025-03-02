@@ -37,7 +37,7 @@ class UserFactory extends Factory
             'location' => $this->faker->address(),
             'lat' => $this->faker->randomFloat(8, -90, 90),
             'long' => $this->faker->randomFloat(8, -180, 180),
-            'image' => $this->faker->imageUrl(640, 480, 'people'),
+            //'image' => $this->faker->imageUrl(640, 480, 'people'),
             'type' => $this->faker->randomElement(['admin', 'creator', 'customer']),
             'created_at' => now(),
             'updated_at' => now(),

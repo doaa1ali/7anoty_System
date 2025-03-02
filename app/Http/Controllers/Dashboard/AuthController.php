@@ -6,6 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Hall;
+use App\Models\Cemetery;
+use App\Models\Service;
 
 class AuthController extends Controller
 {
@@ -57,7 +60,10 @@ class AuthController extends Controller
 // dd('ssss');
         $user = User::create($data);
         Auth::login($user);
-        return view('Layout_home.master');
+        $halls = Hall::all();
+        $Cemeteries = Cemetery::all();
+        $services = Service::all();
+        return view('Layout_home.master' ,compact('halls', 'Cemeteries', 'services'));
 
 
     }
@@ -78,7 +84,10 @@ class AuthController extends Controller
         if(Auth::attempt($data))
         {
             $user=Auth::user();
-            return view('Layout_home.master');
+            $halls = Hall::all();
+            $Cemeteries = Cemetery::all();
+            $services = Service::all();
+            return view('Layout_home.master' ,compact('halls', 'Cemeteries', 'services'));
 
         }
 

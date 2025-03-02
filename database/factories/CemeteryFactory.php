@@ -26,7 +26,7 @@ class CemeteryFactory extends Factory
             'lat' => $this->faker->randomFloat(8, -90, 90),
             'long' => $this->faker->randomFloat(8, -180, 180),
             'size' => $this->faker->randomFloat(2, 100, 10000),
-            'image' => $this->faker->imageUrl(640, 480, 'cemetery'),
+            //'image' => $this->faker->imageUrl(640, 480, 'cemetery'),
             'price' => $this->faker->randomFloat(2, 5000, 50000),
             'is_discount' => $this->faker->boolean(30),
             'discount' => fn (array $attributes) => $attributes['is_discount'] ? $this->faker->randomFloat(2, 500, 5000) : null,
