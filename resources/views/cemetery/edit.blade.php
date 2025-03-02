@@ -3,10 +3,10 @@
 @section('Show-Books')
 <main>
     <div class="register-box">
-        <a href="{{ route('cemetry.index') }}"><button class="close-btn">x</button></a>
+        <a href="{{ route('cemetery.index') }}"><button class="close-btn">x</button></a>
         <h2>تعديل المقبرة: {{ $cemetery->name }} </h2>
 
-        <form action="{{ route('cemetry.update', $cemetery->id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('cemetery.update', $cemetery->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -81,24 +81,32 @@
                 @error('discount') <p class="error">{{ $message }}</p> @enderror
             </div>
 
-            <div class="input-group">
-                <label for="creator_id">منشئ المحتوى:</label>
-                <select name="user_id" id="user_id" required>
-                    <option value="">اختر منشئ المحتوى</option>
-                    @foreach($creators as $creator)
-                        <option value="{{ $creator->id }}" {{ old('user_id', $cemetery->user_id) == $creator->id ? 'selected' : '' }}>
-                            {{ $creator->name }}
-                        </option>
-                    @endforeach
-                </select>
-                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
-            </div>
+            @if (auth()->check() && auth()->user()->type != 'creator')
+                    <div class="input-group">
+                        <label for="creator_id">منشئ المحتوي:</label>
 
-            <button type="submit" class="btn">حفظ التعديلات</button><br><br>
-            <p>
-                لم تجد منشئ المحتوى؟
-                <a href="{{ route('auth.register') }}">سجّل منشئ محتوى جديد</a>
-            </p>
+                        <select name="user_id" id="user_id" required>
+                            <option value="">اختر منشئ المحتوي</option>
+                            @foreach($creators as $creator)
+                                <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
+                                    {{ $creator->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+
+                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
+
+
+                <button type="submit" class="btn">حفظ</button><br><br>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+
+                    <p>
+                        لم تجد منشئ المحتوي؟
+                        <a href="{{ route('auth.create') }}">سجّل منشئ محتوي جديد</a>
+                    </p>
+                @endif
         </form>
     </div>
 </main>

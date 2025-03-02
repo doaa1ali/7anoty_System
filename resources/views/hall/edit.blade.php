@@ -4,7 +4,7 @@
 <main>
     <div class="register-box">
         <a href="{{ route('hall.index') }}"><button class="close-btn">x</button></a>
-        <h2>تعديل بيانات المستخدم</h2>
+        <h2>تعديل دار المناسبات</h2>
 
         <form action="{{ route('hall.update', $hall->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
@@ -16,12 +16,12 @@
                 @error('name') <p class="error">{{ $message }}</p> @enderror
             </div>
 
-            
+
             <div class="input-group">
                 <label for="description">الوصف:</label>
                 <textarea id="description" name="description">{{ old('description',$hall->description) }}</textarea>
             </div>
-               
+
 
             <div class="input-group">
                 <div class="map-container">
@@ -72,9 +72,32 @@
                 <input type="file" id="image" name="image">
                 </div>
 
-           
+                @if (auth()->check() && auth()->user()->type != 'creator')
+                    <div class="input-group">
+                        <label for="creator_id">منشئ المحتوي:</label>
 
-            <button type="submit" class="btn">حفظ التعديلات</button>
+                        <select name="user_id" id="user_id" required>
+                            <option value="">اختر منشئ المحتوي</option>
+                            @foreach($creators as $creator)
+                                <option value="{{ $creator->id }}" {{ old('user_id') == $creator->id ? 'selected' : '' }}>
+                                    {{ $creator->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                @endif
+
+                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
+
+
+                <button type="submit" class="btn">حفظ</button><br><br>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+
+                    <p>
+                        لم تجد منشئ المحتوي؟
+                        <a href="{{ route('auth.create') }}">سجّل منشئ محتوي جديد</a>
+                    </p>
+                @endif
         </form>
     </div>
 </main>

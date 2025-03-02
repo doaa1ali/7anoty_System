@@ -33,43 +33,11 @@ document.addEventListener("DOMContentLoaded", function () {
 //     formContainer.style.display = (formContainer.style.display === "none" || formContainer.style.display === "") ? "block" : "none";
 // }
 
-
-
-//
-// function searchInMap() {
-
-//     let searchQuery = document.getElementById('mapSearch').value;
-//     console.log(searchQuery);
-//     if (searchQuery) {
-//         let googleSearchUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
-//         window.open(googleSearchUrl, '_blank'); // فتح البحث في نافذة جديدة
-//     }
-// }
-
-// function updateMap(lat, long) {
-//     let mapFrame = document.getElementById('mapFrame');
-//     let newSrc = `https://www.google.com/maps?q=${lat},${long}&z=15&output=embed`;
-//     mapFrame.src = newSrc;
-
-//     document.getElementById('lat').value = lat;
-//     document.getElementById('long').value = long;
-// }
-
-// document.getElementById('mapFrame').addEventListener('click', function () {
-//     console.log('tess');
-//     let lat = 30.0444 + (Math.random() * 0.01); // محاكاة اختيار موقع
-//     let long = 31.2357 + (Math.random() * 0.01);
-//     updateMap(lat, long);
-// });
-
-
+//omar map code
 let lat = 30.0444; // Cairo, Egypt
-let lng = 31.2357; // Cairo, Egypt
-const isEditPage = false;
-const isShowPage = false;
-
-
-
+        let lng = 31.2357; // Cairo, Egypt
+        const isEditPage = false;
+        const isShowPage = false;
 var geocoder;
 var googleMap;
 var marker;
@@ -132,25 +100,23 @@ function myMap() {
                     document.getElementById("location_inp").value = results[0].formatted_address;
                     document.getElementById("lat_inp").value = clickLocation.lat();
                     document.getElementById("lng_inp").value = clickLocation.lng();
-                    
+
                 } else {
                     console.log("Geocode error: " + status);
                 }
             }
-            
         );
     });
-    
+
     // Drag marker to update address
     marker.addListener("dragend", function () {
         var position = marker.getPosition();
         geocoder.geocode({ location: position }, function (results, status) {
             if (status === "OK" && results[0]) {
-                document.getElementById("location_inp").value =
-                    results[0].formatted_address;
+                // document.getElementById("location_inp").value =
+                //     results[0].formatted_address;
                 document.getElementById("lat_inp").value = position.lat();
                 document.getElementById("lng_inp").value = position.lng();
-                console.log(position.lat())
             }
         });
     });
@@ -181,5 +147,3 @@ function getCurrentPos() {
         console.log("Geolocation is not supported.");
     }
 }
-
- 

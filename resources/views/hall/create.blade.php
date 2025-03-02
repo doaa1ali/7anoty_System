@@ -98,7 +98,22 @@
 
                 </div>
 
-            <button type="submit" class="btn">اضافه</button><br><br>
+           
+
+                @error('creator_id') <p class="error">{{ $message }}</p> @enderror
+
+
+                <button type="submit" class="btn">حفظ</button><br><br>
+                @if (auth()->check() && auth()->user()->type != 'creator')
+
+                    <p>
+                        لم تجد منشئ المحتوي؟
+                        <a href="{{ route('auth.create') }}">سجّل منشئ محتوي جديد</a>
+                    </p>
+                @endif
+
+
+            <!-- <button type="submit" class="btn">اضافه</button><br><br> -->
         </form>
     </div>
 </div>

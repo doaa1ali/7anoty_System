@@ -36,8 +36,8 @@
         </div>
 
         <div class="buttons-container">
-            <a href="{{route('cemetry.edit', $cemetry->id)}}" class="edit">تعديل</a>
-            <a href="{{ route('cemetry.index')}}" class="cancel">رجوع</a>
+            <a href="{{route('cemetery.edit', $cemetry->id)}}" class="edit">تعديل</a>
+            <a href="{{ route('cemetery.index')}}" class="cancel">رجوع</a>
         </div>
     </div>
 </main>

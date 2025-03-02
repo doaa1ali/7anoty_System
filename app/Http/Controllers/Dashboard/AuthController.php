@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +29,9 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'phone' => 'required|string|max:15',
-            'location' => 'nullable|string|max:255',
+            'location' => 'required|string',
+            'lat' => 'numeric',
+            'long' => 'numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
 
@@ -45,7 +48,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
-            'location' => $request->location,
+            'location'=>$request->location,
+            'lat'=>$request->lat,
+            'long'=>$request->long,
             'image' => $imageName,
             'type' => $request->type ?? 'customer',
         ];
@@ -54,7 +59,6 @@ class AuthController extends Controller
         Auth::login($user);
         return view('Layout_home.master');
 
-        
 
     }
 
@@ -109,6 +113,8 @@ class AuthController extends Controller
             'password' => 'required|min:6',
             'phone' => 'required|string|max:15',
             'location' => 'nullable|string|max:255',
+            'lat' => 'nullable|numeric',
+            'long' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
 
@@ -126,6 +132,8 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'location' => $request->location,
+            'lat' => $request->lat,
+            'long' => $request->long,
             'image' => $imageName,
             'type' => $request->type ?? 'customer',
         ];
@@ -188,6 +196,8 @@ class AuthController extends Controller
             'password' => 'nullable|min:6',
             'phone' => 'required|string|max:15',
             'location' => 'nullable|string|max:255',
+            'lat' => 'nullable|numeric',
+            'long' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
 
@@ -199,6 +209,8 @@ class AuthController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'location' => $request->location,
+            'lat' => $request->lat,
+            'long' => $request->long,
             'type' => $request->type ?? 'customer',
         ];
 

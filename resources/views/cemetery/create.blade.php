@@ -6,9 +6,9 @@
 
         <div class="register-box">
 
-            <a href="{{route('cemetry.index')}}"><button class="close-btn" >x</button></a>
+            <a href="{{route('cemetery.index')}}"><button class="close-btn" >x</button></a>
             <h2>إضافة مقبره جديدة </h2>
-            <form action="{{ route('cemetry.store') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('cemetery.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="input-group">
@@ -71,11 +71,11 @@
                     <input type="number" id="discount" name="discount" value="{{ old('discount') }}" min="0" max="100">
                     @error('discount') <p class="error">{{ $message }}</p> @enderror
                 </div>
-                
+
                 @if (auth()->check() && auth()->user()->type != 'creator')
                     <div class="input-group">
                         <label for="creator_id">منشئ المحتوي:</label>
-                        
+
                         <select name="user_id" id="user_id" required>
                             <option value="">اختر منشئ المحتوي</option>
                             @foreach($creators as $creator)
@@ -84,12 +84,12 @@
                                 </option>
                             @endforeach
                         </select>
-                        
+
                         <!-- <input type="text" id="creator_id" name="creator" value="{{ old('$creator->name') }}"> -->
-                        
+
                     </div>
                 @endif
-               
+
                 @error('creator_id') <p class="error">{{ $message }}</p> @enderror
 
 
