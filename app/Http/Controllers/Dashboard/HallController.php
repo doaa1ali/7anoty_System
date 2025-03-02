@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Controller;
 
 use App\Models\Hall;
-
 use App\Models\Duration;
 use App\Models\User;
 use Illuminate\Http\Request;

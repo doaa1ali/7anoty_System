@@ -1,14 +1,11 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CemeteryController;
-use App\Http\Controllers\HallController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\Dashboard\AuthController;
+use App\Http\Controllers\Dashboard\CemeteryController;
+use App\Http\Controllers\Dashboard\HallController;
+use App\Http\Controllers\Dashboard\ServiceController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
-use App\Http\Middleware\CreatorMiddleware;
-use App\Http\Middleware\TypeMiddleware;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 //HomePage....

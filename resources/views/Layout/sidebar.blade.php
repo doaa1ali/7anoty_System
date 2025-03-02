@@ -3,10 +3,10 @@
 
         <div class="sidebar-main">
             <div class="sidebar-user">
-                <img src="{{ asset('uploads/ImageWebsite/profile.jpg') }}" alt="User Profile">
+                <img src="{{ asset('uploads/userimages/' . Auth::user()->image) }}" alt="User Profile">
                 <div>
-                    <h3>{{Auth::user()->name }}</h3>
-                    <span>{{Auth::user()->email }}</span>
+                    <h3>{{ Auth::user()->name }}</h3>
+                    <span>{{ Auth::user()->email }}</span>
                 </div>
             </div>
             <div class="sidebar-menu">

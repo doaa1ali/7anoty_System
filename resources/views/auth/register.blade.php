@@ -70,6 +70,9 @@
         </form>
     </div>
 </div>
+
+
+
 </x-auth_layout>
 
 
