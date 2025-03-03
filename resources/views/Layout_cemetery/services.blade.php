@@ -21,7 +21,11 @@
                         <p><strong>الموقع:</strong> {{ $cemetery->location }}</p>
                         <p><strong>عدد الأماكن المتاحة:</strong> {{ $cemetery->available_places }}</p>
                         <p><strong>السعر:</strong> {{ number_format($cemetery->price) }} جنيه</p>
-                        <a href="#" class="btn">حجز الان</a>
+                        <form action="{{ route('cart.add', ['type' => 'cemetery']) }}" method="POST" style="display: inline;">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $cemetery->id }}">
+                        <button type="submit" class="btn">حجز الآن</button>
+                    </form>
                     </div>
                 </div>
             @endforeach

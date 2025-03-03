@@ -18,7 +18,11 @@
                     <p><strong>وقت البداية:</strong> {{ $hall->start_time }}</p>
                     <p><strong>وقت النهاية:</strong> {{ $hall->end_time }}</p>
                     <p><strong>بوفيه:</strong> {{ $hall->has_buffet ? 'متوفر' : 'غير متوفر' }}</p>
-                    <a href="#" class="btn">حجز الآن</a>
+                    <form action="{{ route('cart.add', ['type' => 'hall']) }}" method="POST" style="display: inline;">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $hall->id }}">
+                        <button type="submit" class="btn">حجز الآن</button>
+                    </form>
                 </div>
             </div>
         @endforeach

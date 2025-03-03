@@ -9,7 +9,7 @@ class BookDuration extends Model
 {
     use HasFactory;
 
-    protected $fillable = [ 'user_id','service_id', 'hall_id', 'duration_id','order_id'];
+    protected $fillable = [ 'user_id','service_id', 'hall_id', 'duration_id','order_id','booking_date'];
 
     public function user()
     {

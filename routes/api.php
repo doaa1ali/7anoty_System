@@ -5,7 +5,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiAuthController;
 use App\Http\Controllers\Api\ApiOrderController;
+use App\Http\Controllers\API\ApiServiceController;
 
+use App\Http\Controllers\API;
+
+// use Illuminate\Routing\Route;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -23,15 +27,23 @@ Route::delete('auth/delete/{id}', [ApiAuthController::class, 'destroy']);
 Route::post('auth/update/{id}', [ApiAuthController::class, 'update']);
 
 
-<<<<<<< HEAD
 
 Route::get('order/index', [ApiOrderController::class, 'index']);
-=======
+
+
 //crud hall api
 Route::post('hall/store', [ApiHallController::class, 'store']);
 Route::get('hall/show/{id}', [ApiHallController::class, 'show']);
 Route::post('hall/update/{id}', [ApiHallController::class, 'update']);
 Route::delete('hall/delete/{id}', [ApiHallController::class, 'destroy']);
->>>>>>> origin/hall_api_crud
 
+
+
+
+//api crud operation for services
+Route::post('service/store', [ApiServiceController::class, 'store']);
+Route::get('service/show/{id}', [ApiServiceController::class, 'show']);
+Route::post('service/update/{id}', [ApiServiceController::class, 'update']);
+Route::delete('service/delete/{id}', [ApiServiceController::class, 'destroy']);
+    
 

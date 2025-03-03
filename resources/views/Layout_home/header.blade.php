@@ -57,6 +57,9 @@
         @else
             <div class="header-account">
                 <p style="color:#cfc1c1">مرحبا {{ Auth::user()->name }} 😊</p>
+                <a href="{{ route('cart.index') }}" class="btn btn-warning text-white px-4 py-2 d-flex align-items-center" style="font-size: 1rem;  border-radius: 10px;">
+                    <i class="fas fa-shopping-cart me-2"></i> سلة الحجوزات
+                </a>
                 <a href="{{ route('auth.logout') }}" class="logout-btn">
                     <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
                 </a>

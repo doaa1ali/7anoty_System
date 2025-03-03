@@ -90,7 +90,7 @@ Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout'
 
 
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.index');
-Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/add/{type}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart/remove/{index}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
