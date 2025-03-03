@@ -11,29 +11,32 @@ class OrderResource extends JsonResource
     {
         $totalPrice = 0;
 
-        return [
-            'id' => $this->id, 
-            'user' => $this->user->name,  
+
+
+        return array_filter([
+            'id' => $this->id,
+            'user' => optional($this->user)->name,
             'book_durations' => $this->bookDurations->map(function ($bookDuration) use (&$totalPrice) {
 
-                $servicePrice = $bookDuration->service->price ?? 0;
-                $hallPrice = $bookDuration->hall->price ?? 0;
+                $servicePrice = optional($bookDuration->service)->price ?? 0;
+                $hallPrice = optional($bookDuration->hall)->price ?? 0;
 
                 $totalPrice += $servicePrice + $hallPrice;
 
                 return [
-                    'book_duration_id' => $bookDuration->id, 
-                    'order_id' => $bookDuration->order_id,  
+                    'book_duration_id' => $bookDuration->id,
+                    'order_id' => $bookDuration->order_id,
                     'service' => optional($bookDuration->service)->name,
                     'service_price' => $servicePrice,
                     'hall' => optional($bookDuration->hall)->name,
                     'hall_price' => $hallPrice,
                 ];
             })->toArray(),
-            'cemetery_name'=>$this->cemetery->name,
-            'cemetery_price'=>$this->cemetery->price,
+            'cemetery_name' => optional($this->cemetery)->name,
+            'cemetery_price' => optional($this->cemetery)->price,
 
-            'final_price' => $totalPrice + ($this->cemetery ? $this->cemetery->price : 0),
-        ];
+            'final_price' => $totalPrice + (optional($this->cemetery)->price ?? 0),
+        ]);
+
     }
 }

@@ -20,7 +20,9 @@ class HomeController extends Controller
 
     public function service()
     {
-        return view('Layout_service.master');
+        $services = Service::all();
+        // dd($services);
+        return view('Layout_service.master',compact('services'));
     }
 
     public function prayers()

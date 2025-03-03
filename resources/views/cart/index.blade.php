@@ -154,6 +154,10 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
+        @if(session('error'))
+            <div class="alert alert-success">{{ session('error') }}</div>
+        @endif
+
         @if(!empty($cart) && count($cart) > 0)
             <table>
                 <thead>

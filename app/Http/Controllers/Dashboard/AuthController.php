@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+
 use App\Models\Hall;
 use App\Models\Cemetery;
 use App\Models\Service;
@@ -26,17 +28,17 @@ class AuthController extends Controller
 
     public function handleregister(Request $request )
     {
-
-        $request->validate([
+        $x=$request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'phone' => 'required|string|max:15',
             'location' => 'required|string',
-            'lat' => 'numeric',
-            'long' => 'numeric',
+            'lat' => 'nullable|numeric',
+            'long' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
+        // dd($x);
 
         $imageName = null;
 
@@ -57,7 +59,7 @@ class AuthController extends Controller
             'image' => $imageName,
             'type' => $request->type ?? 'customer',
         ];
-// dd('ssss');
+        // dd($data);
         $user = User::create($data);
         Auth::login($user);
         $halls = Hall::all();

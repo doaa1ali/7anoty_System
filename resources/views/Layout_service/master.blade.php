@@ -11,7 +11,7 @@
     </div>
 
     <div class="">
-        @include('Layout_service.filter') 
+        @include('Layout_service.services') 
     </div><br>
 
 

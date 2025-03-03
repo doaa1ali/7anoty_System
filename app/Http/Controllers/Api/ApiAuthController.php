@@ -81,7 +81,7 @@ class ApiAuthController extends Controller
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
-    
+
         $new_access_token = Str::random(64);
 
         $user->update([
@@ -180,14 +180,14 @@ class ApiAuthController extends Controller
 
     }
 
-   
+
 
     public function update(Request $request, $id)
     {
 
         $oldData = User::findOrFail($id);
         $user = User::findOrFail($id);
-    
+
         $validator = Validator::make($request->all(), [
             'name' => 'sometimes|string|max:255',
             'email' => "sometimes|email|unique:users,email,$id",
@@ -198,11 +198,11 @@ class ApiAuthController extends Controller
             'long' => 'nullable|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,webp,gif,svg|max:2048',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-    
+
         $data_update = [
             'name' => $request->name ?? $user->name,
             'email' => $request->email ?? $user->email,
@@ -212,35 +212,35 @@ class ApiAuthController extends Controller
             'long' => $request->long ?? $user->long,
             'type' => $request->type ?? $user->type,
         ];
-    
+
         if ($request->filled('password')) {
             $data_update['password'] = Hash::make($request->password);
         }
-    
+
         if ($request->hasFile('image')) {
             if ($user->image && file_exists(public_path("uploads/userimages/{$user->image}"))) {
                 unlink(public_path("uploads/userimages/{$user->image}"));
             }
-    
+
             $image = $request->file('image');
             $filename = "User_" . time() . '.' . $image->extension();
             $image->move(public_path("uploads/userimages"), $filename);
-    
+
             $data_update['image'] = $filename;
         }
-        
-   
+
+
         $user->update($data_update);
-    
+
         return response()->json([
             'message_before' => 'بيانات المستخدم قبل التحديث!',
             'old_user' => new UserResource($oldData),
             'message_after' => 'تم تحديث بيانات المستخدم بنجاح!',
             'updated_user' => new UserResource($user),
         ], 200);
-        
+
     }
-    
-    
+
+
 
 }

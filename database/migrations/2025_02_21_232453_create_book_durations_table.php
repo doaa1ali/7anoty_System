@@ -24,8 +24,8 @@ return new class extends Migration
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->foreign('hall_id')->references('id')->on('halls')->onDelete('cascade');
             $table->foreign('duration_id')->references('id')->on('durations')->onDelete('cascade');
-            $table->unique(['booking_date', 'duration_id', 'order_id','hall_id'], 'book_durations_uniquehall');
-            $table->unique(['booking_date', 'duration_id', 'order_id','service_id'], 'book_durations_uniqueservice');
+            $table->unique(['booking_date', 'duration_id', 'hall_id'], 'book_durations_uniquehall');
+            $table->unique(['booking_date', 'duration_id','service_id'], 'book_durations_uniqueservice');
             $table->timestamps();
         });
     }

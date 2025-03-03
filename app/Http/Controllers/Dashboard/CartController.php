@@ -28,7 +28,11 @@ class CartController extends Controller
             $item = Cemetery::find($request->id);
         } elseif ($type === 'hall') {
             $item = Hall::find($request->id);
-        } else {
+        }
+        elseif ($type === 'service') {
+             $item = Service::find($request->id);
+        }
+        else {
             return back()->with('error', 'نوع غير معروف!');
         }
 
@@ -75,71 +79,154 @@ class CartController extends Controller
     }
 
 
+    // public function checkout()
+    // {
+    //     if (!Auth::check()) {
+    //         return redirect()->route('auth.login');
+    //     }
+
+    //     $cart = Session::get('cart', []);
+
+    //     if (empty($cart)) {
+    //         return back()->with('error', 'السلة فارغة!');
+    //     }
+
+    //     $totalPrice = array_sum(array_column($cart, 'price'));
+
+    //     $order = Order::create([
+    //         'user_id' => Auth::id(),
+    //         'final_price' => $totalPrice,
+    //     ]);
+
+    //     //dd($order);
+
+    //     foreach ($cart as $item) {
+
+    //         if (isset($item['type']) && $item['type'] === 'cemetery') {
+    //             $order->update([
+    //                 'cemetery_id' => $item['id'],
+    //             ]);
+    //             //dd($order);
+    //         }
+
+    //         elseif (isset($item['type']) && $item['type'] === 'hall') 
+    //         {
+               
+    //             $duration_hall = Duration::where('hall_id', $item['id'])->first();                
+    //             if ($duration_hall) {
+    //                 BookDuration::create([
+    //                     'order_id' => $order->id,
+    //                     'hall_id' => $item['id'],
+    //                     'booking_date' => Carbon::now(),
+    //                     'user_id' => Auth::id(),
+    //                     'duration_id' => $duration_hall->id, 
+    //                 ]);
+
+                    
+    //             } 
+    //             else {
+    //                 return back()->with('error', 'غير متاح الان');
+    //             }
+    //         }
+    //         elseif (isset($item['type']) && $item['type'] === 'service') 
+    //         {
+    //             $duration_service= Duration::where('service_id', $item['id'])->first();                
+    //             if ($duration_service) {
+    //                 BookDuration::create([
+    //                     'order_id' => $order->id,
+    //                     'service_id' => $item['id'],
+    //                     'booking_date' => Carbon::now(),
+    //                     'user_id' => Auth::id(),
+    //                     'duration_id' => $duration_service->id, 
+    //                 ]);
+    //             } 
+    //             else {
+    //                 return back()->with('error', 'غير متاح الان');
+    //             }
+    //         }
+    //     }
+
+    //     Session::forget('cart');
+
+    //     return back()->with('success', 'تم إتمام الطلب بنجاح!');
+    // }
+
+
     public function checkout()
-{
-    if (!Auth::check()) {
-        return redirect()->route('auth.login');
-    }
+    {
+        if (!Auth::check()) {
+            return redirect()->route('auth.login');
+        }
 
-    $cart = Session::get('cart', []);
+        $cart = Session::get('cart', []);
 
-    if (empty($cart)) {
-        return back()->with('error', 'السلة فارغة!');
-    }
+        if (empty($cart)) {
+            return back()->with('error', 'السلة فارغة!');
+        }
 
-    $totalPrice = array_sum(array_column($cart, 'price'));
+        $totalPrice = array_sum(array_column($cart, 'price'));
 
-    $order = Order::create([
-        'user_id' => Auth::id(),
-        'final_price' => $totalPrice,
-    ]);
+        $order = Order::create([
+            'user_id' => Auth::id(),
+            'final_price' => $totalPrice,
+        ]);
 
-    //dd($order);
-
-    foreach ($cart as $item) {
-        if (isset($item['type']) && $item['type'] === 'cemetery') {
-            $order->update([
-                'cemetery_id' => $item['id'],
-            ]);
-        } else {
-            if ($item['type'] === 'hall' || $item['type'] === 'service') {
-                
+        foreach ($cart as $item) {
+            if ($item['type'] === 'cemetery') {
+                $order->update(['cemetery_id' => $item['id']]);
+            } 
+            elseif ($item['type'] === 'hall') {
                 $duration_hall = Duration::where('hall_id', $item['id'])->first();
-                $duration_service = Duration::where('service_id', $item['id'])->first();
 
-            
                 if ($duration_hall) {
+
+                    $existingBooking = BookDuration::where('booking_date', Carbon::now()->toDateString())
+                    ->where('duration_id', $duration_hall->id)
+                    ->where('hall_id', $item['id'])
+                    ->exists();
+                    if ($existingBooking) {
+                        return back()->with('error', 'هذه القاعة غير متاحة للحجز في الوقت الحالي!');
+                    }
+
                     BookDuration::create([
                         'order_id' => $order->id,
-                        'item_id' => $item['id'],
+                        'hall_id' => $item['id'],
                         'booking_date' => Carbon::now(),
-                        'item_type' => $item['type'],
                         'user_id' => Auth::id(),
                         'duration_id' => $duration_hall->id, 
                     ]);
                 } 
-                elseif($duration_service)
-                {
+                
+            }
+            elseif ($item['type'] === 'service') {
+                $duration_service = Duration::where('service_id', $item['id'])->first();
+                if ($duration_service) {
+
+                    //  dd('sss');
+                    $existingBooking = BookDuration::where('booking_date', Carbon::now()->toDateString())
+                    ->where('duration_id', $duration_service->id)
+                    ->where('service_id', $item['id'])
+                    ->exists();
+                    if ($existingBooking) {
+                        return back()->with('error', 'هذه القاعة غير متاحة للحجز في الوقت الحالي!');
+                    }
+
                     BookDuration::create([
                         'order_id' => $order->id,
-                        'item_id' => $item['id'],
+                        'service_id' => $item['id'],
                         'booking_date' => Carbon::now(),
-                        'item_type' => $item['type'],
                         'user_id' => Auth::id(),
                         'duration_id' => $duration_service->id, 
                     ]);
-                }
-                else {
-                    return back()->with('error', 'غير متاح الان');
-                }
+                } 
+              
             }
         }
+
+        Session::forget('cart');
+
+        return back()->with('success', 'تم إتمام الطلب بنجاح!');
     }
-
-    Session::forget('cart');
-
-    return back()->with('success', 'تم إتمام الطلب بنجاح!');
-}
 
 
 

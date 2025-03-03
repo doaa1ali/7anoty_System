@@ -25,30 +25,5 @@ class Order extends Model
     {
         return $this->belongsTo(Cemetery::class);
     }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::saving(function ($order) {
-            $totalPrice = 0;
-
-            if ($order->bookDurations) {
-                foreach ($order->bookDurations as $bookDuration) {
-                    if ($bookDuration->service) {
-                        $totalPrice += $bookDuration->service->price;
-                    }
-                    if ($bookDuration->hall) {
-                        $totalPrice += $bookDuration->hall->price;
-                    }
-                }
-            }
-
-            if ($order->cemetery) {
-                $totalPrice += $order->cemetery->price;
-            }
-
-            $order->final_price = $totalPrice;
-        });
-    }
+    
 }

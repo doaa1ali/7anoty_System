@@ -1,73 +1,24 @@
-<section class="reciter-section">
-    <div class="sections-header">
-        <h2>نتيجة البحث</h2>
+<section class="cemetery-section">
+    <div class="section-header">
+        <h2>أحدث الخدمات</h2>
     </div>
-    <div class="reciter-container">
-
-        <div class="reciters-card">
-            <img src="{{ asset('uploads/ImageWebsite/14.jpg') }}" alt="الشيخ محمد حسن">
-            <div class="reciter-info">
-                <h3>الشيخ محمد حسن</h3>
-                <p><strong>التخصص:</strong> تلاوة القرآن الكريم</p>
-                <p><strong>عدد سنوات الخبرة:</strong> 15 سنة</p>
-                <p><strong>المحافظة:</strong> القاهرة</p>
-                <a href="#" class="btn">حجز الان</a>
+    <div class="cemetery-container">
+        @foreach ($services as $hall)
+            <div class="cemetery-card">
+            <img src="{{ asset('uploads/servicesimage/1.webp') }}">
+                <div class="cemetery-info">
+                    <h3>{{ $hall->name }}</h3>
+                    <p><strong>الموقع:</strong> {{ $hall->location }}</p>
+                    <p><strong>السعر:</strong> {{ number_format($hall->price) }} جنيه</p>
+                    <p><strong>وقت البداية:</strong> {{ $hall->start_time }}</p>
+                    <p><strong>وقت النهاية:</strong> {{ $hall->end_time }}</p>
+                    <form action="{{ route('cart.add', ['type' => 'service']) }}" method="POST" style="display: inline;">
+                        @csrf
+                        <input type="hidden" name="id" value="{{ $hall->id }}">
+                        <button type="submit" class="btn">حجز الآن</button>
+                    </form>
+                </div>
             </div>
-        </div>
-
-        <div class="reciters-card">
-            <img src="{{ asset('uploads/ImageWebsite/15.jpg') }}" alt="الشيخ أحمد عبد الله">
-            <div class="reciter-info">
-                <h3>الشيخ أحمد عبد الله</h3>
-                <p><strong>التخصص:</strong> تلاوة وقراءة التجويد</p>
-                <p><strong>عدد سنوات الخبرة:</strong> 10 سنوات</p>
-                <p><strong>المحافظة:</strong> الجيزة</p>
-                <a href="#" class="btn">حجز الان</a>
-            </div>
-        </div>
-
-        <div class="reciters-card">
-            <img src="{{ asset('uploads/ImageWebsite/16.jpg') }}" alt="الشيخ ياسر محمود">
-            <div class="reciter-info">
-                <h3>الشيخ ياسر محمود</h3>
-                <p><strong>التخصص:</strong> تلاوة القرآن وإقامة المجالس</p>
-                <p><strong>عدد سنوات الخبرة:</strong> 20 سنة</p>
-                <p><strong>المحافظة:</strong> الإسكندرية</p>
-                <a href="#" class="btn">حجز الان</a>
-            </div>
-        </div>
-
-        <div class="reciters-card">
-            <img src="{{ asset('uploads/ImageWebsite/14.jpg') }}" alt="الشيخ محمد حسن">
-            <div class="reciter-info">
-                <h3>الشيخ محمد حسن</h3>
-                <p><strong>التخصص:</strong> تلاوة القرآن الكريم</p>
-                <p><strong>عدد سنوات الخبرة:</strong> 15 سنة</p>
-                <p><strong>المحافظة:</strong> القاهرة</p>
-                <a href="#" class="btn">حجز الان</a>
-            </div>
-        </div>
-
-        <div class="reciters-card">
-            <img src="{{ asset('uploads/ImageWebsite/15.jpg') }}" alt="الشيخ أحمد عبد الله">
-            <div class="reciter-info">
-                <h3>الشيخ أحمد عبد الله</h3>
-                <p><strong>التخصص:</strong> تلاوة وقراءة التجويد</p>
-                <p><strong>عدد سنوات الخبرة:</strong> 10 سنوات</p>
-                <p><strong>المحافظة:</strong> الجيزة</p>
-                <a href="#" class="btn">حجز الان</a>
-            </div>
-        </div>
-
-        <div class="reciters-card">
-            <img src="{{ asset('uploads/ImageWebsite/16.jpg') }}" alt="الشيخ ياسر محمود">
-            <div class="reciter-info">
-                <h3>الشيخ ياسر محمود</h3>
-                <p><strong>التخصص:</strong> تلاوة القرآن وإقامة المجالس</p>
-                <p><strong>عدد سنوات الخبرة:</strong> 20 سنة</p>
-                <p><strong>المحافظة:</strong> الإسكندرية</p>
-                <a href="#" class="btn">حجز الان</a>
-            </div>
-        </div>
+        @endforeach
     </div> 
 </section>

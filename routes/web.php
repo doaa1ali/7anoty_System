@@ -10,14 +10,12 @@ use App\Http\Controllers\Dashboard\CartController;
 
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
-use App\Http\Middleware\TypeMiddleware;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
 
 //HomePage....
 
 Route::get('/' , [HomeController::class ,'index'])->name('home');
-Route::get('service', function () {return view('Layout_service.master');})->name('service');
+Route::get('service' , [HomeController::class ,'service'])->name('service');
 Route::get('prayers', function () {return view('Layout_prayers.master');})->name('prayers');
 Route::get('/cemetery' , [HomeController::class ,'cemetery'])->name('cemetery');
 Route::get('/hall' , [HomeController::class ,'hall'])->name('hall');
@@ -73,7 +71,6 @@ Route::middleware(AdminMiddleware::class)->group(function () {
       Route::get('order/index' ,[OrderController::class ,'index'])->name('order.index');
 
 });
-
 
 
 // Register Routes

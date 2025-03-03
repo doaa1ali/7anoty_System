@@ -1,31 +1,32 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Resources\ServiceResource;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Service;
+use App\Models\User;
 use App\Models\Duration;
+
+
+use Illuminate\Http\Request;
 
 class ApiServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $services = Auth::user()->type === 'creator' ? Auth::user()->services : Service::all();
-        return response()->json($services);
+           $services = Service::all();
+            return response()->json(
+                ['success' => true,
+                'services' => ServiceResource::collection($services) ]
+                , 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
+        $validator = Validator::make($request->all(), [
+           'name' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'location' => 'required|string',
@@ -36,90 +37,128 @@ class ApiServiceController extends Controller
             'start_time' => 'required|date_format:H:i',
             'end_time' => 'required|date_format:H:i|after:start_time',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_id' => 'exists:users,id',
+            'user_id' => 'required|exists:users,id',
         ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
+        $data = $validator->validated();
 
         if ($request->hasFile('image')) {
-            $imageName = 'service' . time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/servicesimage'), $imageName);
-            $validated['image'] = $imageName;
+            $image = $request->file('image');
+            $imageName = 'service' . time() . '.' . $image->extension();
+            $image->move(public_path('uploads/servicesimage'), $imageName);
+            $data['image'] = $imageName;
         }
 
-        $validated['is_discount'] = $request->has('is_discount');
-        if (!$validated['is_discount']) {
-            $validated['discount'] = null;
+        $data['is_discount'] = $request->has('is_discount');
+
+        if (!$data['is_discount']) {
+            $data['discount'] = null;
         }
 
-        $validated['user_id'] = Auth::check() && Auth::user()->type != 'creator' ? $request->user_id : Auth::id();
+        $service = Service::create($data);
+        $user = User::find($request->user_id);
+        $user->services()->attach($service->id);
 
-        $service = Service::create($validated);
-        Duration::create(['start_time' => $service->start_time, 'end_time' => $service->end_time, 'service_id' => $service->id]);
-
-        return response()->json($service, 201);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        $service = Service::with('users')->findOrFail($id);
-        return response()->json($service);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        $service = Service::findOrFail($id);
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'required|string',
-            'price' => 'required|numeric|min:0',
-            'location' => 'required|string',
-            'lat' => 'numeric',
-            'long' => 'numeric',
-            'is_discount' => 'nullable|boolean',
-            'discount' => 'required_if:is_discount,1|nullable|numeric|min:0|lt:price',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'user_id' => 'exists:users,id',
+        Duration::create([
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time,
+            'service_id' => $service->id,
+            'hall_id' => null,
         ]);
+        return response()->json([
+            'message' => 'تم إنشاء الخدمة بنجاح',
+             'service' => new ServiceResource($service)]
+             , 201);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $service = Service::find($id);
+        if (!$service) {
+            return response()->json(['message' => 'الخدمة غير موجودة'], 404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+             'description' => 'required|string',
+             'price' => 'required|numeric|min:0',
+             'location' => 'required|string',
+             'lat' => 'numeric',
+             'long' => 'numeric',
+             'is_discount' => 'nullable|boolean',
+             'discount' => 'required_if:is_discount,1|nullable|numeric|min:0|lt:price',
+             'start_time' => 'required|date_format:H:i',
+             'end_time' => 'required|date_format:H:i|after:start_time',
+             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+             'user_id' => 'required|exists:users,id',
+         ]);
+
+         if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 400);
+        }
+
+        $data = $validator->validated();
 
         if ($request->hasFile('image')) {
             if ($service->image && file_exists(public_path("uploads/servicesimage/{$service->image}"))) {
                 unlink(public_path("uploads/servicesimage/{$service->image}"));
             }
-            $imageName = 'service' . time() . '.' . $request->image->extension();
-            $request->image->move(public_path('uploads/servicesimage'), $imageName);
-            $validated['image'] = $imageName;
+
+            $image = $request->file('image');
+            $imageName = 'service' . time() . '.' . $image->extension();
+            $image->move(public_path('uploads/servicesimage'), $imageName);
+            $data['image'] = $imageName;
         }
 
-        $validated['is_discount'] = $request->has('is_discount') ? 1 : 0;
-        if (!$validated['is_discount']) {
-            $validated['discount'] = null;
-        }
+        $service->update($data);
+        //update pivot
+        $user = User::find($request->user_id);
+        $service->users()->sync([$user->id]);
 
-        $validated['user_id'] = Auth::check() && Auth::user()->type != 'creator' ? $request->user_id : Auth::id();
+        //update duration
+        $duration =Duration::where('service_id', $service->id)->first();
+       if ($duration) {
+        $duration->update([
+            'start_time' => $request->start_time ?? $duration->start_time,
+            'end_time' => $request->end_time ?? $duration->end_time,
+        ]);
+       }
 
-        $service->update($validated);
-        Duration::updateOrCreate(['service_id' => $service->id], ['start_time' => $request->start_time, 'end_time' => $request->end_time]);
-
-        return response()->json($service);
+       return response()->json([
+        'message' => 'تم تحديث الخدمة بنجاح',
+         'service' => new ServiceResource($service)]
+         , 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function show($id)
     {
-        $service = Service::findOrFail($id);
-        if ($service->image && file_exists(public_path("uploads/servicesimage/{$service->image}"))) {
-            unlink(public_path("uploads/servicesimage/{$service->image}"));
+        $service = Service::find($id);
+
+        if (!$service) {
+            return response()->json(['message' => 'الخدمة غير موجودة'], 404);
         }
-        $service->delete();
-        return response()->json(['message' => 'Service deleted successfully'], 200);
+
+        return response()->json([
+            'service' => new ServiceResource($service)]
+            , 200);
     }
+
+   public function destroy($id)
+   {
+    $service = Service::find($id);
+
+    if (!$service) {
+        return response()->json(['message' => 'الخدمة غير موجودة'], 404);
+    }
+    if ($service->image && file_exists(public_path("uploads/servicesimage/{$service->image}"))) {
+        unlink(public_path("uploads/servicesimage/{$service->image}"));
+    }
+
+    $service->delete();
+    return response()->json(['message' => 'تم حذف الخدمة بنجاح'], 200);
+   }
 }
