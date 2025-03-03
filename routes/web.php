@@ -4,14 +4,21 @@ use App\Http\Controllers\Dashboard\AuthController;
 use App\Http\Controllers\Dashboard\CemeteryController;
 use App\Http\Controllers\Dashboard\HallController;
 use App\Http\Controllers\Dashboard\ServiceController;
+use App\Http\Controllers\Dashboard\OrderController;
+use App\Http\Controllers\Dashboard\HomeController;
+use App\Http\Controllers\Dashboard\CartController;
+
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AuthMiddleware;
 use Illuminate\Support\Facades\Route;
 
 //HomePage....
-Route::get('/', function () {return view('Layout_home.master');})->name('home');
+
+Route::get('/' , [HomeController::class ,'index'])->name('home');
 Route::get('service', function () {return view('Layout_service.master');})->name('service');
 Route::get('prayers', function () {return view('Layout_prayers.master');})->name('prayers');
+Route::get('/cemetery' , [HomeController::class ,'cemetery'])->name('cemetery');
+Route::get('/hall' , [HomeController::class ,'hall'])->name('hall');
 
 
 //master Database....
@@ -59,6 +66,10 @@ Route::middleware(AdminMiddleware::class)->group(function () {
       Route::get('cemetery/edit/{id}', [CemeteryController::class, 'edit'])->name('cemetery.edit');
       Route::put('cemetery/update/{id}', [CemeteryController::class, 'update'])->name('cemetery.update');
 
+
+      //Order......
+      Route::get('order/index' ,[OrderController::class ,'index'])->name('order.index');
+
 });
 
 
@@ -74,4 +85,9 @@ Route::post('auth/login', [AuthController::class, 'handlelogin'])->name('auth.ha
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware(AuthMiddleware::class);
 
 
+
+Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.index');
+Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart/remove/{index}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 

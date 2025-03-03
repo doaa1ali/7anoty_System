@@ -3,7 +3,12 @@
 
         <div class="sidebar-main">
             <div class="sidebar-user">
-                <img src="{{ asset('uploads/userimages/' . Auth::user()->image) }}" alt="User Profile">
+                @if(Auth::user()->image)
+                    <img src="{{ asset('uploads/userimages/' . Auth::user()->image) }}" alt="User Profile">
+                @else                   
+                    <p><img src="{{ asset('uploads/userimages/1.png') }}" width="80" height="80" style="border-radius: 50%;"></p>
+                @endif
+                
                 <div>
                     <h3>{{ Auth::user()->name }}</h3>
                     <span>{{ Auth::user()->email }}</span>
@@ -29,8 +34,10 @@
                 <ul>
                     <li><a href="{{route('cemetery.index')}}"><i class="fas fa-users"></i> المقابر</a></li>
                     @if (auth()->check() && auth()->user()->type != 'creator')
-                    <li><a href="{{route('cemetery.index')}}"><i class="fas fa-exchange-alt"></i> حجوزات المقابر</a></li>
-                    <li><a href=""><i class="fas fa-clock"></i> سجلات الدفن</a></li>
+                    
+                    <div class="menu-head">إدارة الحجوزات</div>
+                    <li><a href="{{route('order.index')}}"><i class="fas fa-exchange-alt"></i>سجلات الحجز</a></li>
+                
                 </ul>
                 <ul>
                     <li><a href=""><i class="fas fa-cogs"></i> الإعدادات</a></li>

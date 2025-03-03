@@ -27,7 +27,7 @@ class ServiceFactory extends Factory
             'discount' => $this->faker->randomFloat(2, 10, 500),
             'start_time' => $this->faker->time(),
             'end_time' => $this->faker->time(),
-            'image' => $this->faker->imageUrl(640, 480, 'services'),
+            //'image' => $this->faker->imageUrl(640, 480, 'services'),
         ];
     }
 }

@@ -28,7 +28,7 @@
                     <div >
                         <label>الموقع:</label>
                         <div class="text-center">
-                        <input id="location_inp" type="text" name="location" value="{{ old('location', $cemetery->location) }}" /><br><br>
+                        <input id="location_inp" type="text" name="location" value="{{ old('location', $hall->location) }}" /><br><br>
                             <div id="googleMap"
                                 style="width: 100%;min-height:300px;border:1px solid #009EF7; border-radius: 10px; ">
                             </div>

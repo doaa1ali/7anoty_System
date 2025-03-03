@@ -8,12 +8,16 @@
         <nav class="header-nav">
             <a href="{{route('home')}}" class="{{ request()->routeIs('home') ? 'active' : '' }}">الرئيسية</a>
             <a href="{{route('service')}}" class="{{ request()->routeIs('service') ? 'active' : '' }}">خدماتنا</a>
+            <a href="{{route('cemetery')}}" class="{{ request()->routeIs('cemetery') ? 'active' : '' }}">المقابر</a>
+            <a href="{{route('hall')}}" class="{{ request()->routeIs('hall') ? 'active' : '' }}">دار المناسبات</a>
             <a href="{{route('prayers')}}" class="{{ request()->routeIs('prayers') ? 'active' : '' }}">أدعية وأذكار</a>
             <a href="#" class="{{ request()->routeIs('about') ? 'active' : '' }}">من نحن</a>
             <a href="#" class="{{ request()->routeIs('contact') ? 'active' : '' }}">تواصل معنا</a>
         </nav>
     </div>
 
+
+  
     @guest
     <div class="header-account">
         <a href="{{ route('auth.login') }}" class="login-btn">
@@ -59,5 +63,8 @@
             </div>
         @endif
     @endauth
+
+
+
 
 </header>

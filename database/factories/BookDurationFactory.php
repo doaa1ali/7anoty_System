@@ -1,10 +1,12 @@
 <?php
 
 namespace Database\Factories;
+
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Hall;
 use App\Models\Duration;
+use App\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,13 +21,19 @@ class BookDurationFactory extends Factory
      */
     public function definition(): array
     {
+        
+        $order = Order::factory()->create();
+        $serviceOrHall = $this->faker->randomElement(['service', 'hall']);
+        $serviceId = $serviceOrHall === 'service' ? Service::factory() : null;
+        $hallId = $serviceOrHall === 'hall' ? Hall::factory() : null;
+
         return [
             'booking_date' => $this->faker->date(),
-            'final_price' => $this->faker->randomFloat(2, 50, 1000),
-            'user_id' => User::factory(),
-            'service_id' => Service::factory(),
-            'hall_id' => Hall::factory(),
+            'user_id' => $order->user_id, 
+            'service_id' => $serviceId,
+            'hall_id' => $hallId,
             'duration_id' => Duration::factory(),
+            'order_id' => $order->id, 
         ];
     }
 }

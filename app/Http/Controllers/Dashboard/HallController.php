@@ -76,7 +76,7 @@ class HallController extends Controller
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
             'image'=>$imageName,
-            // 'user_id' => auth()->id(),
+           // 'user_id' => auth()->id(),
 
         ];
         if (auth()->check() && auth()->user()->type != 'creator') {

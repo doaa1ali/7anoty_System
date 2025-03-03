@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiHallController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiAuthController;
@@ -7,8 +8,7 @@ use App\Http\Controllers\Api\ApiCemeteryController;
 use App\Http\Controllers\Api\ApiServiceController;
 use App\Http\Controllers\Api\ApiOrderController;
 use App\Http\Controllers\Api\ApiBookDurationController;
-
-
+use App\Http\Controllers\Api\ApiDurationController;
 
 
 
@@ -30,12 +30,26 @@ Route::get('service/show/{id}', [ApiServiceController::class, 'show']);
 Route::post('service/update/{id}', [ApiServiceController::class, 'update']);
 Route::get('service/delete/{id}', [ApiServiceController::class, 'destroy']);
 
+//crud hall api
+Route::post('hall/store', [ApiHallController::class, 'store']);
+Route::get('hall/show/{id}', [ApiHallController::class, 'show']);
+Route::post('hall/update/{id}', [ApiHallController::class, 'update']);
+Route::delete('hall/delete/{id}', [ApiHallController::class, 'destroy']);
+
+
+//crud duration api
+Route::get('duration/index', [ApiDurationController::class, 'index']);
+Route::get('duration/show/{id}', [ApiDurationController::class, 'show']);
+Route::get('duration/delete/{id}', [ApiDurationController::class, 'destroy']);
+
+
 //order_crud api
 Route::get('order/index', [ApiOrderController::class, 'index']);
-Route::post('order/store', [ApiOrderController::class, 'store']);
 Route::get('order/show/{id}', [ApiOrderController::class, 'show']);
-Route::post('order/update/{id}', [ApiOrderController::class, 'update']);
 Route::get('order/delete/{id}', [ApiOrderController::class, 'destroy']);
+//ask omar
+Route::post('order/store', [ApiOrderController::class, 'store']);
+Route::post('order/update/{id}', [ApiOrderController::class, 'update']);
 
 //booking_crud api
 Route::get('booking/index', [ApiBookDurationController::class, 'index']);
@@ -52,3 +66,8 @@ Route::post('auth/store', [ApiAuthController::class, 'store']);
 Route::post('auth/show/{id}', [ApiAuthController::class, 'show']);
 Route::delete('auth/delete/{id}', [ApiAuthController::class, 'destroy']);
 Route::post('auth/update/{id}', [ApiAuthController::class, 'update']);
+
+
+// Route::get('order/index', [ApiOrderController::class, 'index']);
+
+
