@@ -1,5 +1,4 @@
-
- .reciter-section {
+.reciter-section {
     text-align: center;
     background-color: #333;
 }
@@ -72,6 +71,80 @@
 
 .reciters-card .btn:hover {
     background: #ae7906c6;
+}
+
+
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.pagination .page-link {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination .page-link:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.pagination .disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.pagination .active {
+    background-color: #FFD700;
+    border-color: #FFD700;
+    color: black;
+}
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    width: 50%;
+    
+}
+
+.search-form input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 80%;
+}
+
+.search-form button {
+    background-color: #FFD700;
+    color: black;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 20%;
+}
+
+.search-form button:hover {
+    background-color: #0056b3;
 }
 
 

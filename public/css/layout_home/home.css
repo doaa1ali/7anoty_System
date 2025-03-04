@@ -41,3 +41,49 @@ body {
 .logout-btn span {
     margin-right: 5px;
 }
+
+
+/* تحسين تصميم الـ Pagination */
+
+.pagination {
+    display: flex;
+    flex-wrap: wrap; /* يمنع الانتقال للسطر إلا عند الضرورة */
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 8px;
+    list-style: none; /* إزالة النقاط إذا كان العنصر <ul> */
+    padding: 0; /* إزالة أي مسافات داخلية زائدة */
+}
+
+.pagination .page-item {
+    display: inline-block; /* ضمان أن العناصر تبقى بجانب بعضها */
+}
+
+.pagination .page-link {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.pagination .page-link:hover,
+.pagination .page-item.active .page-link {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.pagination .page-item.disabled .page-link {
+    background-color: #ccc;
+    border-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+

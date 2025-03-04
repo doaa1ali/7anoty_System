@@ -10,9 +10,7 @@ use Illuminate\Http\Request;
 
 class HallController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         if (auth()->user()->type=== 'creator') {
@@ -26,9 +24,7 @@ class HallController extends Controller
         return view("hall.index", compact("halls"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         $creators=User::where('type','creator')->get();
@@ -36,9 +32,7 @@ class HallController extends Controller
         return view("hall.create",compact('creators'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+ 
     public function store(Request $request)
     {
         $data=$request->validate([
@@ -219,4 +213,8 @@ class HallController extends Controller
       return view('hall.index', compact('halls'));
 
     }
+
+
+    
+
 }
