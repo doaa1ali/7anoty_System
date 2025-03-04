@@ -11,7 +11,7 @@
             direction: rtl;
             text-align: center;
         }
-        
+
         .container {
             width: 80%;
             margin: 40px auto;
@@ -38,7 +38,7 @@
             font-size: 20px;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 5px; 
+            border-radius: 5px;
             transition: background 0.3s ease-in-out;
         }
 
@@ -49,7 +49,7 @@
 
         .checkout-container {
             margin-top: 20px;
-           
+
         }
 
         .checkout-btn {
@@ -146,7 +146,7 @@
     <div class="container">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h1>🛒 سلة الحجوزات</h1>
-            
+
             <a href="/"><button  class="btn btn-back">x</button></a>
         </div>
 
@@ -193,6 +193,7 @@
             <div class="alert alert-info">سلة الحجوزات فارغة! 🛒</div>
         @endif
     </div>
+
 
 </body>
 </html>

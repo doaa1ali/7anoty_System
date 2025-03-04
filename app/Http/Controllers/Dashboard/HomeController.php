@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Hall;
+use App\Models\Order;
+
 use App\Models\Cemetery;
 use App\Models\Service;
 
@@ -32,7 +34,9 @@ class HomeController extends Controller
 
     public function cemetery()
     {
-        $Cemeteries = Cemetery::all();
+        // $Cemeteries = Cemetery::all();
+        $reservedCemeteryIds = Order::whereNotNull('cemetery_id')->pluck('cemetery_id');
+        $Cemeteries = Cemetery::whereNotIn('id', $reservedCemeteryIds)->get();
         return view('Layout_cemetery.master' ,compact('Cemeteries'));
     }
 

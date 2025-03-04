@@ -36,7 +36,7 @@ class CartController extends Controller
             return back()->with('error', 'نوع غير معروف!');
         }
 
-     
+
         if (!$item) {
             return back()->with('error', 'العنصر غير موجود!');
         }
@@ -48,14 +48,11 @@ class CartController extends Controller
             'type' => $type,
         ];
 
-   
+
         Session::put('cart', $cart);
 
         return back()->with('success', 'تمت إضافة العنصر إلى السلة!');
     }
-
-
-
 
     public function viewCart()
     {
@@ -79,79 +76,6 @@ class CartController extends Controller
     }
 
 
-    // public function checkout()
-    // {
-    //     if (!Auth::check()) {
-    //         return redirect()->route('auth.login');
-    //     }
-
-    //     $cart = Session::get('cart', []);
-
-    //     if (empty($cart)) {
-    //         return back()->with('error', 'السلة فارغة!');
-    //     }
-
-    //     $totalPrice = array_sum(array_column($cart, 'price'));
-
-    //     $order = Order::create([
-    //         'user_id' => Auth::id(),
-    //         'final_price' => $totalPrice,
-    //     ]);
-
-    //     //dd($order);
-
-    //     foreach ($cart as $item) {
-
-    //         if (isset($item['type']) && $item['type'] === 'cemetery') {
-    //             $order->update([
-    //                 'cemetery_id' => $item['id'],
-    //             ]);
-    //             //dd($order);
-    //         }
-
-    //         elseif (isset($item['type']) && $item['type'] === 'hall') 
-    //         {
-               
-    //             $duration_hall = Duration::where('hall_id', $item['id'])->first();                
-    //             if ($duration_hall) {
-    //                 BookDuration::create([
-    //                     'order_id' => $order->id,
-    //                     'hall_id' => $item['id'],
-    //                     'booking_date' => Carbon::now(),
-    //                     'user_id' => Auth::id(),
-    //                     'duration_id' => $duration_hall->id, 
-    //                 ]);
-
-                    
-    //             } 
-    //             else {
-    //                 return back()->with('error', 'غير متاح الان');
-    //             }
-    //         }
-    //         elseif (isset($item['type']) && $item['type'] === 'service') 
-    //         {
-    //             $duration_service= Duration::where('service_id', $item['id'])->first();                
-    //             if ($duration_service) {
-    //                 BookDuration::create([
-    //                     'order_id' => $order->id,
-    //                     'service_id' => $item['id'],
-    //                     'booking_date' => Carbon::now(),
-    //                     'user_id' => Auth::id(),
-    //                     'duration_id' => $duration_service->id, 
-    //                 ]);
-    //             } 
-    //             else {
-    //                 return back()->with('error', 'غير متاح الان');
-    //             }
-    //         }
-    //     }
-
-    //     Session::forget('cart');
-
-    //     return back()->with('success', 'تم إتمام الطلب بنجاح!');
-    // }
-
-
     public function checkout()
     {
         if (!Auth::check()) {
@@ -164,6 +88,7 @@ class CartController extends Controller
             return back()->with('error', 'السلة فارغة!');
         }
 
+
         $totalPrice = array_sum(array_column($cart, 'price'));
 
         $order = Order::create([
@@ -172,54 +97,65 @@ class CartController extends Controller
         ]);
 
         foreach ($cart as $item) {
+
             if ($item['type'] === 'cemetery') {
                 $order->update(['cemetery_id' => $item['id']]);
-            } 
+                // Cemetery::where('id', $item['id'])->delete();
+            }
             elseif ($item['type'] === 'hall') {
                 $duration_hall = Duration::where('hall_id', $item['id'])->first();
 
                 if ($duration_hall) {
-
                     $existingBooking = BookDuration::where('booking_date', Carbon::now()->toDateString())
-                    ->where('duration_id', $duration_hall->id)
-                    ->where('hall_id', $item['id'])
-                    ->exists();
+                        ->where('duration_id', $duration_hall->id)
+                        ->where('hall_id', $item['id'])
+                        ->exists();
+
                     if ($existingBooking) {
                         return back()->with('error', 'هذه القاعة غير متاحة للحجز في الوقت الحالي!');
                     }
 
-                    BookDuration::create([
-                        'order_id' => $order->id,
-                        'hall_id' => $item['id'],
-                        'booking_date' => Carbon::now(),
-                        'user_id' => Auth::id(),
-                        'duration_id' => $duration_hall->id, 
-                    ]);
-                } 
-                
+                    try {
+                        $x = BookDuration::create([
+                            'order_id' => $order->id,
+                            'hall_id' => $item['id'],
+                            'booking_date' => Carbon::now(),
+                            'user_id' => Auth::id(),
+                            'duration_id' => $duration_hall->id,
+                        ]);
+                    } catch (\Exception $e) {
+                        dd($e);
+                    }
+                }
             }
             elseif ($item['type'] === 'service') {
-                $duration_service = Duration::where('service_id', $item['id'])->first();
-                if ($duration_service) {
 
-                    //  dd('sss');
+                $duration_service = Duration::where('service_id', $item['id'])->first();
+
+                if ($duration_service) {
                     $existingBooking = BookDuration::where('booking_date', Carbon::now()->toDateString())
-                    ->where('duration_id', $duration_service->id)
-                    ->where('service_id', $item['id'])
-                    ->exists();
+                        ->where('duration_id', $duration_service->id)
+                        ->where('service_id', $item['id'])
+                        ->exists();
+
                     if ($existingBooking) {
-                        return back()->with('error', 'هذه القاعة غير متاحة للحجز في الوقت الحالي!');
+                        return back()->with('error', 'هذه الخدمة غير متاحة للحجز في الوقت الحالي!');
                     }
 
-                    BookDuration::create([
-                        'order_id' => $order->id,
-                        'service_id' => $item['id'],
-                        'booking_date' => Carbon::now(),
-                        'user_id' => Auth::id(),
-                        'duration_id' => $duration_service->id, 
-                    ]);
-                } 
-              
+
+                    try {
+                        $x = BookDuration::create([
+                            'order_id' => $order->id,
+                            'service_id' => $item['id'],
+                            'booking_date' => Carbon::now(),
+                            'user_id' => Auth::id(),
+                            'duration_id' => $duration_service->id,
+                        ]);
+                    } catch (\Exception $e) {
+                        dd($e);
+
+                    }
+                }
             }
         }
 
@@ -227,7 +163,5 @@ class CartController extends Controller
 
         return back()->with('success', 'تم إتمام الطلب بنجاح!');
     }
-
-
-
+    
 }
