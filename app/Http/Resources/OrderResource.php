@@ -23,14 +23,13 @@ class OrderResource extends JsonResource
 
                 $totalPrice += $servicePrice + $hallPrice;
 
-                return [
+                return array_filter([
                     'book_duration_id' => $bookDuration->id,
-                    'order_id' => $bookDuration->order_id,
                     'service' => optional($bookDuration->service)->name,
                     'service_price' => $servicePrice,
                     'hall' => optional($bookDuration->hall)->name,
                     'hall_price' => $hallPrice,
-                ];
+                ]);
             })->toArray(),
             'cemetery_name' => optional($this->cemetery)->name,
             'cemetery_price' => optional($this->cemetery)->price,

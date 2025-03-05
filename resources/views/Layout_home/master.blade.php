@@ -4,6 +4,11 @@
     @include('Layout_home.head')
 </head>
 <body>
+@if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="main-content">
         @include('Layout_home.header')
         @include('Layout_home.Hero_Section')

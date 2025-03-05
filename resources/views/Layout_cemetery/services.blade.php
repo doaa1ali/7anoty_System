@@ -19,25 +19,27 @@
                 <div class="cemetery-info">
                     <h3>{{ $cemetery->name }}</h3>
                     <p><strong>الموقع:</strong> {{ $cemetery->location }}</p>
-                    <p><strong>عدد الأماكن المتاحة:</strong> {{ $cemetery->available_places }}</p>
                     <p><strong>السعر:</strong> {{ number_format($cemetery->price) }} جنيه</p>
-                    <form action="{{ route('cart.add', ['type' => 'cemetery']) }}" method="POST" style="display: inline;">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $cemetery->id }}">
-                    <button type="submit" class="btn">حجز الآن</button>
-                </form>
+                    <button type="button" class="btn" onclick="addToCart({
+                    id: {{ $cemetery->id }},
+                    name: '{{ $cemetery->name }}',
+                    price: {{ $cemetery->price }},
+                    type: 'cemetery'
+                    })">
+                    حجز الآن
+                </button>
                 </div>
             </div>
         @endforeach
-    </div> 
+    </div>
 
 
 
     @php
-        $currentPage = $Cemeteries->currentPage(); 
-        $lastPage = $Cemeteries->lastPage(); 
-        $start = max($currentPage - 1, 1); 
-        $end = min($start + 9, $lastPage); 
+        $currentPage = $Cemeteries->currentPage();
+        $lastPage = $Cemeteries->lastPage();
+        $start = max($currentPage - 1, 1);
+        $end = min($start + 9, $lastPage);
     @endphp
 
 <div class="pagination">

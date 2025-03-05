@@ -32,13 +32,13 @@
                 </div>
             </div>
         @endforeach
-    </div> 
+    </div>
 
     @php
-        $currentPage = $halls->currentPage(); 
-        $lastPage = $halls->lastPage(); 
-        $start = max($currentPage - 1, 1); 
-        $end = min($start + 9, $lastPage); 
+        $currentPage = $halls->currentPage();
+        $lastPage = $halls->lastPage();
+        $start = max($currentPage - 1, 1);
+        $end = min($start + 9, $lastPage);
     @endphp
 
 <div class="pagination">

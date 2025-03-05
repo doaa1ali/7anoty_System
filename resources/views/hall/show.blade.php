@@ -5,11 +5,13 @@
 <main class="container">
     <div class="card">
         <div class="user-info">
-            @if($hall->image)
+            <!-- @if($hall->image)
                 <img src="{{ asset('uploads/hallimages/' . $hall->image) }}" class="profile-img">
             @else                   
-                <img src="{{ asset('uploads/hallimages/1.png') }}" class="profile-img">
-            @endif
+                <img src="{{ asset('uploads/hallimages/hall2.jpg') }}" class="profile-img">
+            @endif -->
+
+            <img src="{{ asset('uploads/hallimages/hall2.jpg') }}" class="profile-img">
             <h3>{{ $hall->name }}</h3>
             <span class="description">{{ $hall->description}}</span>
         </div>
@@ -35,11 +37,11 @@
             <p>{{ $hall->end_time }}</p>
             <h4>اسم المستخدم</h4>
             @if($hall->user)
-                              <p>  {{ $hall->user->name }}</p>
-                            @else
-                                <span class="text-muted">لا يوجد مستخدم</span>
-                            @endif
-                            </div>
+                <p>  {{ $hall->user->name }}</p>
+            @else
+                <span class="text-muted">لا يوجد مستخدم</span>
+            @endif
+            </div>
 
          
 

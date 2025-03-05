@@ -32,7 +32,7 @@
                     <th>المعرف</th>
                     <th>الاسم</th>
                     <!-- <th>الوصف</th> -->
-                    <th>الموقع</th>
+                    <!-- <th>الموقع</th> -->
                     <!-- <th>الإحداثيات</th> -->
                     <th>الحجم</th>
                     <th>السعر</th>
@@ -48,7 +48,7 @@
                         <td>{{ $cemetery->id }}</td>
                         <td>{{ $cemetery->name }}</td>
                         <!-- <td>{{ $cemetery->description ?? 'لا يوجد وصف' }}</td> -->
-                        <td>{{ $cemetery->location }}</td>
+                        <!-- <td>{{ $cemetery->location }}</td> -->
                         <!-- <td>{{ $cemetery->lat }}, {{ $cemetery->long }}</td> -->
                         <td>{{ $cemetery->size }} م²</td>
                         <td>{{ $cemetery->price }} $</td>

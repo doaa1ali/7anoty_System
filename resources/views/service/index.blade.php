@@ -32,11 +32,11 @@
                 <tr>
                     <th>المعرف</th>
                     <th>اسم الخدمة</th>
-                    <th>الوصف</th>
+                    <!-- <th>الوصف</th> -->
                     <th>الصورة</th>
                     <th>السعر</th>
                     <th>الموقع</th>
-                    <th>يوجد خصم؟</th>
+                    <!-- <th>يوجد خصم؟</th> -->
                     <th>قيمة الخصم</th>
                     <th>وقت البدء</th>
                     <th>وقت الانتهاء</th>
@@ -49,7 +49,7 @@
                     <tr>
                         <td>{{ $service->id }}</td>
                         <td>{{ $service->name }}</td>
-                        <td>{{ $service->description }}</td>
+                        <!-- <td>{{ $service->description }}</td> -->
                         <td>
                             @if ($service->image)
                             <img src="{{ asset('uploads/servicesimage/' . $service->image) }}" width="80" height="80" style="border-radius: 50%;">
@@ -59,7 +59,7 @@
                         </td>
                         <td>{{ $service->price }} جنيه</td>
                         <td>{{ $service->location }}</td>
-                        <td>{{ $service->is_discount ? 'نعم' : 'لا' }}</td>
+                        <!-- <td>{{ $service->is_discount ? 'نعم' : 'لا' }}</td> -->
                         <td>{{ $service->discount ?? '-' }}</td>
                         <td>{{ $service->start_time }}</td>
                         <td>{{ $service->end_time }}</td>

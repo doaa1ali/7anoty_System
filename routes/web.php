@@ -88,15 +88,9 @@ Route::post('auth/login', [AuthController::class, 'handlelogin'])->name('auth.ha
 // Logout Route
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware(AuthMiddleware::class);
 
-
-
-//Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.index');
+//cart
 Route::post('/cart/add/{type}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart/remove/{index}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::get('/order/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
-
-Route::post('/checkout', function () {
-  return view('cart.payment');
-})->name('checkout');
+Route::post('/order/checkout', [OrderController::class, 'checkout'])->name('order.checkout');
 
 Route::post('/payment/process', [OrderController::class, 'processPayment'])->name('payment.process');

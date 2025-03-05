@@ -55,7 +55,7 @@ class HomeController extends Controller
             $query->where('location', 'LIKE', '%' . $request->location . '%');
         }
 
-        
+
         $halls = $query->paginate(9);
         //dd($halls);
 
@@ -71,7 +71,7 @@ class HomeController extends Controller
             $query->where('location', 'LIKE', '%' . $request->location . '%');
         }
 
-        
+
         $Cemeteries = $query->paginate(9);
         //dd($Cemeteries);
 
@@ -87,7 +87,7 @@ class HomeController extends Controller
             $query->where('location', 'LIKE', '%' . $request->location . '%');
         }
 
-        
+
         $services = $query->paginate(9);
         //dd($Cemeteries);
 

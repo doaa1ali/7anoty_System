@@ -16,21 +16,25 @@
                     <p><strong>السعر:</strong> {{ number_format($hall->price) }} جنيه</p>
                     <p><strong>وقت البداية:</strong> {{ $hall->start_time }}</p>
                     <p><strong>وقت النهاية:</strong> {{ $hall->end_time }}</p>
-                    <form action="{{ route('cart.add', ['type' => 'service']) }}" method="POST" style="display: inline;">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $hall->id }}">
-                        <button type="submit" class="btn">حجز الآن</button>
-                    </form>
+
+                    <button type="button" class="btn" onclick="addToCart({
+                    id: {{ $hall->id }},
+                    name: '{{ $hall->name }}',
+                    price: {{ $hall->price }},
+                    type: 'service'
+                    })">
+                    حجز الآن
+                </button>
                 </div>
             </div>
         @endforeach
-    </div> 
+    </div>
 
     @php
-        $currentPage = $services->currentPage(); 
-        $lastPage = $services->lastPage(); 
-        $start = max($currentPage - 1, 1); 
-        $end = min($start + 9, $lastPage); 
+        $currentPage = $services->currentPage();
+        $lastPage = $services->lastPage();
+        $start = max($currentPage - 1, 1);
+        $end = min($start + 9, $lastPage);
     @endphp
 
 <div class="pagination">

@@ -31,8 +31,8 @@
                 <tr>
                     <th>المعرف</th>
                     <th>الاسم</th>
-                    <th>الوصف</th>
-                    <th>الموقع</th>
+                    <!-- <th>الوصف</th> -->
+                    <!-- <th>الموقع</th> -->
                     <th>السعر</th>
                     <th>الصوره</th>
                     <th>الكراسي</th>
@@ -49,15 +49,16 @@
                     <tr>
                         <td>{{ $hall->id }}</td>
                         <td>{{ $hall->name }}</td>
-                        <td>{{ $hall->description }}</td>
-                        <td>{{ $hall->location }}</td>
+                        <!-- <td>{{ $hall->description }}</td> -->
+                        <!-- <td>{{ $hall->location }}</td> -->
                         <td>{{ $hall->price }}</td>
                         <td>
-                            @if($hall->image)
+                        <img src="{{ asset('uploads/hallimages/hall2.jpg') }}" width="80" height="80" style="border-radius: 50%;">
+                            <!-- @if($hall->image)
                                 <img src="{{ asset('uploads/hallimages/' . $hall->image) }}" width="80" height="80" style="border-radius: 50%;">
                             @else                   
-                                <p><img src="{{ asset('uploads/hallimages/hall2.png') }}" width="80" height="80" style="border-radius: 50%;"></p>
-                            @endif
+                                <img src="{{ asset('uploads/hallimages/hall2.png') }}" width="80" height="80" style="border-radius: 50%;">
+                            @endif -->
                         </td>
                         <td>{{ $hall->seats }}</td>
                         <td>{{ $hall->has_buffet ? 'نعم' : 'لا' }}</td> 

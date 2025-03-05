@@ -36,7 +36,7 @@ class CartController extends Controller
             return back()->with('error', 'نوع غير معروف!');
         }
 
-     
+
         if (!$item) {
             return back()->with('error', 'العنصر غير موجود!');
         }
@@ -48,7 +48,7 @@ class CartController extends Controller
             'type' => $type,
         ];
 
-   
+
         Session::put('cart', $cart);
 
         return back()->with('success', 'تمت إضافة العنصر إلى السلة!');
@@ -74,79 +74,6 @@ class CartController extends Controller
 
         return back()->with('success', 'تم حذف العنصر من السلة!');
     }
-
-
-    // public function checkout()
-    // {
-    //     if (!Auth::check()) {
-    //         return redirect()->route('auth.login');
-    //     }
-
-    //     $cart = Session::get('cart', []);
-
-    //     if (empty($cart)) {
-    //         return back()->with('error', 'السلة فارغة!');
-    //     }
-
-    //     $totalPrice = array_sum(array_column($cart, 'price'));
-
-    //     $order = Order::create([
-    //         'user_id' => Auth::id(),
-    //         'final_price' => $totalPrice,
-    //     ]);
-
-    //     //dd($order);
-
-    //     foreach ($cart as $item) {
-
-    //         if (isset($item['type']) && $item['type'] === 'cemetery') {
-    //             $order->update([
-    //                 'cemetery_id' => $item['id'],
-    //             ]);
-    //             //dd($order);
-    //         }
-
-    //         elseif (isset($item['type']) && $item['type'] === 'hall') 
-    //         {
-               
-    //             $duration_hall = Duration::where('hall_id', $item['id'])->first();                
-    //             if ($duration_hall) {
-    //                 BookDuration::create([
-    //                     'order_id' => $order->id,
-    //                     'hall_id' => $item['id'],
-    //                     'booking_date' => Carbon::now(),
-    //                     'user_id' => Auth::id(),
-    //                     'duration_id' => $duration_hall->id, 
-    //                 ]);
-
-                    
-    //             } 
-    //             else {
-    //                 return back()->with('error', 'غير متاح الان');
-    //             }
-    //         }
-    //         elseif (isset($item['type']) && $item['type'] === 'service') 
-    //         {
-    //             $duration_service= Duration::where('service_id', $item['id'])->first();                
-    //             if ($duration_service) {
-    //                 BookDuration::create([
-    //                     'order_id' => $order->id,
-    //                     'service_id' => $item['id'],
-    //                     'booking_date' => Carbon::now(),
-    //                     'user_id' => Auth::id(),
-    //                     'duration_id' => $duration_service->id, 
-    //                 ]);
-    //             } 
-    //             else {
-    //                 return back()->with('error', 'غير متاح الان');
-    //             }
-    //         }
-    //     }
-
-    //     Session::forget('cart');
-
-    //     return back()->with('success', 'تم إتمام الطلب بنجاح!');
-    // }
 
 
     public function checkout()
@@ -232,7 +159,5 @@ class CartController extends Controller
 
         return back()->with('success', 'تم إتمام الطلب بنجاح!');
     }
-
-
-
+    
 }

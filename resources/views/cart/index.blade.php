@@ -13,7 +13,7 @@
             direction: rtl;
             text-align: center;
         }
-        
+
         .container {
             width: 80%;
             margin: 40px auto;
@@ -42,7 +42,7 @@
             font-size: 20px;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 5px; 
+            border-radius: 5px;
             transition: background 0.3s ease-in-out;
         }
 
@@ -106,6 +106,7 @@
         }
 
         .btn-delete {
+
             padding: 8px 12px;
             border: none;
             cursor: pointer;
@@ -171,6 +172,8 @@
             <a href="/"><button class="btn-back">x</button></a>
         </div>
 
+
+
         <div id="cartItems">
             <p>🛒 جاري تحميل السلة...</p>
         </div>
@@ -190,17 +193,13 @@
         <h3 class="total">💰 الإجمالي: <span id="totalPrice">0</span> جنيه</h3>
 
         <div class="checkout-container">
-            <button id="clearCartBtn" class="btn-clear">🚮 مسح السلة</button>
+            <button id="clearCartBtn" class="btn-clear" >🚮 مسح السلة</button>
 
             <form id="checkoutForm" action="{{route('order.checkout')}}" method="POST">
                 @csrf 
                 <input type="hidden" name="cart" id="cartInput">
                 <button type="submit" class="checkout-btn">✅ إتمام الطلب</button>
             </form>
-
-            <!-- <a href="{{ route('checkout') }}" id="checkoutForm">
-                <button class="checkout-btn">✅ إتمام الطلب</button>
-            </a> -->
 
         </div>
 

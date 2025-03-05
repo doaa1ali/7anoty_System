@@ -24,9 +24,6 @@ function addToCart(item) {
 }
 
 
-function getCart() {
-    return JSON.parse(localStorage.getItem('cart')) || [];
-}
 
 function clearCart() {
     localStorage.removeItem('cart');
@@ -48,4 +45,3 @@ document.getElementById("checkoutForm").addEventListener("submit", function(even
     
     localStorage.removeItem("cart");
 });
-
