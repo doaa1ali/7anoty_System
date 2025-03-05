@@ -6,6 +6,7 @@
 
     <title>سلة المشتريات</title>
     <style>
+
         body {
             font-family: 'Arial', sans-serif;
             background-color: #333;
@@ -29,8 +30,6 @@
         p {
             color: white;
         }
-
-
         .btn-back {
             background-color: red;
             color: white;
@@ -52,11 +51,18 @@
         }
 
         .checkout-container {
-            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;  
+            align-items: center;  
+            gap: 10px; 
         }
 
+        .checkout-container form {
+            width: 100%;
+
+        }
         .checkout-btn {
-            width: 80%;
+            width: 100%;
             background-color: #FFD700;
             color: black;
             padding: 10px;
@@ -123,6 +129,7 @@
             color: white;
             transition: 0.3s;
             border: none;
+            width: 20%;
         }
 
         .btn-clear:hover {
@@ -155,9 +162,10 @@
         }
     </style>
 </head>
-<body>
+<body>   
 
     <div class="container">
+
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h1>🛒 سلة الحجوزات</h1>
             <a href="/"><button class="btn-back">x</button></a>
@@ -167,16 +175,35 @@
             <p>🛒 جاري تحميل السلة...</p>
         </div>
 
+        @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+        @endif
+
+        @if(session('error'))
+        <div class="alert alert-success">
+            {{ session('error') }}
+            </div>
+        @endif 
+
         <h3 class="total">💰 الإجمالي: <span id="totalPrice">0</span> جنيه</h3>
 
         <div class="checkout-container">
             <button id="clearCartBtn" class="btn-clear">🚮 مسح السلة</button>
 
             <form id="checkoutForm" action="{{route('order.checkout')}}" method="POST">
+                @csrf 
                 <input type="hidden" name="cart" id="cartInput">
                 <button type="submit" class="checkout-btn">✅ إتمام الطلب</button>
             </form>
+
+            <!-- <a href="{{ route('checkout') }}" id="checkoutForm">
+                <button class="checkout-btn">✅ إتمام الطلب</button>
+            </a> -->
+
         </div>
+
     </div>
 
     <script>

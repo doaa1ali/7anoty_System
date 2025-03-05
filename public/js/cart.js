@@ -19,8 +19,9 @@ function addToCart(item) {
     localStorage.setItem("cart", JSON.stringify(cart));
 
     alert(item.name + " تمت إضافته إلى السلة!");
-}
 
+    displayCart();
+}
 
 
 function getCart() {
@@ -33,14 +34,18 @@ function clearCart() {
 
 
 
-document.getElementById("checkoutForm").addEventListener("submit", function (event) {
-    let cart = getCart();
-
+document.getElementById("checkoutForm").addEventListener("submit", function(event) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    
     if (cart.length === 0) {
-        alert("❌ السلة فارغة!");
         event.preventDefault(); 
+        alert("السلة فارغة! لا يمكن إتمام الطلب.");
         return;
     }
 
     document.getElementById("cartInput").value = JSON.stringify(cart);
+
+    
+    localStorage.removeItem("cart");
 });
+

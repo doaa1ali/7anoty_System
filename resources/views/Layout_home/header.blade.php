@@ -47,7 +47,7 @@
                 <p style="color:#cfc1c1">مرحبا {{ Auth::user()->name }} 😊</p>
                 <button class="create-btn">
                     <a href="{{ route('home.Database') }}">
-                    <span class="fas fa-database"> </span>قاعدة البيانات  
+                    <span class="fas fa-database"> </span> لوحة التحكم 
                     </a>
                 </button>
                 <a href="{{ route('auth.logout') }}" class="logout-btn">
@@ -63,13 +63,28 @@
                 </a>
 
                 <script>
-                    function updateCartCount() {
-                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-                        document.getElementById("cartCount").innerText = cart.length;
+                    function addToCart(item) {
+                    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                    cart.push(item);
+                    localStorage.setItem("cart", JSON.stringify(cart));
+
+                    updateCartCount(); 
                     }
 
-                    updateCartCount();
+                    function updateCartCount() {
+                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        let cartCountElement = document.getElementById("cartCount");
+
+                        if (cartCountElement) {
+                            cartCountElement.innerText = cart.length;
+                        }
+                    }
+
+                   
+                    document.addEventListener("DOMContentLoaded", updateCartCount);
+
                 </script>
+
                 <a href="{{ route('auth.logout') }}" class="logout-btn">
                     <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
                 </a>

@@ -18,9 +18,16 @@
                     <p><strong>وقت البداية:</strong> {{ $hall->start_time }}</p>
                     <p><strong>وقت النهاية:</strong> {{ $hall->end_time }}</p>
                     <p><strong>بوفيه:</strong> {{ $hall->has_buffet ? 'متوفر' : 'غير متوفر' }}</p>
-                    <button type="button" class="btn" onclick="addToCart({ id: {{ $hall->id }}, name: '{{ $hall->name }}', price: {{ $hall->price }} })">
+                    <button type="button" class="btn" 
+                        onclick="addToCart({ 
+                            id: {{ $hall->id }}, 
+                            name: '{{ $hall->name }}', 
+                            price: {{ $hall->price }}, 
+                            type: 'hall' 
+                        })">
                         حجز الآن
                     </button>
+
 
                 </div>
             </div>
