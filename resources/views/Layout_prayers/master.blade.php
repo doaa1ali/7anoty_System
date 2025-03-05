@@ -10,7 +10,7 @@
     </div>
 
     <div class="">
-        @include('Layout_prayers.filter') 
+        @include('Layout_prayers.prayers') 
     </div><br>
 
 

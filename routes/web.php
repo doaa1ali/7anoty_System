@@ -19,7 +19,11 @@ Route::get('service' , [HomeController::class ,'service'])->name('service');
 Route::get('prayers', function () {return view('Layout_prayers.master');})->name('prayers');
 Route::get('/cemetery' , [HomeController::class ,'cemetery'])->name('cemetery');
 Route::get('/hall' , [HomeController::class ,'hall'])->name('hall');
+Route::get('/Search_halls' , [HomeController::class ,'Search_halls'])->name('Search_halls');
+Route::get('/Search_services' , [HomeController::class ,'Search_services'])->name('Search_services');
+Route::get('/Search_Cemeteries' , [HomeController::class ,'Search_Cemeteries'])->name('Search_Cemeteries');
 
+Route::get('/cart', function () { return view('cart.index');})->name('cart.view');
 
 //master Database....
 Route::middleware(AdminMiddleware::class)->group(function () {
@@ -84,10 +88,7 @@ Route::post('auth/login', [AuthController::class, 'handlelogin'])->name('auth.ha
 // Logout Route
 Route::get('auth/logout', [AuthController::class, 'logout'])->name('auth.logout')->middleware(AuthMiddleware::class);
 
-
 //cart
-Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.index');
 Route::post('/cart/add/{type}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('/cart/remove/{index}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-
+Route::post('/order/checkout', [OrderController::class, 'checkout'])->name('order.checkout');

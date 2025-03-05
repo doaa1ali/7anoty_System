@@ -57,9 +57,19 @@
         @else
             <div class="header-account">
                 <p style="color:#cfc1c1">مرحبا {{ Auth::user()->name }} 😊</p>
-                <a href="{{ route('cart.index') }}" class="btn btn-warning text-white px-4 py-2 d-flex align-items-center" style="font-size: 1rem;  border-radius: 10px;">
-                    <i class="fas fa-shopping-cart me-2"></i> سلة الحجوزات
+
+                <a href="{{ route('cart.view') }}" class="btn btn-primary">
+                    🛒 السلة (<span id="cartCount">0</span>)
                 </a>
+
+                <script>
+                    function updateCartCount() {
+                        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+                        document.getElementById("cartCount").innerText = cart.length;
+                    }
+
+                    updateCartCount();
+                </script>
                 <a href="{{ route('auth.logout') }}" class="logout-btn">
                     <span class="fas fa-sign-out-alt"></span> تسجيل الخروج
                 </a>

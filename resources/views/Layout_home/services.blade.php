@@ -1,8 +1,8 @@
 <section class="main-services">
     <h2>الخدمات الرئيسية</h2>
-    
+
     <div class="services-container">
-        
+
         <div class="service-card">
             <img src="{{ asset('uploads/ImageWebsite/11.jpg') }}" alt="تجهيز الجنازات">
             <h3>تجهيز الجنازات</h3>
@@ -24,7 +24,7 @@
             <a href="{{route('hall')}}" class="btn">المزيد</a>
         </div>
 
-    </div> 
+    </div>
 
 </section>
 <section class="cemetery-section">
@@ -47,19 +47,19 @@
                 <div class="cemetery-info">
                     <h3>{{ $cemetery->name }}</h3>
                     <p><strong>الموقع:</strong> {{ $cemetery->location }}</p>
-                    <p><strong>عدد الأماكن المتاحة:</strong> {{ $cemetery->available_places }}</p>
                     <p><strong>السعر:</strong> {{ number_format($cemetery->price) }} جنيه</p>
-                    <form action="{{ route('cart.add', ['type' => 'cemetery']) }}" method="POST" style="display: inline;">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $cemetery->id }}">
-                        <button type="submit" class="btn">حجز الآن</button>
-                    </form>
-
-
+                    <button type="button" class="btn" onclick="addToCart({
+                    id: {{ $cemetery->id }},
+                    name: '{{ $cemetery->name }}',
+                    price: {{ $cemetery->price }},
+                    type: 'cemetery'
+                    })">
+                    حجز الآن
+                </button>
                 </div>
             </div>
         @endforeach
-    </div> 
+    </div>
 </section>
 
 <section class="cemetery-section">
@@ -82,15 +82,18 @@
                     <p><strong>وقت البداية:</strong> {{ $hall->start_time }}</p>
                     <p><strong>وقت النهاية:</strong> {{ $hall->end_time }}</p>
                     <p><strong>بوفيه:</strong> {{ $hall->has_buffet ? 'متوفر' : 'غير متوفر' }}</p>
-                    <form action="{{ route('cart.add', ['type' => 'hall']) }}" method="POST" style="display: inline;">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $hall->id }}">
-                        <button type="submit" class="btn">حجز الآن</button>
-                    </form>
+                    <button type="button" class="btn" onclick="addToCart({
+                    id: {{ $hall->id }},
+                    name: '{{ $hall->name }}',
+                    price: {{ $hall->price }},
+                    type: 'hall'
+                    })">
+                    حجز الآن
+                </button>
                 </div>
             </div>
         @endforeach
-    </div> 
+    </div>
 </section>
 
 <section class="cemetery-section">
@@ -111,13 +114,16 @@
                     <p><strong>السعر:</strong> {{ number_format($hall->price) }} جنيه</p>
                     <p><strong>وقت البداية:</strong> {{ $hall->start_time }}</p>
                     <p><strong>وقت النهاية:</strong> {{ $hall->end_time }}</p>
-                    <form action="{{ route('cart.add', ['type' => 'service']) }}" method="POST" style="display: inline;">
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $hall->id }}">
-                        <button type="submit" class="btn">حجز الآن</button>
-                    </form>
+                    <button type="button" class="btn" onclick="addToCart({
+                    id: {{ $hall->id }},
+                    name: '{{ $hall->name }}',
+                    price: {{ $hall->price }},
+                    type: 'service'
+                    })">
+                    حجز الآن
+                </button>
                 </div>
             </div>
         @endforeach
-    </div> 
+    </div>
 </section>

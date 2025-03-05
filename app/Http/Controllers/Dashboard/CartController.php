@@ -78,10 +78,6 @@ class CartController extends Controller
 
     public function checkout()
     {
-        if (!Auth::check()) {
-            return redirect()->route('auth.login');
-        }
-
         $cart = Session::get('cart', []);
 
         if (empty($cart)) {

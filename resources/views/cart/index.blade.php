@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>سلة المشتريات</title>
     <style>
         body {
@@ -25,8 +26,12 @@
             color: white;
             margin-bottom: 15px;
         }
+        p {
+            color: white;
+        }
 
-        .btn {
+
+        .btn-back {
             background-color: red;
             color: white;
             border: none;
@@ -42,14 +47,12 @@
             transition: background 0.3s ease-in-out;
         }
 
-
         .btn-back:hover {
             background-color: #555;
         }
 
         .checkout-container {
             margin-top: 20px;
-
         }
 
         .checkout-btn {
@@ -69,7 +72,6 @@
             background-color: #e0a800;
         }
 
-
         table {
             width: 100%;
             border-collapse: collapse;
@@ -88,8 +90,7 @@
             border-bottom: 1px solid #ddd;
         }
 
-
-        tbody{
+        tbody {
             background-color: rgb(26, 26, 26);
             color: white;
         }
@@ -99,20 +100,34 @@
         }
 
         .btn-delete {
+
             padding: 8px 12px;
             border: none;
             cursor: pointer;
-            text-decoration: none;
-            font-size: 10px;
+            font-size: 14px;
             border-radius: 5px;
             transition: 0.3s;
-            text-align: center;
             background-color: #e74c3c;
             color: white;
         }
 
         .btn-delete:hover {
             background-color: #a71d2a;
+        }
+
+        .btn-clear {
+            background-color: red;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn-clear:hover {
+            background-color: darkred;
         }
 
         .total {
@@ -146,54 +161,86 @@
     <div class="container">
         <div style="display: flex; justify-content: space-between; align-items: center;">
             <h1>🛒 سلة الحجوزات</h1>
-
-            <a href="/"><button  class="btn btn-back">x</button></a>
+            <a href="/"><button class="btn-back">x</button></a>
         </div>
-
         @if(session('success'))
-            <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
         @endif
 
         @if(session('error'))
-            <div class="alert alert-success">{{ session('error') }}</div>
-        @endif
+        <div class="alert alert-danger" style="color: #fff; background-color: #dc3545; padding: 10px; border-radius: 5px; margin-top: 10px; font-weight: bold; text-align: center;">
+            {{ session('error') }}
+        </div>
+         @endif
 
-        @if(!empty($cart) && count($cart) > 0)
-            <table>
-                <thead>
-                    <tr>
-                        <th>الاسم</th>
-                        <th>السعر</th>
-                        <th>إجراء</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($cart as $index => $item)
-                        <tr>
-                            <td>{{ $item['name'] }}</td>
-                            <td><strong style="color: #28a745;">{{ number_format($item['price']) }} جنيه</strong></td>
-                            <td>
-                                <a href="{{ route('cart.remove', $index) }}" class="btn-delete"> حذف</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div id="cartItems">
+            <p>🛒 جاري تحميل السلة...</p>
+        </div>
 
-            <h3 class="total">💰 الإجمالي: {{ number_format($totalPrice) }} جنيه</h3>
+        <h3 class="total">💰 الإجمالي: <span id="totalPrice">0</span> جنيه</h3>
 
-            <div class="checkout-container">
-                <form action="{{ route('cart.checkout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="checkout-btn">🛍️ إتمام الطلب</button>
-                </form>
-            </div>
+        <div class="checkout-container">
+            <button id="clearCartBtn" class="btn-clear" style="width: 80%;">🚮 مسح السلة</button>
 
-        @else
-            <div class="alert alert-info">سلة الحجوزات فارغة! 🛒</div>
-        @endif
+            <form id="checkoutForm" action="{{route('order.checkout')}}" method="POST">
+              @csrf
+                <input type="hidden" name="cart" id="cartInput">
+                <button type="submit" class="checkout-btn">✅ إتمام الطلب</button>
+            </form>
+        </div>
     </div>
 
+    <script>
+        function getCart() {
+            return JSON.parse(localStorage.getItem("cart")) || [];
+        }
+
+        function displayCart() {
+            let cart = getCart();
+            let cartContainer = document.getElementById("cartItems");
+            let totalPriceElement = document.getElementById("totalPrice");
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartContainer.innerHTML = "<p>🛒 السلة فارغة</p>";
+                totalPriceElement.innerText = "0";
+                return;
+            }
+
+            let content = "<table><thead><tr><th>الاسم</th><th>السعر</th><th>إجراء</th></tr></thead><tbody>";
+            cart.forEach((item, index) => {
+                totalPrice += item.price;
+                content += `<tr>
+                    <td>${item.name}</td>
+                    <td><strong style="color: #28a745;">${item.price.toLocaleString()} جنيه</strong></td>
+                    <td><button onclick="removeFromCart(${index})" class="btn-delete">❌ حذف</button></td>
+                </tr>`;
+            });
+            content += "</tbody></table>";
+
+            cartContainer.innerHTML = content;
+            totalPriceElement.innerText = totalPrice.toLocaleString();
+        }
+
+        function removeFromCart(index) {
+            let cart = getCart();
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            displayCart();
+        }
+
+        document.getElementById("clearCartBtn").addEventListener("click", function() {
+            localStorage.removeItem("cart");
+            displayCart();
+        });
+
+        displayCart();
+    </script>
+
+
+<script src="{{ asset('js/cart.js')}}"></script>
 
 </body>
 </html>
